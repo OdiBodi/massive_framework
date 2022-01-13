@@ -11,6 +11,8 @@ namespace MassiveCore.Framework
 
         private const string NumberSessionKey = "number_session";
 
+        private const string ApplicationReviewActiveKey = "application_review_active";
+
         private const string LevelIndexKey = "current_level_index";
 
         private bool wasLoad;
@@ -19,6 +21,8 @@ namespace MassiveCore.Framework
         public DateTime LastSessionDate { get; set; }
 
         public int NumberSession { get; set; }
+
+        public ReactiveProperty<bool> ApplicationReviewActive { get; } = new ReactiveProperty<bool>();
 
         public ReactiveProperty<int> LevelIndex { get; } = new ReactiveProperty<int>();
 
@@ -39,6 +43,8 @@ namespace MassiveCore.Framework
 
             NumberSession = PlayerPrefs.GetInt(NumberSessionKey, 0);
 
+            ApplicationReviewActive.GetPlayerPrefsBool(ApplicationReviewActiveKey, true);
+
             LevelIndex.GetPlayerPrefsInt(LevelIndexKey, 0);
         }
 
@@ -48,6 +54,8 @@ namespace MassiveCore.Framework
             LastSessionDate.SaveToPlayerPrefs(LastSessionDateKey);
 
             PlayerPrefs.SetInt(NumberSessionKey, NumberSession);
+
+            ApplicationReviewActive.SetPlayerPrefsBool(ApplicationReviewActiveKey);
 
             LevelIndex.SetPlayerPrefsInt(LevelIndexKey);
 

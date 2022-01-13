@@ -1,9 +1,13 @@
 using UnityEngine;
+using Zenject;
 
 namespace MassiveCore.Framework
 {
     public class ExampleScreenController : BaseMonoBehaviour
     {
+        [Inject]
+        private readonly IApplicationReview applicationReview;
+        
         [SerializeField]
         private ExampleScreen view;
 
@@ -17,6 +21,10 @@ namespace MassiveCore.Framework
             view.OnCloseButtonClicked += () =>
             {
                 view.Close(ClosingResult.Close);
+            };
+            view.OnShowAppReviewButtonClicked += () =>
+            {
+                applicationReview.Request();
             };
         }
     }

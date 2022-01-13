@@ -7,9 +7,13 @@ namespace MassiveCore.Framework
     public class ExampleScreen : Screen
     {
         [Space, SerializeField]
-        private Button button;
+        private Button closeButton;
+        
+        [SerializeField]
+        private Button showAppReviewButton;
 
         public event Action OnCloseButtonClicked;
+        public event Action OnShowAppReviewButtonClicked;
 
         private void Awake()
         {
@@ -18,7 +22,8 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnButtons()
         {
-            button.onClick.AddListener(() => OnCloseButtonClicked?.Invoke());
+            closeButton.onClick.AddListener(() => OnCloseButtonClicked?.Invoke());
+            showAppReviewButton.onClick.AddListener(() => OnShowAppReviewButtonClicked?.Invoke());
         }
     }
 }

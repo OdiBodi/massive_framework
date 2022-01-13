@@ -10,6 +10,8 @@ namespace MassiveCore.Framework
 
         int NumberSession { get; set; }
 
+        ReactiveProperty<bool> ApplicationReviewActive { get; }
+
         ReactiveProperty<int> LevelIndex { get; } 
 
         void Sync();
