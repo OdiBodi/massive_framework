@@ -65,7 +65,7 @@ namespace MassiveCore.Framework
             return obj != null ? obj.GetComponent<T>() : default;
         }
 
-        public void Return(GameObject obj)
+        public void Return<T>(T obj) where T : BaseMonoBehaviour
         {
             obj.SetActive(false);
         }
