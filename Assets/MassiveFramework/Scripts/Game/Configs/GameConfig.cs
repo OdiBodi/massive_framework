@@ -2,7 +2,7 @@
 
 namespace MassiveCore.Framework
 {
-    [CreateAssetMenu(fileName = "game_config", menuName = "Configs/Game Config")]
+    [CreateAssetMenu(fileName = "game_config", menuName = "Massive Framework/Configs/Game Config")]
     public class GameConfig : ScriptableObject
     {
         [SerializeField]

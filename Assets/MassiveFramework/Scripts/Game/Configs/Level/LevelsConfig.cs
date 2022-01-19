@@ -2,7 +2,7 @@
 
 namespace MassiveCore.Framework
 {
-    [CreateAssetMenu(fileName = "levels_config", menuName = "Configs/Levels Config")]
+    [CreateAssetMenu(fileName = "levels_config", menuName = "Massive Framework/Configs/Levels Config")]
     public class LevelsConfig : ScriptableObject
     {
         [SerializeField]
