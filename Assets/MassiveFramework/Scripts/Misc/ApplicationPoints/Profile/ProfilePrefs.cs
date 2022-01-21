@@ -36,7 +36,7 @@ namespace MassiveCore.Framework
             Save();
         }
 
-        private void Load()
+        protected virtual void Load()
         {
             FirstLaunchDate = DateTime.Now.FromPlayerPrefs(FirstLaunchDateKey);
             LastSessionDate = DateTime.Now.FromPlayerPrefs(LastSessionDateKey);
@@ -48,7 +48,7 @@ namespace MassiveCore.Framework
             LevelIndex.GetPlayerPrefsInt(LevelIndexKey, 0);
         }
 
-        private void Save()
+        protected virtual void Save()
         {
             FirstLaunchDate.SaveToPlayerPrefs(FirstLaunchDateKey);
             LastSessionDate.SaveToPlayerPrefs(LastSessionDateKey);
