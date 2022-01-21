@@ -6,11 +6,7 @@ namespace MassiveCore.Framework
     {
         public override void InstallBindings()
         {
-#if DEBUG
             Container.Bind<IProfile>().To<ProfilePrefs>().AsSingle();
-#else
-            Container.Bind<IProfile>().To<ProfilePrefs>().AsSingle();
-#endif
         }
     }
 }
