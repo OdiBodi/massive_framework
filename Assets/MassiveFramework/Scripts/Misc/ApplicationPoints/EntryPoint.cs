@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Unity.Linq;
-using Zenject;
 
 namespace MassiveCore.Framework
 {
@@ -12,9 +11,6 @@ namespace MassiveCore.Framework
         public bool Loaded { get; private set; }
 
         private IEnumerable<ApplicationPoint> Points => CacheGameObject.Descendants().OfComponent<ApplicationPoint>();
-
-        [Inject]
-        private Timers timers; 
 
         private void Awake()
         {
