@@ -9,7 +9,7 @@ namespace Squares
     public class IosApplicationReview : IApplicationReview
     {
         [Inject]
-        private readonly IProfile profile;
+        private readonly ICustomProfile profile;
         
         public async Task<bool> Request()
         {

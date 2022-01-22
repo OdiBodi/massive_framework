@@ -1,5 +1,4 @@
 ﻿using System;
-using UniRx;
 
 namespace MassiveCore.Framework
 {
@@ -9,10 +8,6 @@ namespace MassiveCore.Framework
         DateTime LastSessionDate { get; set; }
 
         int NumberSession { get; set; }
-
-        ReactiveProperty<bool> ApplicationReviewActive { get; }
-
-        ReactiveProperty<int> LevelIndex { get; } 
 
         void Sync();
     }

@@ -9,7 +9,7 @@ namespace MassiveCore.Framework
     public class Levels
     {
         [Inject]
-        private readonly IProfile profile;
+        private readonly ICustomProfile profile;
 
         [Inject]
         private readonly GameConfig gameConfig;

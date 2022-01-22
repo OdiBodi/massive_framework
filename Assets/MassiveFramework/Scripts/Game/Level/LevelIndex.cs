@@ -2,10 +2,10 @@ namespace MassiveCore.Framework
 {
     public class LevelIndex
     {
-        private readonly IProfile profile;
+        private readonly ICustomProfile profile;
         private readonly LevelsConfig levelsConfig;
 
-        public LevelIndex(IProfile profile, LevelsConfig levelsConfig)
+        public LevelIndex(ICustomProfile profile, LevelsConfig levelsConfig)
         {
             this.profile = profile;
             this.levelsConfig = levelsConfig;

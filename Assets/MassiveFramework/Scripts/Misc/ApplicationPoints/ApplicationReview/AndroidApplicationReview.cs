@@ -13,7 +13,7 @@ namespace MassiveCore.Framework
         private readonly ILogger logger;
 
         [Inject]
-        private readonly IProfile profile;
+        private readonly ICustomProfile profile;
 
         public async Task<bool> Request()
         {

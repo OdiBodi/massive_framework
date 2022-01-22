@@ -1,5 +1,4 @@
 ﻿using System;
-using UniRx;
 using UnityEngine;
 
 namespace MassiveCore.Framework
@@ -11,20 +10,12 @@ namespace MassiveCore.Framework
 
         private const string NumberSessionKey = "number_session";
 
-        private const string ApplicationReviewActiveKey = "application_review_active";
-
-        private const string LevelIndexKey = "current_level_index";
-
         private bool wasLoad;
 
         public DateTime FirstLaunchDate { get; private set; }
         public DateTime LastSessionDate { get; set; }
 
         public int NumberSession { get; set; }
-
-        public ReactiveProperty<bool> ApplicationReviewActive { get; } = new ReactiveProperty<bool>();
-
-        public ReactiveProperty<int> LevelIndex { get; } = new ReactiveProperty<int>();
 
         public void Sync()
         {
@@ -42,10 +33,6 @@ namespace MassiveCore.Framework
             LastSessionDate = DateTime.Now.FromPlayerPrefs(LastSessionDateKey);
 
             NumberSession = PlayerPrefs.GetInt(NumberSessionKey, 0);
-
-            ApplicationReviewActive.GetPlayerPrefsBool(ApplicationReviewActiveKey, true);
-
-            LevelIndex.GetPlayerPrefsInt(LevelIndexKey, 0);
         }
 
         protected virtual void Save()
@@ -54,10 +41,6 @@ namespace MassiveCore.Framework
             LastSessionDate.SaveToPlayerPrefs(LastSessionDateKey);
 
             PlayerPrefs.SetInt(NumberSessionKey, NumberSession);
-
-            ApplicationReviewActive.SetPlayerPrefsBool(ApplicationReviewActiveKey);
-
-            LevelIndex.SetPlayerPrefsInt(LevelIndexKey);
 
             PlayerPrefs.Save();
         }
