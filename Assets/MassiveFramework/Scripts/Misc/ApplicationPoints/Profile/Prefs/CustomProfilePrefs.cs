@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     {
         private const string ApplicationReviewActiveKey = "application_review_active";
 
-        private const string LevelIndexKey = "current_level_index";
+        private const string LevelIndexKey = "level_index";
 
         public ReactiveProperty<bool> ApplicationReviewActive { get; } = new ReactiveProperty<bool>();
 
