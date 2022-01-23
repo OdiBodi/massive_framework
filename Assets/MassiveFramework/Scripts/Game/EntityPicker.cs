@@ -25,6 +25,7 @@ namespace MassiveCore.Framework
         private bool active;
 
         public event Action<T> OnPicked;
+        public event Action OnMissed;
 
         public EntityPicker(Camera camera, PickType pickType, float maxDistance, int layerMask)
         {
@@ -108,10 +109,11 @@ namespace MassiveCore.Framework
             {
                 return;
             }
-            
+
             var ray = finger.GetRay(camera);
             if (!Physics.Raycast(ray, out var hitInfo, maxDistance, layerMask))
             {
+                OnMissed?.Invoke();
                 return;
             }
 
