@@ -32,7 +32,7 @@ namespace MassiveCore.Framework
             FirstLaunchDate = DateTime.Now.FromPlayerPrefs(FirstLaunchDateKey);
             LastSessionDate = DateTime.Now.FromPlayerPrefs(LastSessionDateKey);
 
-            NumberSession = PlayerPrefs.GetInt(NumberSessionKey, 0);
+            NumberSession = PlayerPrefs.GetInt(NumberSessionKey, -1);
         }
 
         protected virtual void Save()

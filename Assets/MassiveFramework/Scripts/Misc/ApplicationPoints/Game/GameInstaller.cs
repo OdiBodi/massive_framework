@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     {
         public override void InstallBindings()
         {
-            Container.Bind<Game>().ToSelf().AsSingle();
+            Container.Bind<Game>().AsSingle();
         }
     }
 }
