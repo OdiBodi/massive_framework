@@ -7,7 +7,10 @@ namespace MassiveCore.Framework
     {
         [Inject]
         private readonly IApplicationReview applicationReview;
-        
+
+        [Inject]
+        private readonly Pool pool;
+
         [SerializeField]
         private ExampleScreen view;
 
@@ -25,6 +28,10 @@ namespace MassiveCore.Framework
             view.OnShowAppReviewButtonClicked += () =>
             {
                 applicationReview.Request();
+            };
+            view.OnPlayVfxButtonClicked += () =>
+            {
+                pool.PlayVfx("example", Vector3.zero, Quaternion.identity, Vector3.one);
             };
         }
     }

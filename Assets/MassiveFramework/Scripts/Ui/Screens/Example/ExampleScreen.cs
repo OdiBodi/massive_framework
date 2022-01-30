@@ -12,8 +12,12 @@ namespace MassiveCore.Framework
         [SerializeField]
         private Button showAppReviewButton;
 
+        [SerializeField]
+        private Button playVfxButton;
+
         public event Action OnCloseButtonClicked;
         public event Action OnShowAppReviewButtonClicked;
+        public event Action OnPlayVfxButtonClicked;
 
         private void Awake()
         {
@@ -24,6 +28,7 @@ namespace MassiveCore.Framework
         {
             closeButton.onClick.AddListener(() => OnCloseButtonClicked?.Invoke());
             showAppReviewButton.onClick.AddListener(() => OnShowAppReviewButtonClicked?.Invoke());
+            playVfxButton.onClick.AddListener(() => OnPlayVfxButtonClicked?.Invoke());
         }
     }
 }

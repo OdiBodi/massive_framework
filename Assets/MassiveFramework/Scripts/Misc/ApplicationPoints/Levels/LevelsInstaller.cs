@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     public class LevelsInstaller : MonoInstaller
     {
         [Inject]
-        private GameConfig gameConfig;
+        private readonly GameConfig gameConfig;
 
         [SerializeField]
         private Transform root;
