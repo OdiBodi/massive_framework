@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace MassiveCore.Framework
@@ -20,26 +21,24 @@ namespace MassiveCore.Framework
         public event Action<State> OnClicked;
         public event Action<State> OnStateChanged;
 
-        public State CurrentState
-        {
-            get => state;
-            set
-            {
-                state = value;
-                states.ForEach(x => x.button.Visibility = state.id == x.id);
-                OnStateChanged?.Invoke(state);
-            }
-        }
+        public State CurrentState => state;
 
         private void Awake()
         {
             Subscribe();
-            CurrentState = states[0];
+            UpdateState(states[0].id);
         }
 
         private void Subscribe()
         {
             states.ForEach(state => state.button.OnClicked += () => OnClicked?.Invoke(state));
+        }
+
+        public void UpdateState(string id)
+        {
+            state = states.First(x => x.id == id);
+            states.ForEach(x => x.button.Visibility = state.id == x.id);
+            OnStateChanged?.Invoke(state);
         }
     }
 }
