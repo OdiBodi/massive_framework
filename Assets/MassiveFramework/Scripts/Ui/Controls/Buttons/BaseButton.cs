@@ -24,9 +24,8 @@ namespace MassiveCore.Framework
             get => button.interactable;
             set
             {
-                var interactable = Visibility && value; 
-                button.interactable = interactable;
-                canvasGroup.blocksRaycasts = interactable;
+                button.interactable = value;
+                canvasGroup.blocksRaycasts = value;
             }
         }
         public bool Visibility
