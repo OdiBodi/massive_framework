@@ -37,6 +37,10 @@ namespace MassiveCore.Framework
 
         public void UpdateState(string id)
         {
+            if (CurrentState.id == id)
+            {
+                return;
+            }
             state = states.First(x => x.id == id);
             states.ForEach(x => x.button.Visibility = state.id == x.id);
             OnStateChanged?.Invoke(state);
