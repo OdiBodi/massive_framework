@@ -21,6 +21,11 @@ namespace MassiveCore.Framework
         public event Action<State> OnClicked;
         public event Action<State> OnStateChanged;
 
+        public State this[string id]
+        {
+            get => states.FirstOrDefault(state => state.id == id);
+        }
+
         public State CurrentState => state;
 
         private void Awake()
