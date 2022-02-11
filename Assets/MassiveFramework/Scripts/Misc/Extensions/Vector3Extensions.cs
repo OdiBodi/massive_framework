@@ -4,6 +4,11 @@ namespace MassiveCore.Framework
 {
     public static class Vector3Extensions
     {
+        public static bool EqualsTo(this Vector3 a, Vector3 b, float error = 0.01f)
+        {
+            return new Vector3EqualityComparer(error).Equals(a, b);
+        }
+
         public static float RandomRange(this Vector2 vector)
         {
             return Random.Range(vector.x, vector.y);

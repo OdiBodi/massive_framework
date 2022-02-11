@@ -7,7 +7,7 @@ namespace MassiveCore.Framework
     public class CameraPanel : BaseMonoBehaviour
     {
         [Inject]
-        private Cameras cameras;
+        private readonly Cameras cameras;
 
         [SerializeField]
         private RawImage image;
