@@ -10,7 +10,7 @@ namespace MassiveCore.Framework
         [Serializable]
         public struct DirectionalLight
         {
-            public Quaternion rotation;
+            public Vector2 rotation;
             public Color color;
             [Space]
             public LightShadows shadowType;
@@ -19,7 +19,7 @@ namespace MassiveCore.Framework
 
             public void ApplyTo(Light light)
             {
-                light.transform.rotation = rotation;
+                light.transform.eulerAngles = rotation;
                 light.color = color;
                 light.shadows = shadowType; 
                 light.shadowStrength = shadowStrength;
@@ -69,7 +69,7 @@ namespace MassiveCore.Framework
         [SerializeField]
         private DirectionalLight directionalLight = new DirectionalLight
         {
-            rotation = Quaternion.identity,
+            rotation = Vector2.zero,
             color = Color.white,
             shadowType = LightShadows.None,
             shadowStrength = 1f
