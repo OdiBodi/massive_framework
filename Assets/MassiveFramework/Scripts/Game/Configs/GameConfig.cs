@@ -9,9 +9,13 @@ namespace MassiveCore.Framework
         private LevelsConfig levelsConfig;
 
         [SerializeField]
+        private EnvironmentsConfig environmentsConfig;
+
+        [SerializeField]
         private VfxConfigs vfxConfigs;
 
         public LevelsConfig LevelsConfig => levelsConfig;
+        public EnvironmentsConfig EnvironmentsConfig => environmentsConfig;
         public VfxConfigs VfxConfigs => vfxConfigs;
     }
 }

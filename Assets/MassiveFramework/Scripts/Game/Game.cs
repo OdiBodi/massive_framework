@@ -5,6 +5,9 @@ namespace MassiveCore.Framework
     public class Game
     {
         [Inject]
+        private readonly Environment environment;
+
+        [Inject]
         private readonly Levels levels;
 
         [Inject]
@@ -12,6 +15,7 @@ namespace MassiveCore.Framework
 
         public void StartGame()
         {
+            environment.ApplyConfig("example");
             levels.LoadCurrentLevel();
             screens.ShowBottomScreen<ExampleScreen>();
         }
