@@ -9,11 +9,6 @@ namespace MassiveCore.Framework
             return new Vector3EqualityComparer(error).Equals(a, b);
         }
 
-        public static float RandomRange(this Vector2 vector)
-        {
-            return Random.Range(vector.x, vector.y);
-        }
-        
         public static Vector3 SetX(this Vector3 vector, float value)
         {
             return new Vector3(value, vector.y, vector.z);
