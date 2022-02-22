@@ -1,4 +1,5 @@
 using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,9 @@ namespace MassiveCore.Framework
     public class ExampleScreen : Screen
     {
         [Space, SerializeField]
+        private AnimatedNumericText animatedNumericText;
+
+        [SerializeField]
         private Button closeButton;
         
         [SerializeField]
@@ -22,6 +26,7 @@ namespace MassiveCore.Framework
         private void Awake()
         {
             SubscribeOnButtons();
+            StartIncreasingNumber();
         }
 
         private void SubscribeOnButtons()
@@ -29,6 +34,12 @@ namespace MassiveCore.Framework
             closeButton.onClick.AddListener(() => OnCloseButtonClicked?.Invoke());
             showAppReviewButton.onClick.AddListener(() => OnShowAppReviewButtonClicked?.Invoke());
             playVfxButton.onClick.AddListener(() => OnPlayVfxButtonClicked?.Invoke());
+        }
+
+        private void StartIncreasingNumber()
+        {
+            Observable.Interval(TimeSpan.FromSeconds(2f)).Subscribe(_ => animatedNumericText.Number += 10)
+                .AddTo(this);
         }
     }
 }
