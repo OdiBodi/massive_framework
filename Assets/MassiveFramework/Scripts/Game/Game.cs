@@ -13,11 +13,11 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly Screens screens;
 
-        public void StartGame()
+        public async void StartGame()
         {
             environment.ApplyConfig("example");
             levels.LoadCurrentLevel();
-            screens.ShowBottomScreen<ExampleScreen>();
+            var closed = await screens.ShowBottomScreen<ExampleScreen>() == ScreenClosingResult.Close;
         }
     }
 }

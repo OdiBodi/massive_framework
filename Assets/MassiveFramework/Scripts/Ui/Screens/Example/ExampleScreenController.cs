@@ -23,7 +23,7 @@ namespace MassiveCore.Framework
         {
             view.OnCloseButtonClicked += () =>
             {
-                view.Close(ClosingResult.Close);
+                view.Close(ScreenClosingResult.Close);
             };
             view.OnShowAppReviewButtonClicked += () =>
             {

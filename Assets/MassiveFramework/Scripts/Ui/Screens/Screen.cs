@@ -6,11 +6,6 @@ using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public enum ClosingResult
-    {
-        Close
-    }
-
     public class Screen : BaseMonoBehaviour
     {
         public class Factory : PlaceholderFactory<Type, Screen>
@@ -20,7 +15,7 @@ namespace MassiveCore.Framework
         [SerializeField]
         private Canvas canvas;
 
-        protected AsyncSubject<ClosingResult> closeSubject = new AsyncSubject<ClosingResult>();
+        protected AsyncSubject<ScreenClosingResult> closeSubject = new AsyncSubject<ScreenClosingResult>();
 
         public int Order
         {
@@ -30,21 +25,21 @@ namespace MassiveCore.Framework
 
         protected virtual void OnDestroy()
         {
-            TriggerCloseResult(ClosingResult.Close);
+            TriggerCloseResult(ScreenClosingResult.Close);
         }
 
-        public async Task<ClosingResult> WaitForClose()
+        public async Task<ScreenClosingResult> WaitForClose()
         {
             return await closeSubject.ToTask();
         }
 
-        private void TriggerCloseResult(ClosingResult result)
+        private void TriggerCloseResult(ScreenClosingResult result)
         {
             closeSubject.OnNext(result);
             closeSubject.OnCompleted();
         }
 
-        public void Close(ClosingResult result)
+        public void Close(ScreenClosingResult result)
         {
             TriggerCloseResult(result);
             Destroy(CacheGameObject);
