@@ -8,5 +8,15 @@ namespace MassiveCore.Framework
         {
             Debug.Log(text);
         }
+
+        public void PrintError(string text)
+        {
+            Debug.LogError(text);
+        }
+
+        public void PrintWarning(string text)
+        {
+            Debug.LogWarning(text);
+        }
     }
 }
