@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace MassiveCore.Framework
 {
-    public class EntityPicker<T> where T : BaseMonoBehaviour
+    public class EntityPicker<T> : IDisposable
+        where T : BaseMonoBehaviour
     {
         public enum PickType
         {
@@ -53,6 +54,11 @@ namespace MassiveCore.Framework
                     }
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            Active = false;
         }
 
         private void SubscribeOnLeanTouch()
