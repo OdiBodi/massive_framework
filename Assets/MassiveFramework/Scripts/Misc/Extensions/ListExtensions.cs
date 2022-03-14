@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
 {
     public static class ListExtensions
     {
-        public static void Shuffle<T>(this IList<T> list, Action<T, T> onWillSwap = null)
+        public static IList<T> Shuffle<T>(this IList<T> list, Action<T, T> onWillSwap = null)
         {
             var n = list.Count;
             while (n > 1) {
@@ -15,6 +15,7 @@ namespace MassiveCore.Framework
                 onWillSwap?.Invoke(list[k], list[n]);
                 (list[k], list[n]) = (list[n], list[k]);
             }
+            return list;
         }
     }
 }
