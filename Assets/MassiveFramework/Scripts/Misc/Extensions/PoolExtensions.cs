@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace MassiveCore.Framework
@@ -24,14 +24,14 @@ namespace MassiveCore.Framework
             return pool.Get(id, worldPoint, rotation, scale, onPrepare);
         }
 
-        public static Task PlayVfx(this Pool pool, string id, Vector3 position, Quaternion rotation, Vector3 scale,
+        public static UniTask PlayVfx(this Pool pool, string id, Vector3 position, Quaternion rotation, Vector3 scale,
             Action<Vfx> onPrepare = null)
         {
             var vfx = pool.Get(id, position, rotation, scale, onPrepare);
             return vfx.Play();
         }
 
-        public static Task PlayVfx(this Pool pool, string id, Camera camera, Vector3 position, Quaternion rotation,
+        public static UniTask PlayVfx(this Pool pool, string id, Camera camera, Vector3 position, Quaternion rotation,
             Vector3 scale, Action<Vfx> onPrepare = null)
         {
             var worldPoint = camera.ViewportToWorldPoint(position);

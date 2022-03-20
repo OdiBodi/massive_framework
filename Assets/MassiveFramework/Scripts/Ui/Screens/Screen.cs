@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -28,7 +28,7 @@ namespace MassiveCore.Framework
             TriggerCloseResult(ScreenClosingResult.Close);
         }
 
-        public async Task<ScreenClosingResult> WaitForClose()
+        public async UniTask<ScreenClosingResult> WaitForClose()
         {
             return await closeSubject.ToTask();
         }

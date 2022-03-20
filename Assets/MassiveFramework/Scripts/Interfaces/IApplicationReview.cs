@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 
 namespace MassiveCore.Framework
 {
     public interface IApplicationReview
     {
-        Task<bool> Request();
+        UniTask<bool> Request();
     }
 }

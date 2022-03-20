@@ -1,6 +1,6 @@
 #if UNITY_IOS
 
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine.iOS;
 using Zenject;
 
@@ -11,7 +11,7 @@ namespace Squares
         [Inject]
         private readonly ICustomProfile profile;
         
-        public async Task<bool> Request()
+        public async UniTask<bool> Request()
         {
             if (profile.ApplicationReviewActive.Value)
             {

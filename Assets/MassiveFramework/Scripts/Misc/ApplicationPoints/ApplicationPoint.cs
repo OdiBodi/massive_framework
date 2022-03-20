@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UniRx;
 
 namespace MassiveCore.Framework
@@ -11,7 +11,7 @@ namespace MassiveCore.Framework
         {
         }
 
-        public async Task<bool> WaitForComplete()
+        public async UniTask<bool> WaitForComplete()
         {
             return await completeSubject.ToTask();
         }

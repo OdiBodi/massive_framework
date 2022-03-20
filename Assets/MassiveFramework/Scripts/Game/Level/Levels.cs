@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using Unity.Linq;
 using Zenject;
@@ -21,14 +21,14 @@ namespace MassiveCore.Framework
 
         public Level CurrentLevel { get; private set; }
 
-        public Task LoadCurrentLevel()
+        public UniTask LoadCurrentLevel()
         {
             var levelIndex = new LevelIndex(profile, gameConfig.LevelsConfig);
             var index = levelIndex.Current();
             return LoadLevel(index);
         }
 
-        public Task LoadNextLevel()
+        public UniTask LoadNextLevel()
         {
             var levelIndex = new LevelIndex(profile, gameConfig.LevelsConfig);
             levelIndex.UpdateToNext();
@@ -45,7 +45,7 @@ namespace MassiveCore.Framework
             }
         }
 
-        private async Task LoadLevel(int index)
+        private async UniTask LoadLevel(int index)
         {
             DestroyCurrentLevel();
             await Observable.NextFrame();

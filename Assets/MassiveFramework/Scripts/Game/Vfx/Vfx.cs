@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -22,7 +22,7 @@ namespace MassiveCore.Framework
             Stop();
         }
 
-        public async Task Play()
+        public async UniTask Play()
         {
             if (stream != null)
             {

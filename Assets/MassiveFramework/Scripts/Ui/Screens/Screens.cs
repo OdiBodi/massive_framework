@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using Unity.Linq;
 using UnityEngine;
@@ -29,12 +29,12 @@ namespace MassiveCore.Framework
         private int LastBottomScreenOrder => InstanceScreens.Count(BottomScreen);
         private int LastTopScreenOrder => originTopOrder + InstanceScreens.Count(TopScreen);
 
-        public Task<ScreenClosingResult> ShowBottomScreen<T>(Action<T> onCreated = null) where T : Screen
+        public UniTask<ScreenClosingResult> ShowBottomScreen<T>(Action<T> onCreated = null) where T : Screen
         {
             return ShowScreen(LastBottomScreenOrder, onCreated);
         }
 
-        public Task<ScreenClosingResult> ShowTopScreen<T>(Action<T> onCreated = null) where T : Screen
+        public UniTask<ScreenClosingResult> ShowTopScreen<T>(Action<T> onCreated = null) where T : Screen
         {
             return ShowScreen(LastTopScreenOrder, onCreated);
         }
@@ -49,7 +49,7 @@ namespace MassiveCore.Framework
             InstanceTopScreens.ForEach(x => x.Close(ScreenClosingResult.Close));
         }
 
-        private async Task<ScreenClosingResult> ShowScreen<T>(int order, Action<T> onCreated = null) where T : Screen
+        private async UniTask<ScreenClosingResult> ShowScreen<T>(int order, Action<T> onCreated = null) where T : Screen
         {
             var screen = screenFactory.Create(typeof(T)) as T;
             screen.CacheTransform.SetParent(root, false);
@@ -60,7 +60,7 @@ namespace MassiveCore.Framework
             return result;
         }
 
-        private async Task UpdateScreenOrdersOnNextFrame()
+        private async UniTask UpdateScreenOrdersOnNextFrame()
         {
             await Observable.NextFrame();
             InstanceBottomScreens.UpdateOrders(0);

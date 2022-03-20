@@ -1,6 +1,6 @@
 #if UNITY_ANDROID
 
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Google.Play.Review;
 using UniRx;
 using Zenject;
@@ -15,7 +15,7 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ICustomProfile profile;
 
-        public async Task<bool> Request()
+        public async UniTask<bool> Request()
         {
             if (profile.ApplicationReviewActive.Value)
             {
