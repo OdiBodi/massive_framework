@@ -12,8 +12,7 @@ namespace MassiveCore.Framework
 
         private void Awake()
         {
-            sceneContext.Installers = CacheGameObject.AfterSelf().OfComponent<MonoInstaller>()
-                .Where(x => x.gameObject.activeInHierarchy);
+            sceneContext.Installers = CacheGameObject.AfterSelf().OfComponent<MonoInstaller>().Where(x => x.Activity());
         }
     }
 }

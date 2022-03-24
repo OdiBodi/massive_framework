@@ -67,7 +67,7 @@ namespace MassiveCore.Framework
 
         public void Return<T>(T obj) where T : BaseMonoBehaviour
         {
-            obj.SetActive(false);
+            obj.UpdateActivity(false);
         }
 
         public void ReturnAll<T>()
