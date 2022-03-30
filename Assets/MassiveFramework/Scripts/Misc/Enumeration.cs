@@ -6,20 +6,11 @@ namespace MassiveCore.Framework
     {
         public virtual bool Equals(Enumeration other)
         {
-            return true;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
+            if (other is null)
             {
                 return false;
             }
-            if (GetType() != obj.GetType())
-            {
-                return false;
-            }
-            return Equals((Enumeration)obj);
+            return GetType() == other.GetType();
         }
 
         public override int GetHashCode()
@@ -32,7 +23,7 @@ namespace MassiveCore.Framework
             return left.Equals(right);
         }
 
-        public static bool operator !=(Enumeration left, Enumeration right)
+        public static bool operator != (Enumeration left, Enumeration right)
         {
             return !(left == right);
         }
