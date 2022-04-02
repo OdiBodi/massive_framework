@@ -9,7 +9,7 @@ namespace MassiveCore.Framework
 #if DEBUG
             Container.Bind<IAds>().To<EditorAds>().AsSingle();
 #else
-            Container.Bind<IAnalytics>().To<EditorAds>().AsSingle(); // AppodealAds
+            Container.Bind<IAds>().To<EditorAds>().AsSingle(); // AppodealAds
 #endif
         }
     }
