@@ -14,8 +14,12 @@ namespace MassiveCore.Framework
         [SerializeField]
         private VfxConfigs vfxConfigs;
 
+        [SerializeField]
+        private VibrationsConfig vibrationsConfig;
+
         public LevelsConfig LevelsConfig => levelsConfig;
         public EnvironmentsConfig EnvironmentsConfig => environmentsConfig;
         public VfxConfigs VfxConfigs => vfxConfigs;
+        public VibrationsConfig VibrationsConfig => vibrationsConfig;
     }
 }

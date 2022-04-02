@@ -9,6 +9,9 @@ namespace MassiveCore.Framework
         private readonly IApplicationReview applicationReview;
 
         [Inject]
+        private readonly IVibrations vibrations;
+
+        [Inject]
         private readonly Pool pool;
 
         [SerializeField]
@@ -31,6 +34,7 @@ namespace MassiveCore.Framework
             };
             view.OnPlayVfxButtonClicked += () =>
             {
+                vibrations.Vibrate("button_click");
                 pool.PlayVfx("example", Vector3.zero, Quaternion.identity, Vector3.one);
             };
         }

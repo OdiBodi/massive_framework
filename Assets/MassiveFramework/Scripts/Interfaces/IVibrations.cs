@@ -2,6 +2,6 @@
 {
     public interface IVibrations
     {
-        void ButtonClick();
+        void Vibrate(string id);
     }
 }

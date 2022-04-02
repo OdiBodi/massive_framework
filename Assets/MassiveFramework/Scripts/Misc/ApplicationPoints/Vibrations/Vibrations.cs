@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Lofelt.NiceVibrations;
 using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class EditorVibrations : IVibrations
+    public class Vibrations : IVibrations
     {
-        [Inject]
-        private readonly ILogger logger;
-
         [Inject]
         private readonly GameConfig gameConfig;
 
@@ -27,7 +25,7 @@ namespace MassiveCore.Framework
             {
                 return;
             }
-            logger.Print($"EditorVibrations:Vibrate(\"{id}\")");
+            HapticPatterns.PlayPreset(config.Preset);
         }
     }
 }
