@@ -17,6 +17,7 @@ namespace MassiveCore.Framework
 
         protected AsyncSubject<ScreenClosingResult> closeSubject = new AsyncSubject<ScreenClosingResult>();
 
+        public Canvas Canvas => canvas;
         public int Order
         {
             get => canvas.sortingOrder;
