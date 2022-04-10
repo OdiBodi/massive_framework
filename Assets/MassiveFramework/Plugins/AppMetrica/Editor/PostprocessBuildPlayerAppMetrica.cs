@@ -12,6 +12,7 @@ using UnityEditor.Callbacks;
 using System.IO;
 using System.Collections;
 #if UNITY_IOS
+using UnityEditor.iOS.Xcode.Extensions;
 using UnityEditor.iOS.Xcode;
 #endif
 
@@ -22,6 +23,14 @@ using UnityEditor.iOS.Xcode;
 
 public class PostprocessBuildPlayerAppMetrica
 {
+    private const string FrameworksDir = "Assets/AppMetrica/Plugins/iOS";
+
+    private static readonly string[] AppMetricaFrameworks =
+    {
+        "YandexMobileMetrica",
+        "YandexMobileMetricaCrashes"
+    };
+
     private static readonly string[] StrongFrameworks = {
 #if APP_METRICA_ADD_IAD_FRAMEWORK
         "iAd",
@@ -72,6 +81,22 @@ public class PostprocessBuildPlayerAppMetrica
             var target = project.TargetGuidByName ("Unity-iPhone");
 #endif
 
+            var frameworkArch = PlayerSettings.iOS.sdkVersion == iOSSdkVersion.DeviceSDK
+                ? "ios-arm64_armv7"
+                : "ios-arm64_i386_x86_64-simulator";
+
+            var phaseGUID = project.GetFrameworksBuildPhaseByTarget(target);
+            foreach (var appMetricaFramework in AppMetricaFrameworks) {
+                var frameworkName = appMetricaFramework + ".framework";
+                var frameworkPath = FrameworksDir + '/' + appMetricaFramework + ".xcframework/" + frameworkArch +
+                                    '/' + frameworkName;
+                var dstPath = "AppMetricaFrameworks/" + frameworkName;
+                CopyAndReplaceDirectory (frameworkPath, Path.Combine(path, dstPath));
+                var fileGuid = project.AddFile (dstPath, "Frameworks/" + frameworkName);
+                project.AddFileToBuild (target, fileGuid);
+            }
+            project.AddBuildProperty(target, "FRAMEWORK_SEARCH_PATHS", "$(PROJECT_DIR)/AppMetricaFrameworks");
+
             foreach (var frameworkName in StrongFrameworks) {
                 project.AddFrameworkToProject (target, frameworkName + ".framework", false);
             }
@@ -88,5 +113,23 @@ public class PostprocessBuildPlayerAppMetrica
             File.WriteAllText (projectPath, project.WriteToString ());
         }
 #endif
+    }
+
+    private static void CopyAndReplaceDirectory (string srcPath, string dstPath)
+    {
+        if (Directory.Exists (dstPath)) Directory.Delete (dstPath, true);
+        if (File.Exists (dstPath)) File.Delete (dstPath);
+
+        Directory.CreateDirectory (dstPath);
+
+        foreach (var file in Directory.GetFiles (srcPath)) {
+            if (!file.EndsWith (".meta")) {
+                File.Copy (file, Path.Combine (dstPath, Path.GetFileName (file)));
+            }
+        }
+
+        foreach (var dir in Directory.GetDirectories(srcPath)) {
+            CopyAndReplaceDirectory(dir, Path.Combine(dstPath, Path.GetFileName(dir)));
+        }
     }
 }
