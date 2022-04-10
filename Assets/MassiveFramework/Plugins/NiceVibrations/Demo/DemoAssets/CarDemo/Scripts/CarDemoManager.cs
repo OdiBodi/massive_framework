@@ -71,7 +71,6 @@ namespace Lofelt.NiceVibrations
                     _carStartedAt = Time.time;
                     _lastStartClickAt = Time.time;
 
-                    HapticController.fallbackPreset = HapticPatterns.PresetType.HeavyImpact;
                     HapticPatterns.PlayConstant(_knobValue, _knobValue, MaximumPowerDuration);
                     CarEngineAudioSource.Play();
                 }
