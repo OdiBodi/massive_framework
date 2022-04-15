@@ -94,9 +94,8 @@ namespace MassiveCore.Framework
 
         public bool ShowRewarded(string tag)
         {
-            if (HasRewarded)
+            if (Appodeal.show(Appodeal.REWARDED_VIDEO))
             {
-                Appodeal.show(Appodeal.REWARDED_VIDEO);
                 rewardedTag = tag;
                 return true;
             }
