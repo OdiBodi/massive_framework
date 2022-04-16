@@ -30,23 +30,13 @@ namespace Lofelt.NiceVibrations
     /// Before calling any other method, Initialize() needs to be called.
     ///
     /// Errors are printed and swallowed, no exceptions are thrown. On iOS, this happens inside
-    /// the SDK, on Android this happens with try/catch blocks in this class and in JNIHelpers.
+    /// the SDK, on Android this happens with try/catch blocks in this class.
     public static class LofeltHaptics
     {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
         static AndroidJavaObject lofeltHaptics;
         static AndroidJavaObject hapticPatterns;
         static long nativeController;
-
-        // Cache the most commonly used JNI method IDs during initialization.
-        // Calling a Java method via its method ID is faster and uses less allocations than
-        // calling a method by string, like e.g. 'lofeltHaptics.Call("play")'.
-        static IntPtr playMethodId = IntPtr.Zero;
-        static IntPtr stopMethodId = IntPtr.Zero;
-        static IntPtr seekMethodId = IntPtr.Zero;
-        static IntPtr loopMethodId = IntPtr.Zero;
-        static IntPtr setAmplitudeMultiplicationMethodId = IntPtr.Zero;
-        static IntPtr playMaximumAmplitudePattern = IntPtr.Zero;
 
         [DllImport("lofelt_sdk")]
         private static extern bool lofeltHapticsLoadDirect(IntPtr controller, [In] byte[] bytes, long size);
@@ -116,19 +106,12 @@ namespace Lofelt.NiceVibrations
                 {
                     lofeltHaptics = new AndroidJavaObject("com.lofelt.haptics.LofeltHaptics", context);
                     nativeController = lofeltHaptics.Call<long>("getControllerHandle");
-                    hapticPatterns = new AndroidJavaObject("com.lofelt.haptics.HapticPatterns", context);
-
-                    playMethodId = AndroidJNIHelper.GetMethodID(lofeltHaptics.GetRawClass(), "play", "()V", false);
-                    stopMethodId = AndroidJNIHelper.GetMethodID(lofeltHaptics.GetRawClass(), "stop", "()V", false);
-                    seekMethodId = AndroidJNIHelper.GetMethodID(lofeltHaptics.GetRawClass(), "seek", "(F)V", false);
-                    loopMethodId = AndroidJNIHelper.GetMethodID(lofeltHaptics.GetRawClass(), "loop", "(Z)V", false);
-                    setAmplitudeMultiplicationMethodId = AndroidJNIHelper.GetMethodID(lofeltHaptics.GetRawClass(), "setAmplitudeMultiplication", "(F)V", false);
-                    playMaximumAmplitudePattern = AndroidJNIHelper.GetMethodID(hapticPatterns.GetRawClass(), "playMaximumAmplitudePattern", "([F)V", false);
+                    hapticPatterns =  new AndroidJavaObject("com.lofelt.haptics.HapticPatterns", context);
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogException(ex);
+                Debug.LogWarning(ex);
             }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             lofeltHapticsSystemHapticsInitializeBinding();
@@ -169,7 +152,15 @@ namespace Lofelt.NiceVibrations
         public static bool DeviceMeetsMinimumPlatformRequirements()
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            return JNIHelpers.Call<bool>(lofeltHaptics, "deviceMeetsMinimumRequirements");
+            try
+            {
+                return lofeltHaptics.Call<bool>("deviceMeetsMinimumRequirements");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+                return false;
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             return lofeltHapticsDeviceMeetsMinimumRequirementsBinding();
 #else
@@ -180,14 +171,18 @@ namespace Lofelt.NiceVibrations
         public static void Load(byte[] data)
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            // For performance reasons, we do *not* call into the Java API with
-            // `lofeltHaptics.Call("load", data)` here. Instead, we bypass the Java layer and
-            // call into the native library directly, saving the costly conversion from
-            // C#'s byte[] to Java's byte[].
-            //
-            // No exception handling needed here, lofeltHapticsLoadDirect() is a native method that
-            // doesn't throw an exception and instead logs the error.
-            lofeltHapticsLoadDirect((IntPtr)nativeController, data, data.Length);
+            try
+            {
+                // For performance reasons, we do *not* call into the Java API with
+                // `lofeltHaptics.Call("load", data)` here. Instead, we bypass the Java layer and
+                // call into the native library directly, saving the costly conversion from
+                // C#'s byte[] to Java's byte[].
+                lofeltHapticsLoadDirect((IntPtr)nativeController, data, data.Length);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             lofeltHapticsLoadBinding(controller, data, data.Length);
 #endif
@@ -196,7 +191,15 @@ namespace Lofelt.NiceVibrations
         public static float GetClipDuration()
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            return JNIHelpers.Call<float>(lofeltHaptics, "getClipDuration");
+            try
+            {
+                return lofeltHaptics.Call<float>("getClipDuration");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+                return 0.0f;
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             return lofeltHapticsGetClipDurationBinding(controller);
 #else
@@ -208,7 +211,14 @@ namespace Lofelt.NiceVibrations
         public static void Play()
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            JNIHelpers.Call(lofeltHaptics, playMethodId);
+            try
+            {
+                lofeltHaptics.Call("play");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             lofeltHapticsPlayBinding(controller);
 #endif
@@ -217,25 +227,9 @@ namespace Lofelt.NiceVibrations
         public static void PlayMaximumAmplitudePattern(float[] timings)
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            JNIHelpers.Call(hapticPatterns, playMaximumAmplitudePattern, timings);
-#endif
-        }
-
-        public static void Stop()
-        {
-#if (UNITY_ANDROID && !UNITY_EDITOR)
-            JNIHelpers.Call(lofeltHaptics, stopMethodId);
-#elif (UNITY_IOS && !UNITY_EDITOR)
-            lofeltHapticsStopBinding(controller);
-#endif
-        }
-
-        public static void StopPattern()
-        {
-#if (UNITY_ANDROID && !UNITY_EDITOR)
             try
             {
-                hapticPatterns.Call("stopPattern");
+                hapticPatterns.Call("playMaximumAmplitudePattern",timings);
             }
             catch (Exception ex)
             {
@@ -244,10 +238,33 @@ namespace Lofelt.NiceVibrations
 #endif
         }
 
+        public static void Stop()
+        {
+#if (UNITY_ANDROID && !UNITY_EDITOR)
+            try
+            {
+                lofeltHaptics.Call("stop");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
+#elif (UNITY_IOS && !UNITY_EDITOR)
+            lofeltHapticsStopBinding(controller);
+#endif
+        }
+
         public static void Seek(float time)
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            JNIHelpers.Call(lofeltHaptics, seekMethodId, time);
+            try
+            {
+                lofeltHaptics.Call("seek", time);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             lofeltHapticsSeekBinding(controller, time);
 #endif
@@ -256,7 +273,14 @@ namespace Lofelt.NiceVibrations
         public static void SetAmplitudeMultiplication(float factor)
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            JNIHelpers.Call(lofeltHaptics, setAmplitudeMultiplicationMethodId, factor);
+            try
+            {
+                lofeltHaptics.Call("setAmplitudeMultiplication", factor);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             lofeltHapticsSetAmplitudeMultiplicationBinding(controller, factor);
 #endif
@@ -272,7 +296,14 @@ namespace Lofelt.NiceVibrations
         public static void Loop(bool enabled)
         {
 #if (UNITY_ANDROID && !UNITY_EDITOR)
-            JNIHelpers.Call(lofeltHaptics, loopMethodId, enabled);
+            try
+            {
+                lofeltHaptics.Call("loop", enabled);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning(ex);
+            }
 #elif (UNITY_IOS && !UNITY_EDITOR)
             lofeltHapticsLoopBinding(controller, enabled);
 #endif
