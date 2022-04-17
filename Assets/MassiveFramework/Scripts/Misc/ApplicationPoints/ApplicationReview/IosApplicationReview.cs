@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.iOS;
 using Zenject;
 
-namespace Squares
+namespace MassiveCore.Framework
 {
     public class IosApplicationReview : IApplicationReview
     {
