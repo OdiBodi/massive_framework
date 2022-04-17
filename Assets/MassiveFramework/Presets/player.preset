@@ -658,7 +658,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: applicationIdentifier.Array.data[2].second
-    value: com.massicecore.project
+    value: com.massivecore.project
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: buildNumber.Array.size
@@ -1930,7 +1930,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetBatching.Array.data[3].m_DynamicBatching
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_BuildTargetBatching.Array.data[4].m_BuildTarget
@@ -2254,7 +2254,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: locationUsageDescription
-    value: 
+    value: Use for ads and analytics
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: microphoneUsageDescription
