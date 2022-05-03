@@ -17,9 +17,13 @@ namespace MassiveCore.Framework
         [SerializeField]
         private VibrationsConfig vibrationsConfig;
 
+        [SerializeField]
+        private LocalNotificationsConfig localNotificationsConfig;
+
         public LevelsConfig LevelsConfig => levelsConfig;
         public EnvironmentsConfig EnvironmentsConfig => environmentsConfig;
         public VfxConfigs VfxConfigs => vfxConfigs;
         public VibrationsConfig VibrationsConfig => vibrationsConfig;
+        public LocalNotificationsConfig LocalNotificationsConfig => localNotificationsConfig;
     }
 }
