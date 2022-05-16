@@ -14,5 +14,15 @@ namespace MassiveCore.Framework
         {
             return new Vector2(value, value);
         }
+
+        public static Vector3 ToVector3(this float value)
+        {
+            return new Vector3(value, value, value);
+        }
+
+        public static Vector4 ToVector4(this float value)
+        {
+            return new Vector4(value, value, value, value);
+        }
     }
 }

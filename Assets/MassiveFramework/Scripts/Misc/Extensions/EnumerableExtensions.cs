@@ -31,24 +31,7 @@ namespace MassiveCore.Framework
                 predicate(element);
             }
         }
-        
-        public static IEnumerable<IEnumerable<T>> GroupWhile<T>(this IEnumerable<T> source, Func<T, T, bool> condition)
-        {
-            var previous = source.First();
-            var list = new List<T> { previous };
-            foreach (var item in source.Skip(1))
-            {
-                if (condition(previous, item) == false)
-                {
-                    yield return list;
-                    list = new List<T>();
-                }
-                list.Add(item);
-                previous = item;
-            }
-            yield return list;
-        }
-        
+
         public static T RandomElement<T>(this IEnumerable<T> list)
         {
             var index = Random.Range(0, list.Count());
