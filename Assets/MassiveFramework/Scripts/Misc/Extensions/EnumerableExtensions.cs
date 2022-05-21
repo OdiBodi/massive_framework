@@ -37,5 +37,25 @@ namespace MassiveCore.Framework
             var index = Random.Range(0, list.Count());
             return list.ElementAt(index);
         }
+
+        public static int IndexOf<TSource>(this IEnumerable<TSource> list, TSource value)
+            where TSource : IEquatable<TSource>
+        {
+            return list.IndexOf(value, EqualityComparer<TSource>.Default);
+        }
+
+        public static int IndexOf<TSource>(this IEnumerable<TSource> list, TSource value, IEqualityComparer<TSource> comparer)
+        {
+            var index = 0;
+            foreach (var item in list)
+            {
+                if (comparer.Equals(item, value))
+                {
+                    return index;
+                }
+                index++;
+            }
+            return -1;
+        }
     }
 }
