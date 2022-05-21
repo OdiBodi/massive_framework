@@ -15,7 +15,7 @@ namespace MassiveCore.Framework
             (
                 (c, id) =>
                 {
-                    var configs = gameConfig.VfxConfigs.Configs;
+                    var configs = gameConfig.Config<VfxConfigs>().Configs;
                     var prefab = configs.First(x => x.Id == id).Vfx;
                     var vfx = c.InstantiatePrefabForComponent<Vfx>(prefab);
                     vfx.name = id;

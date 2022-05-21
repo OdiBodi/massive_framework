@@ -14,7 +14,7 @@ namespace MassiveCore.Framework
 
         private readonly WaitingList<string> waitingList = new WaitingList<string>(8);
 
-        private IEnumerable<VibrationConfig> Configs => gameConfig.VibrationsConfig.Configs;
+        private IEnumerable<VibrationConfig> Configs => gameConfig.Config<VibrationsConfig>().Configs;
 
         public void Vibrate(string id)
         {

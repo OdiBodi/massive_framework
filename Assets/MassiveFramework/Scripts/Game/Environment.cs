@@ -25,7 +25,7 @@ namespace MassiveCore.Framework
 
         private EnvironmentConfig ConfigBy(string name)
         {
-            return gameConfig.EnvironmentsConfig.Configs.First(config => config.name == name);
+            return gameConfig.Config<EnvironmentsConfig>().Configs.First(config => config.name == name);
         }
     }
 }

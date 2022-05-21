@@ -23,14 +23,14 @@ namespace MassiveCore.Framework
 
         public UniTask LoadCurrentLevel()
         {
-            var levelIndex = new LevelIndex(profile, gameConfig.LevelsConfig);
+            var levelIndex = new LevelIndex(profile, gameConfig.Config<LevelsConfig>());
             var index = levelIndex.Current();
             return LoadLevel(index);
         }
 
         public UniTask LoadNextLevel()
         {
-            var levelIndex = new LevelIndex(profile, gameConfig.LevelsConfig);
+            var levelIndex = new LevelIndex(profile, gameConfig.Config<LevelsConfig>());
             levelIndex.UpdateToNext();
             var index = levelIndex.Current();
             return LoadLevel(index);
@@ -38,11 +38,12 @@ namespace MassiveCore.Framework
 
         public void DestroyCurrentLevel()
         {
-            if (CurrentLevel != null)
+            if (CurrentLevel == null)
             {
-                CurrentLevel.gameObject.Destroy();
-                CurrentLevel = null;
+                return;
             }
+            CurrentLevel.gameObject.Destroy();
+            CurrentLevel = null;
         }
 
         private async UniTask LoadLevel(int index)

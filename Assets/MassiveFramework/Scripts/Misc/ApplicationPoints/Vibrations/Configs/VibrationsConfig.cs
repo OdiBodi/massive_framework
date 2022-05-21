@@ -3,7 +3,7 @@
 namespace MassiveCore.Framework
 {
     [CreateAssetMenu(fileName = "vibrations_config", menuName = "Massive Framework/Configs/Vibrations Config")]
-    public class VibrationsConfig : ScriptableObject
+    public class VibrationsConfig : Config
     {
         [SerializeField]
         private VibrationConfig[] iosConfigs;

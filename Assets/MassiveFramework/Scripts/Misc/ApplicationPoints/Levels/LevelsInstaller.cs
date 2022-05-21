@@ -18,7 +18,7 @@ namespace MassiveCore.Framework
             (
                 (c, i) =>
                 {
-                    var configs = gameConfig.LevelsConfig.Configs;
+                    var configs = gameConfig.Config<LevelsConfig>().Configs;
                     var index = i % configs.Length;
                     var prefab = configs[index].Prefab;
                     var level = c.InstantiatePrefabForComponent<Level>(prefab, root);

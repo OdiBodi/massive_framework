@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace MassiveCore.Framework
 {
@@ -6,24 +7,11 @@ namespace MassiveCore.Framework
     public class GameConfig : ScriptableObject
     {
         [SerializeField]
-        private LevelsConfig levelsConfig;
+        private Config[] configs;
 
-        [SerializeField]
-        private EnvironmentsConfig environmentsConfig;
-
-        [SerializeField]
-        private VfxConfigs vfxConfigs;
-
-        [SerializeField]
-        private VibrationsConfig vibrationsConfig;
-
-        [SerializeField]
-        private LocalNotificationsConfig localNotificationsConfig;
-
-        public LevelsConfig LevelsConfig => levelsConfig;
-        public EnvironmentsConfig EnvironmentsConfig => environmentsConfig;
-        public VfxConfigs VfxConfigs => vfxConfigs;
-        public VibrationsConfig VibrationsConfig => vibrationsConfig;
-        public LocalNotificationsConfig LocalNotificationsConfig => localNotificationsConfig;
+        public T Config<T>() where T : Config
+        {
+            return (T)configs.First(x => x.GetType() == typeof(T));
+        }
     }
 }

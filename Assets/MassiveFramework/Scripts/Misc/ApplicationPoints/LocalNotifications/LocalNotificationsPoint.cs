@@ -28,7 +28,7 @@ namespace MassiveCore.Framework
             }
             else
             {
-                new LocalNotificationsScheduler(notifications, logger, gameConfig.LocalNotificationsConfig).Schedule();
+                new LocalNotificationsScheduler(notifications, logger, gameConfig.Config<LocalNotificationsConfig>()).Schedule();
             }
         }
 
