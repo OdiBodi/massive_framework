@@ -15,7 +15,7 @@ namespace MassiveCore.Framework
         [SerializeField]
         private Canvas canvas;
 
-        protected AsyncSubject<ScreenClosingResult> closeSubject = new AsyncSubject<ScreenClosingResult>();
+        protected readonly AsyncSubject<ScreenClosingResult> closeSubject = new AsyncSubject<ScreenClosingResult>();
 
         public Canvas Canvas => canvas;
         public int Order
