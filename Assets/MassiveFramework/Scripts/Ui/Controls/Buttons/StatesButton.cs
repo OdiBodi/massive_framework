@@ -21,7 +21,6 @@ namespace MassiveCore.Framework
         public event Action<State> OnClicked;
         public event Action<State> OnStateChanged;
 
-        public State this[string id] => states.FirstOrDefault(state => state.id == id);
         public State CurrentState => state;
 
         private void Awake()
@@ -35,14 +34,24 @@ namespace MassiveCore.Framework
             states.ForEach(state => state.button.OnClicked += () => OnClicked?.Invoke(state));
         }
 
+        public T Button<T>(string id) where T : BaseButton 
+        {
+            return (T)states.First(state => state.id == id).button;
+        }
+
+        public T CurrentButton<T>() where T : BaseButton
+        {
+            return (T)state.button;
+        }
+
         public void UpdateState(string id)
         {
-            if (CurrentState.id == id)
+            if (state.id == id)
             {
                 return;
             }
             state = states.First(x => x.id == id);
-            states.ForEach(x => x.button.Visibility = state.id == x.id);
+            states.ForEach(x => x.button.UpdateActivity(state.id == x.id));
             OnStateChanged?.Invoke(state);
         }
     }
