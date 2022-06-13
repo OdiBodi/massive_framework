@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace MassiveCore.Framework
 {
-    public class StatesButton : BaseMonoBehaviour
+    public class StatesButton : BaseMonoBehaviour, IEnumerable<StatesButton.State>
     {
         [Serializable]
         public struct State
@@ -53,6 +55,16 @@ namespace MassiveCore.Framework
             state = states.First(x => x.id == id);
             states.ForEach(x => x.button.UpdateActivity(state.id == x.id));
             OnStateChanged?.Invoke(state);
+        }
+
+        public IEnumerator<State> GetEnumerator()
+        {
+            return ((IEnumerable<State>)states).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
