@@ -32,12 +32,12 @@ namespace MassiveCore.Framework
             property.Value = defaultValue.FromPlayerPrefs(key);
         }
 
-        public static void GetPlayerPrefsStrings(this ReactiveCollection<string> property, string key)
+        public static void GetPlayerPrefsCollection<T>(this ReactiveCollection<T> property, string key)
         {
             var json = PlayerPrefs.GetString(key, "[]");
-            var collection = JsonConvert.DeserializeObject<ReactiveCollection<string>>(json);
+            var collection = JsonConvert.DeserializeObject<ReactiveCollection<T>>(json);
             property.Clear();
-            collection.ForEach(x => property.Add(x));
+            collection.ForEach(property.Add);
         }
 
         public static void SetPlayerPrefsBool(this ReactiveProperty<bool> property, string key)
@@ -66,12 +66,12 @@ namespace MassiveCore.Framework
             PlayerPrefs.SetString(key, binaryString);
         }
         
-        public static void SetPlayerPrefsStrings(this ReactiveCollection<string> property, string key)
+        public static void SetPlayerPrefsCollection<T>(this ReactiveCollection<T> property, string key)
         {
             var json = JsonConvert.SerializeObject(property);
             PlayerPrefs.SetString(key, json);
         }
-        
+
         public static void Max(this ReactiveProperty<int> property, int value)
         {
             property.Value = Math.Max(value, property.Value);
