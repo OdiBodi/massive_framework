@@ -42,18 +42,19 @@ namespace MassiveCore.Framework
             {
                 for (var i = 0; i < pool.Length; ++i)
                 {
-                    if (pool[i] == null)
+                    if (pool[i] != null)
                     {
-                        if (factories.TryGetValue(typeof(T), out var createObject))
+                        continue;
+                    }
+                    if (factories.TryGetValue(typeof(T), out var createObject))
+                    {
+                        obj = createObject(id);
+                        if (!string.IsNullOrEmpty(id))
                         {
-                            obj = createObject(id);
-                            if (!string.IsNullOrEmpty(id))
-                            {
-                                obj.name = id;
-                            }
-                            obj.transform.SetParent(root);
-                            pool[i] = obj;
+                            obj.name = id;
                         }
+                        obj.transform.SetParent(root);
+                        pool[i] = obj;
                         break;
                     }
                 }
