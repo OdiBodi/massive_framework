@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
 {
     public class GameSession
     {
-        private IProfile profile;
+        private readonly IProfile profile;
 
         public GameSession(IProfile profile)
         {
