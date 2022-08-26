@@ -1,5 +1,4 @@
 using System.IO;
-using Facebook.Unity.Editor.iOS.Xcode;
 using UnityEditor;
 using UnityEditor.Callbacks;
 

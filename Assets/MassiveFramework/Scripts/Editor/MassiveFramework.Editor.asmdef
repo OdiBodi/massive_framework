@@ -1,0 +1,18 @@
+{
+    "name": "MassiveFramework.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:08e6d46d09425455b887507702d82164"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
