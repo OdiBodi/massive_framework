@@ -13,11 +13,13 @@ namespace MassiveCore.Framework
         private readonly ILogger logger;
 
         [Inject]
-        private readonly ICustomProfile profile;
+        private readonly IProfile profile;
+
+        private ReactiveProperty<bool> ApplicationReviewActive => profile.Property<bool>(ProfileIds.ApplicationReviewActive);
 
         public async UniTask<bool> Request()
         {
-            if (!profile.ApplicationReviewActive.Value)
+            if (!ApplicationReviewActive.Value)
             {
                 return true;
             }
@@ -37,7 +39,7 @@ namespace MassiveCore.Framework
                 return false;
             }
 
-            profile.ApplicationReviewActive.Value = false;
+            ApplicationReviewActive.Value = false;
             return true;
         }
     }

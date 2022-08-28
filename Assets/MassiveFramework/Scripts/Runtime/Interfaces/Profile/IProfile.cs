@@ -1,14 +1,11 @@
-﻿using System;
+﻿using UniRx;
 
 namespace MassiveCore.Framework
 {
     public interface IProfile
     {
-        DateTime FirstLaunchDate { get; }
-        DateTime LastSessionDate { get; set; }
-
-        int NumberSession { get; set; }
-
+        ReactiveProperty<T> Property<T>(string id, T defaultValue = default);
+        ReactiveCollection<T> Collection<T>(string id, T[] defaultValue = default);
         void Sync();
     }
 }

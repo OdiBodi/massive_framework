@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using System;
+using Zenject;
 
 namespace MassiveCore.Framework
 {
@@ -11,6 +12,7 @@ namespace MassiveCore.Framework
 
         public override void Init()
         {
+            InitProfileValues();
             profile.Sync();
 
             InitGameSession();
@@ -44,6 +46,20 @@ namespace MassiveCore.Framework
             }
             profile.Sync();
             gameSession.UpdateLastDate();
+        }
+
+        private void InitProfileValues()
+        {
+            var nowTime = DateTime.Now;
+
+            profile.Property(ProfileIds.FirstLaunchDate, nowTime);
+
+            profile.Property(ProfileIds.SessionNumber, -1);
+            profile.Property(ProfileIds.LastSessionDate, nowTime);
+
+            profile.Property(ProfileIds.ApplicationReviewActive, true);
+
+            profile.Property(ProfileIds.LevelIndex, 0);
         }
 
         private void InitGameSession()

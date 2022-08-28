@@ -11,9 +11,11 @@ namespace MassiveCore.Framework
             this.profile = profile;
         }
 
+        private DateTime FirstLaunchDate => profile.Property<DateTime>(ProfileIds.FirstLaunchDate).Value;
+
         public int Day()
         {
-            return (int) (DateTime.Now - profile.FirstLaunchDate).TotalDays;
+            return (int) (DateTime.Now - FirstLaunchDate).TotalDays;
         }
     }
 }

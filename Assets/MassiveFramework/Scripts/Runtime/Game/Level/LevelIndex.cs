@@ -1,25 +1,29 @@
+using UniRx;
+
 namespace MassiveCore.Framework
 {
     public class LevelIndex
     {
-        private readonly ICustomProfile profile;
+        private readonly IProfile profile;
         private readonly LevelsConfig levelsConfig;
 
-        public LevelIndex(ICustomProfile profile, LevelsConfig levelsConfig)
+        public LevelIndex(IProfile profile, LevelsConfig levelsConfig)
         {
             this.profile = profile;
             this.levelsConfig = levelsConfig;
         }
 
+        private ReactiveProperty<int> CurrentLevelIndex => profile.Property<int>(ProfileIds.LevelIndex);
+
         public int Current()
         {
-            return profile.LevelIndex.Value;
+            return CurrentLevelIndex.Value;
         }
 
         public void UpdateToNext()
         {
-            profile.LevelIndex.Value++;
-            profile.LevelIndex.Value %= levelsConfig.Configs.Length;
+            CurrentLevelIndex.Value++;
+            CurrentLevelIndex.Value %= levelsConfig.Configs.Length;
         }
     }
 }

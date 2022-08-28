@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UniRx;
 using Zenject;
 
 namespace MassiveCore.Framework
@@ -9,16 +10,18 @@ namespace MassiveCore.Framework
         private readonly ILogger logger;
 
         [Inject]
-        private readonly ICustomProfile profile;
+        private readonly IProfile profile;
+
+        private ReactiveProperty<bool> ApplicationReviewActive => profile.Property<bool>(ProfileIds.ApplicationReviewActive);
 
         public async UniTask<bool> Request()
         {
-            if (!profile.ApplicationReviewActive.Value)
+            if (!ApplicationReviewActive.Value)
             {
                 return false;
             }
             logger.Print("ApplicationReview::Request()");
-            profile.ApplicationReviewActive.Value = false;
+            ApplicationReviewActive.Value = false;
             return true;
         }
     }

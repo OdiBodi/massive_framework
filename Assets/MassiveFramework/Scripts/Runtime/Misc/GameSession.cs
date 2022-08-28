@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 
 namespace MassiveCore.Framework
 {
@@ -11,25 +12,28 @@ namespace MassiveCore.Framework
             this.profile = profile;
         }
 
+        private ReactiveProperty<int> SessionNumber => profile.Property<int>(ProfileIds.SessionNumber);
+        private ReactiveProperty<DateTime> LastSessionDate => profile.Property<DateTime>(ProfileIds.LastSessionDate);
+
         public void Increase()
         {
-            ++profile.NumberSession;
+            SessionNumber.Value++;
             UpdateLastDate();
         }
 
         public void Update()
         {
-            var time = (DateTime.Now - profile.LastSessionDate).TotalMinutes;
+            var time = (DateTime.Now - LastSessionDate.Value).TotalMinutes;
             if (time > 30)
             {
-                ++profile.NumberSession;
+                SessionNumber.Value++;
             }
             UpdateLastDate();
         }
 
         public void UpdateLastDate()
         {
-            profile.LastSessionDate = DateTime.Now;
+            LastSessionDate.Value = DateTime.Now;
         }
     }
 }
