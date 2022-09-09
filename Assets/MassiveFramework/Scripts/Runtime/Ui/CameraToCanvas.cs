@@ -7,7 +7,7 @@ namespace MassiveCore.Framework
     public class CameraToCanvas : BaseMonoBehaviour
     {
         [Inject]
-        private readonly Cameras cameras;
+        private readonly ICameras cameras;
 
         [SerializeField]
         private string cameraName;
@@ -18,7 +18,7 @@ namespace MassiveCore.Framework
         private void Awake()
         {
             var canvas = GetComponent<Canvas>();
-            canvas.worldCamera = cameras.CameraByName(cameraName);
+            canvas.worldCamera = cameras.CameraBy(cameraName);
             canvas.planeDistance = planeDistance;
         }
     }

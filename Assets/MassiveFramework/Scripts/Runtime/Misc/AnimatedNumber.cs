@@ -18,7 +18,7 @@ namespace MassiveCore.Framework
         public float TargetNumber { get; set; }
         public FloatReactiveProperty Number { get; private set; }
 
-        public void Init()
+        public void Initialize()
         {
             Number = new FloatReactiveProperty();
             StartUpdateStream();

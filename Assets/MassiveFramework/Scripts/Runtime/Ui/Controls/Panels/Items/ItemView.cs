@@ -23,7 +23,7 @@ namespace MassiveCore.Framework
             button.onClick.AddListener(() => OnClicked?.Invoke(Model));
         }
 
-        public virtual void Init(ItemModel model)
+        public virtual void Initialize(ItemModel model)
         {
             Model = model;
         }

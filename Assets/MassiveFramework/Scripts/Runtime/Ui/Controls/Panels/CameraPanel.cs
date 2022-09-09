@@ -7,7 +7,7 @@ namespace MassiveCore.Framework
     public class CameraPanel : BaseMonoBehaviour
     {
         [Inject]
-        private readonly Cameras cameras;
+        private readonly ICameras cameras;
 
         [SerializeField]
         private RawImage image;
@@ -17,7 +17,7 @@ namespace MassiveCore.Framework
 
         private void Awake()
         {
-            image.texture = cameras.CameraByName(cameraName).targetTexture;
+            image.texture = cameras.CameraBy(cameraName).targetTexture;
         }
     }
 }

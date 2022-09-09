@@ -33,7 +33,7 @@ namespace MassiveCore.Framework
         {
             animation = new AnimatedNumber(animationSpeed);
             animation.AddTo(this);
-            animation.Init();
+            animation.Initialize();
         }
 
         private void SubscribeOnAnimation()

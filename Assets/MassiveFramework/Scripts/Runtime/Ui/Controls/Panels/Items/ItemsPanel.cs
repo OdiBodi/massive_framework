@@ -30,7 +30,7 @@ namespace MassiveCore.Framework
             foreach (var itemModel in model)
             {
                 var itemView = Instantiate(itemViewPrefab, content);
-                itemView.Init(itemModel);
+                itemView.Initialize(itemModel);
                 itemView.OnClicked += model => OnItemClicked?.Invoke(itemView, itemModel);
             }
         }
