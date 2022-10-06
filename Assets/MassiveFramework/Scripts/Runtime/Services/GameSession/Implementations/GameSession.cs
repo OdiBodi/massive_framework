@@ -8,13 +8,13 @@ namespace MassiveCore.Framework
     public class GameSession : BaseMonoBehaviour
     {
         [Inject]
-        private readonly IProfile profile;
+        private readonly IProfile _profile;
 
         [SerializeField]
-        private GameSessionInitializer initializer;
+        private GameSessionInitializer _initializer;
 
-        private ReactiveProperty<int> SessionNumber => profile.Property<int>(ProfileIds.SessionNumber);
-        private ReactiveProperty<DateTime> LastSessionDate => profile.Property<DateTime>(ProfileIds.LastSessionDate);
+        private ReactiveProperty<int> SessionNumber => _profile.Property<int>(ProfileIds.SessionNumber);
+        private ReactiveProperty<DateTime> LastSessionDate => _profile.Property<DateTime>(ProfileIds.LastSessionDate);
 
         private void Start()
         {
@@ -23,22 +23,22 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnInitializer()
         {
-            initializer.Initialized.Subscribe(_ => {}, () =>
+            _initializer.Initialized.Where(result => result).Subscribe(_ => {}, () =>
             {
                 IncreaseSession();
-                Observable.EveryApplicationPause().Subscribe(_ =>
+                Observable.EveryApplicationPause().Where(result => result).Subscribe(_ =>
                 {
                     UpdateLastSessionDate();
-                    profile.Sync();
+                    _profile.Sync();
                 }).AddTo(this);
-                Observable.EveryApplicationFocus().Subscribe(_ =>
+                Observable.EveryApplicationFocus().Where(result => result).Subscribe(_ =>
                 {
                     UpdateSession();
                 }).AddTo(this);
                 Observable.OnceApplicationQuit().Subscribe(_ =>
                 {
                     UpdateLastSessionDate();
-                    profile.Sync();
+                    _profile.Sync();
                 }).AddTo(this);
             }).AddTo(this);
         }

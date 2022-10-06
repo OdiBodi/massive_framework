@@ -4,18 +4,19 @@ namespace MassiveCore.Framework
 {
     public class GameDay
     {
-        private readonly IProfile profile;
+        private readonly IProfile _profile;
 
         public GameDay(IProfile profile)
         {
-            this.profile = profile;
+            _profile = profile;
         }
 
-        private DateTime FirstLaunchDate => profile.Property<DateTime>(ProfileIds.FirstLaunchDate).Value;
+        private DateTime FirstLaunchDate => _profile.Property<DateTime>(ProfileIds.FirstLaunchDate).Value;
 
         public int Day()
         {
-            return (int) (DateTime.Now - FirstLaunchDate).TotalDays;
+            var day = (int)(DateTime.Now - FirstLaunchDate).TotalDays;
+            return day;
         }
     }
 }

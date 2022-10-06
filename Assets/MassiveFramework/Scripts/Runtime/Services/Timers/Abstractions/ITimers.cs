@@ -1,13 +1,9 @@
-﻿using System;
-
-namespace MassiveCore.Framework
+﻿namespace MassiveCore.Framework
 {
     public interface ITimers
     {
-        public void Start(string id, TimeSpan duration);
-        public void Stop(string id);
-        public void Subscribe(string id, Action<ITimer> onTick, Action onCompleted = null);
-        public void Unsubscribe(string id, Action<ITimer> onTick, Action onCompleted = null);
-        public ITimer Timer(string id);
+        void Start<T>(string id, params object[] arguments) where T : ITimer;
+        void Stop(string id);
+        ITimer TimerBy(string id);
     }
 }

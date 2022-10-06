@@ -8,6 +8,10 @@ namespace MassiveCore.Framework
     {
         protected override void Load(string id, ReactiveProperty<DateTime> property)
         {
+            if (!PlayerPrefs.HasKey(id))
+            {
+                return;
+            }
             var binaryString = PlayerPrefs.GetString(id);
             var binary = long.Parse(binaryString);
             property.Value = DateTime.FromBinary(binary);

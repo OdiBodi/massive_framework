@@ -6,13 +6,13 @@ namespace MassiveCore.Framework
 {
     public class AnimatedNumber : IDisposable
     {
-        private readonly float speed;
+        private readonly float _speed;
 
-        private IDisposable updateStream; 
+        private IDisposable _updateStream; 
 
         public AnimatedNumber(float speed)
         {
-            this.speed = speed;
+            _speed = speed;
         }
 
         public float TargetNumber { get; set; }
@@ -26,7 +26,7 @@ namespace MassiveCore.Framework
 
         public void Dispose()
         {
-            updateStream?.Dispose();
+            _updateStream?.Dispose();
             Number?.Dispose();
         }
 
@@ -38,10 +38,10 @@ namespace MassiveCore.Framework
 
         private void StartUpdateStream()
         {
-            updateStream = Observable.EveryUpdate().Subscribe(_ =>
+            _updateStream = Observable.EveryUpdate().Subscribe(_ =>
             {
                 Number.Value = Number.Value.EqualsTo(TargetNumber) ? TargetNumber :
-                    Mathf.Lerp(Number.Value, TargetNumber, Time.deltaTime * speed);
+                    Mathf.Lerp(Number.Value, TargetNumber, Time.deltaTime * _speed);
             });
         }
     }

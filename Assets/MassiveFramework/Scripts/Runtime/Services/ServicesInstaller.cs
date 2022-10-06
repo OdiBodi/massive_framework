@@ -8,12 +8,12 @@ namespace MassiveCore.Framework
     public class ServicesInstaller : BaseMonoBehaviour
     {
         [SerializeField]
-        private SceneContext sceneContext;
+        private SceneContext _sceneContext;
 
         private void Awake()
         {
-            sceneContext.Installers = CacheGameObject.Descendants().OfType<IServiceInstaller>()
-                .Select(installer => installer.Installer());
+            _sceneContext.Installers = CacheGameObject.Descendants().OfInterfaceComponent<IServiceInstaller>()
+                .Select(installer => installer.Installer()).Where(installer => installer.Activity());
         }
     }
 }

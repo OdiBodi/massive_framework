@@ -7,6 +7,10 @@ namespace MassiveCore.Framework
     {
         protected override void Load(string id, ReactiveProperty<int> property)
         {
+            if (!PlayerPrefs.HasKey(id))
+            {
+                return;
+            }
             property.Value = PlayerPrefs.GetInt(id);
         }
 

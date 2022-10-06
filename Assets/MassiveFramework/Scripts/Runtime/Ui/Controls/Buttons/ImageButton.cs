@@ -6,12 +6,12 @@ namespace MassiveCore.Framework
     public class ImageButton : BaseButton
     {
         [SerializeField]
-        private Image image;
+        private Image _image;
 
         public Sprite Sprite
         {
-            get => image.sprite;
-            set => image.sprite = value;
+            get => _image.sprite;
+            set => _image.sprite = value;
         }
     }
 }

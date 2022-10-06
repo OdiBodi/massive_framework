@@ -7,18 +7,18 @@ namespace MassiveCore.Framework
     public class Environment : IEnvironment
     {
         [Inject]
-        private readonly IGameConfig gameConfig;
+        private readonly IGameConfig _gameConfig;
 
-        private readonly Light directionalLight;
+        private readonly Light _directionalLight;
 
         public Environment(Light directionalLight)
         {
-            this.directionalLight = directionalLight;
+            _directionalLight = directionalLight;
         }
 
         public EnvironmentConfig ConfigBy(string name)
         {
-            var environmentsConfig = gameConfig.Config<EnvironmentsConfig>();
+            var environmentsConfig = _gameConfig.Config<EnvironmentsConfig>();
             var environmentConfig = environmentsConfig.Configs.First(config => config.name == name);
             return environmentConfig;
         }
@@ -26,7 +26,7 @@ namespace MassiveCore.Framework
         public void ApplyConfig(string name)
         {
             var config = ConfigBy(name);
-            config.DirectionalLightParams.ApplyTo(directionalLight);
+            config.DirectionalLightParams.ApplyTo(_directionalLight);
             config.AmbientLightingParams.Apply();
         }
     }

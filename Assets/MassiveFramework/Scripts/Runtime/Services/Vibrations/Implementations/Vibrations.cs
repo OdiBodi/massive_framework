@@ -8,11 +8,11 @@ namespace MassiveCore.Framework
     public class Vibrations : IVibrations
     {
         [Inject]
-        private readonly IGameConfig gameConfig;
+        private readonly IGameConfig _gameConfig;
 
-        private readonly WaitingList<string> waitingList = new WaitingList<string>(8);
+        private readonly WaitingList<string> _waitingList = new(8);
 
-        private IEnumerable<VibrationConfig> Configs => gameConfig.Config<VibrationsConfig>().Configs;
+        private IEnumerable<VibrationConfig> Configs => _gameConfig.Config<VibrationsConfig>().Configs;
 
         public void Vibrate(string id)
         {
@@ -21,7 +21,7 @@ namespace MassiveCore.Framework
             {
                 return;
             }
-            if (config.CooldownTime > 0f && !waitingList.Add(id, config.CooldownTime))
+            if (config.CooldownTime > 0f && !_waitingList.Add(id, config.CooldownTime))
             {
                 return;
             }

@@ -1,75 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using UniRx;
 using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class Timers
+    public class Timers : ITimers
     {
-        private class Timer : IDisposable
-        {
-            private readonly DateTime startTime;
-            private readonly IObservable<long> observable;
-            private readonly IDisposable subscription;
-
-            public event Action<TimeSpan> OnTick;
-            public event Action OnCompleted;
-
-            public Timer(IObservable<long> observable)
-            {
-                startTime = DateTime.Now;
-                this.observable = observable;
-                subscription = observable.Subscribe
-                (
-                    x =>
-                    {
-                        if (OnTick == null)
-                        {
-                            return;
-                        }
-                        var passedTime = DateTime.Now - startTime;
-                        OnTick.Invoke(passedTime);
-                    },
-                    () => OnCompleted?.Invoke()
-                );
-            }
-
-            public void Dispose()
-            {
-                OnCompleted?.Invoke();
-                subscription?.Dispose();
-            }
-        }
-
         [Inject]
-        private readonly ILogger logger;
-        
-        private readonly Dictionary<string, Timer> timers = new Dictionary<string, Timer>();
+        private readonly ILogger _logger;
 
-        public void Start(string id, int time)
+        private readonly Dictionary<string, ITimer> _timers = new();
+
+        public void Start<T>(string id, params object[] arguments)
+            where T : ITimer
         {
-            if (TimerBy(id) != null || time == 0)
+            if (TimerBy(id) != null)
             {
                 return;
             }
 
-            var stream = Observable.Interval(TimeSpan.FromSeconds(1));
-            if (time > 0)
+            var timer = Activator.CreateInstance(typeof(T), arguments) as ITimer;
+            timer.OnTicked += () =>
             {
-                stream = stream.TakeWhile(x =>
-                {
-                    var currentTime = x + 1;
-                    logger.Print($"Timer[\"{id}\"] tick: {currentTime} < {time}");
-                    return currentTime < time;
-                });
-            }
+                var elapsedTime = (int)timer.ElapsedTime().TotalSeconds;
+                var duration = timer.Duration() == TimeSpan.MaxValue ? int.MaxValue : (int)timer.Duration().TotalSeconds;
+                _logger.Print($"Timer[\"{id}\"] ticked: {elapsedTime}s < {duration}s");
+            };
+            timer.OnCompleted += () =>
+            {
+                _timers.Remove(id);
+                _logger.Print($"Timer[\"{id}\"] stopped!");
+            };
 
-            var timer = new Timer(stream);
-            timer.OnCompleted += () => timers.Remove(id);
-
-            timers.Add(id, timer);
-            logger.Print($"Timer[\"{id}\"] start {time}");
+            _timers.Add(id, timer);
+            _logger.Print($"Timer[\"{id}\"] started!");
         }
 
         public void Stop(string id)
@@ -81,53 +45,14 @@ namespace MassiveCore.Framework
             }
 
             timer.Dispose();
-            timers.Remove(id);
+            _timers.Remove(id);
 
-            logger.Print($"Timer[\"{id}\"] stop");
+            _logger.Print($"Timer[\"{id}\"] stopped!");
         }
 
-        public void Subscribe(string id, Action<TimeSpan> onTick, Action onCompleted = null)
+        public ITimer TimerBy(string id)
         {
-            var timer = TimerBy(id);
-            if (timer == null)
-            {
-                return;
-            }
-            if (onTick != null)
-            {
-                timer.OnTick += onTick;
-            }
-            if (onCompleted != null)
-            {
-                timer.OnCompleted += onCompleted;
-            }
-        }
-
-        public void Unsubscribe(string id, Action<TimeSpan> onTick, Action onCompleted = null)
-        {
-            var timer = TimerBy(id);
-            if (timer == null)
-            {
-                return;
-            }
-            if (onTick != null)
-            {
-                timer.OnTick -= onTick;
-            }
-            if (onCompleted != null)
-            {
-                timer.OnCompleted -= onCompleted;
-            }
-        }
-
-        public bool Contains(string id)
-        {
-            return timers.ContainsKey(id);
-        }
-
-        private Timer TimerBy(string id)
-        {
-            timers.TryGetValue(id, out var timer);
+            _timers.TryGetValue(id, out var timer);
             return timer;
         }
     }

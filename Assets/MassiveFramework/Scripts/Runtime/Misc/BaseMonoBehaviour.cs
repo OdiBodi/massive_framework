@@ -10,11 +10,11 @@ namespace MassiveCore.Framework
         {
             get
             {
-                if (cacheGameObject == null)
+                if (_cacheGameObject == null)
                 {
-                    cacheGameObject = gameObject;
+                    _cacheGameObject = gameObject;
                 }
-                return cacheGameObject;
+                return _cacheGameObject;
             }
         }
 
@@ -22,11 +22,11 @@ namespace MassiveCore.Framework
         {
             get
             {
-                if (cacheTransform == null)
+                if (_cacheTransform == null)
                 {
-                    cacheTransform = GetComponent<Transform>();
+                    _cacheTransform = GetComponent<Transform>();
                 }
-                return cacheTransform;
+                return _cacheTransform;
             }
         }
 
@@ -34,11 +34,11 @@ namespace MassiveCore.Framework
         {
             get
             {
-                if (cacheRectTransform == null)
+                if (_cacheRectTransform == null)
                 {
-                    cacheRectTransform = GetComponent<RectTransform>();
+                    _cacheRectTransform = GetComponent<RectTransform>();
                 }
-                return cacheRectTransform;
+                return _cacheRectTransform;
             }
         }
 
@@ -46,11 +46,11 @@ namespace MassiveCore.Framework
         {
             get
             {
-                if (cacheImage == null)
+                if (_cacheImage == null)
                 {
-                    cacheImage = GetComponent<Image>();
+                    _cacheImage = GetComponent<Image>();
                 }
-                return cacheImage;
+                return _cacheImage;
             }
         }
 
@@ -58,21 +58,21 @@ namespace MassiveCore.Framework
         {
             get
             {
-                if (cacheRigidbody == null)
+                if (_cacheRigidbody == null)
                 {
-                    cacheRigidbody = GetComponent<Rigidbody>();
+                    _cacheRigidbody = GetComponent<Rigidbody>();
                 }
-                return cacheRigidbody;
+                return _cacheRigidbody;
             }
         }
 
-        private GameObject cacheGameObject;
-        private Transform cacheTransform;
-        private RectTransform cacheRectTransform;
-        private Image cacheImage;
-        private Rigidbody cacheRigidbody;
+        private GameObject _cacheGameObject;
+        private Transform _cacheTransform;
+        private RectTransform _cacheRectTransform;
+        private Image _cacheImage;
+        private Rigidbody _cacheRigidbody;
 
         [Inject]
-        protected readonly ILogger logger;
+        protected readonly ILogger _logger;
     }
 }

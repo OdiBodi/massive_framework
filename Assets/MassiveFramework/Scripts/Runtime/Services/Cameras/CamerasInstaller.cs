@@ -5,11 +5,11 @@ namespace MassiveCore.Framework
     public class CamerasInstaller : ServiceInstaller
     {
         [SerializeField]
-        private Camera[] cameras;
+        private Camera[] _cameras;
 
         public override void InstallBindings()
         {
-            Container.Bind<ICameras>().To<Cameras>().AsSingle().WithArguments(cameras);
+            Container.Bind<ICameras>().To<Cameras>().AsSingle().WithArguments(_cameras);
         }
     }
 }

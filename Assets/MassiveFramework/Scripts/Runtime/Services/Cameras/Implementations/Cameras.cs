@@ -6,16 +6,16 @@ namespace MassiveCore.Framework
 {
     public class Cameras : ICameras
     {
-        private readonly IEnumerable<Camera> cameras;
+        private readonly IEnumerable<Camera> _cameras;
 
         public Cameras(IEnumerable<Camera> cameras)
         {
-            this.cameras = cameras;
+            _cameras = cameras;
         }
 
         public Camera CameraBy(string name)
         {
-            return cameras.First(camera => camera.name == name);
+            return _cameras.First(camera => camera.name == name);
         }
     }
 }

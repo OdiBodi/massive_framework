@@ -6,28 +6,28 @@ namespace MassiveCore.Framework
     public class CameraSizeByScreenSize : BaseMonoBehaviour
     {
         [SerializeField]
-        private Vector2 referenceResolution = new Vector2(1125f, 2436f);
+        private Vector2 _referenceResolution = new(1125f, 2436f);
 
         [SerializeField, Range(0f, 1f)]
-        private float widthOrHeight;
+        private float _widthOrHeight;
 
         private void Awake()
         {
-            var targetAspect = referenceResolution.x / referenceResolution.y;
+            var targetAspect = _referenceResolution.x / _referenceResolution.y;
 
             var camera = GetComponent<Camera>();
             if (camera.orthographic)
             {
                 var originSize = camera.orthographicSize;
                 var targetSize = originSize * (targetAspect / camera.aspect);
-                camera.orthographicSize = Mathf.Lerp(targetSize, originSize, widthOrHeight);
+                camera.orthographicSize = Mathf.Lerp(targetSize, originSize, _widthOrHeight);
             }
             else
             {
                 var originFov = camera.fieldOfView;
                 var horizontalFov = ComputeVerticalFov(originFov, 1 / targetAspect);
                 var targetFov = ComputeVerticalFov(horizontalFov, camera.aspect);
-                camera.fieldOfView = Mathf.Lerp(targetFov, originFov, widthOrHeight);
+                camera.fieldOfView = Mathf.Lerp(targetFov, originFov, _widthOrHeight);
             }
         }
 

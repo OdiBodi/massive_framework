@@ -6,10 +6,10 @@ namespace MassiveCore.Framework
     public class AdsRewardedButton : BaseMonoBehaviour
     {
         [Inject]
-        private readonly IAds ads;
+        private readonly IAds _ads;
 
         [SerializeField]
-        private BaseButton button;
+        private BaseButton _button;
 
         private void Awake()
         {
@@ -24,19 +24,19 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnAds()
         {
-            ads.OnRewardedLoaded += OnRewardedLoaded;
-            ads.OnRewardedClosed += OnRewardedClosed;
+            _ads.OnRewardedLoaded += OnRewardedLoaded;
+            _ads.OnRewardedClosed += OnRewardedClosed;
         }
 
         private void UnsubscribeFromAds()
         {
-            ads.OnRewardedLoaded -= OnRewardedLoaded;
-            ads.OnRewardedClosed -= OnRewardedClosed;
+            _ads.OnRewardedLoaded -= OnRewardedLoaded;
+            _ads.OnRewardedClosed -= OnRewardedClosed;
         }
 
         private void UpdateView()
         {
-            button.Enabled = ads.HasRewarded;
+            _button.Enabled = _ads.RewardedReady;
         }
 
         private void OnRewardedLoaded(bool loaded, string tag)

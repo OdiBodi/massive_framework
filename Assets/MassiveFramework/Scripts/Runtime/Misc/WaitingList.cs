@@ -6,31 +6,31 @@ namespace MassiveCore.Framework
 {
     public class WaitingList<T>
     {
-        private readonly Dictionary<T, IDisposable> map;
+        private readonly Dictionary<T, IDisposable> _map;
 
         public WaitingList(int capacity = 2)
         {
-            map = new Dictionary<T, IDisposable>(capacity);
+            _map = new Dictionary<T, IDisposable>(capacity);
         }
 
         public bool Add(T type, float duration)
         {
-            if (map.ContainsKey(type))
+            if (_map.ContainsKey(type))
             {
                 return false;
             }
-            map[type] = Observable.Timer(TimeSpan.FromSeconds(duration)).Subscribe
+            _map[type] = Observable.Timer(TimeSpan.FromSeconds(duration)).Subscribe
             (
                 _ => { },
-                () => map.Remove(type)
+                () => _map.Remove(type)
             );
             return true;
         }
 
         private void Reset()
         {
-            map.ForEach(item => item.Value.Dispose());
-            map.Clear();
+            _map.ForEach(item => item.Value.Dispose());
+            _map.Clear();
         }
     }
 }

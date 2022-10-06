@@ -5,18 +5,18 @@ namespace MassiveCore.Framework
 {
     public class Vector2EqualityComparer : IEqualityComparer<Vector2>
     {
-        private readonly float error;
+        private readonly float _error;
 
-        public static readonly Vector2EqualityComparer Default = new Vector2EqualityComparer(0.01f);
+        public static readonly Vector2EqualityComparer Default = new(0.01f);
 
         public Vector2EqualityComparer(float error)
         {
-            this.error = error;
+            _error = error;
         }
 
         public bool Equals(Vector2 a, Vector2 b)
         {
-            return a.x.EqualsTo(b.x, error) && a.y.EqualsTo(b.y, error);
+            return a.x.EqualsTo(b.x, _error) && a.y.EqualsTo(b.y, _error);
         }
 
         public int GetHashCode(Vector2 vector)

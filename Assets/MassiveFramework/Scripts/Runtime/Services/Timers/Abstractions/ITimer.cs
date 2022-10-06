@@ -4,9 +4,12 @@ namespace MassiveCore.Framework
 {
     public interface ITimer : IDisposable
     {
-        public TimeSpan StartTime();
-        public TimeSpan Duration();
-        public TimeSpan ElapsedTime();
-        public TimeSpan RemainingTime();
+        event Action OnTicked;
+        event Action OnCompleted;
+        DateTime StartTime();
+        DateTime EndTime();
+        TimeSpan Duration();
+        TimeSpan ElapsedTime();
+        TimeSpan RemainingTime();
     }
 }

@@ -16,50 +16,52 @@ namespace MassiveCore.Framework
         }
 
         [SerializeField]
-        private State[] states;
+        private State[] _states;
 
-        private State state;
+        private State _state;
 
         public event Action<State> OnClicked;
         public event Action<State> OnStateChanged;
 
-        public State CurrentState => state;
+        public State CurrentState => _state;
 
         private void Awake()
         {
             Subscribe();
-            UpdateState(states[0].id);
+            UpdateState(_states[0].id);
         }
 
         private void Subscribe()
         {
-            states.ForEach(state => state.button.OnClicked += () => OnClicked?.Invoke(state));
+            _states.ForEach(state => state.button.OnClicked += () => OnClicked?.Invoke(state));
         }
 
-        public T Button<T>(string id) where T : BaseButton 
+        public T Button<T>(string id)
+            where T : BaseButton 
         {
-            return (T)states.First(state => state.id == id).button;
+            return (T)_states.First(state => state.id == id).button;
         }
 
-        public T CurrentButton<T>() where T : BaseButton
+        public T CurrentButton<T>()
+            where T : BaseButton
         {
-            return (T)state.button;
+            return (T)_state.button;
         }
 
         public void UpdateState(string id)
         {
-            if (state.id == id)
+            if (_state.id == id)
             {
                 return;
             }
-            state = states.First(x => x.id == id);
-            states.ForEach(x => x.button.UpdateActivity(state.id == x.id));
-            OnStateChanged?.Invoke(state);
+            _state = _states.First(x => x.id == id);
+            _states.ForEach(x => x.button.UpdateActivity(_state.id == x.id));
+            OnStateChanged?.Invoke(_state);
         }
 
         public IEnumerator<State> GetEnumerator()
         {
-            return ((IEnumerable<State>)states).GetEnumerator();
+            return ((IEnumerable<State>)_states).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()

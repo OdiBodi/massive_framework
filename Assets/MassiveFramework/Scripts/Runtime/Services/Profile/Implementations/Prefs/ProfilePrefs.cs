@@ -7,10 +7,10 @@ namespace MassiveCore.Framework
 {
     public class ProfilePrefs : IProfile
     {
-        private readonly Dictionary<string, object> values = new Dictionary<string, object>();
-        private readonly Dictionary<Type, IProfileValueHandler> valueHandlers = new Dictionary<Type, IProfileValueHandler>();
+        private readonly Dictionary<string, object> _values = new();
+        private readonly Dictionary<Type, IProfileValueHandler> _valueHandlers = new();
 
-        private bool loaded;
+        private bool _loaded;
 
         public ProfilePrefs()
         {
@@ -19,29 +19,29 @@ namespace MassiveCore.Framework
 
         public ReactiveProperty<T> Property<T>(string id, T defaultValue = default)
         {
-            if (!values.TryGetValue(id, out var value))
+            if (!_values.TryGetValue(id, out var value))
             {
                 value = new ReactiveProperty<T>(defaultValue);
-                values[id] = value;
+                _values[id] = value;
             }
             return (ReactiveProperty<T>)value;
         }
 
         public ReactiveCollection<T> Collection<T>(string id, T[] defaultValue = default)
         {
-            if (!values.TryGetValue(id, out var value))
+            if (!_values.TryGetValue(id, out var value))
             {
                 value = defaultValue == default ? new ReactiveCollection<T>() : new ReactiveCollection<T>(defaultValue);
-                values[id] = value;
+                _values[id] = value;
             }
             return (ReactiveCollection<T>)value;
         }
 
         public void Sync()
         {
-            if (!loaded)
+            if (!_loaded)
             {
-                loaded = true;
+                _loaded = true;
                 Load();
             }
             Save();
@@ -50,13 +50,13 @@ namespace MassiveCore.Framework
         public void BindPropertyHandler<T>(IProfileValueHandler handler)
         {
             var type = typeof(ReactiveProperty<T>);
-            valueHandlers[type] = handler;
+            _valueHandlers[type] = handler;
         }
 
         public void BindCollectionHandler<T>(IProfileValueHandler handler)
         {
             var type = typeof(ReactiveCollection<T>);
-            valueHandlers[type] = handler;
+            _valueHandlers[type] = handler;
         }
 
         protected virtual void Load()
@@ -96,12 +96,10 @@ namespace MassiveCore.Framework
 
         private void IterateValueHandlerForValues(Action<IProfileValueHandler, string, object> onHandle)
         {
-            foreach (var pair in values)
+            foreach (var (id, value) in _values)
             {
-                var id = pair.Key;
-                var value = pair.Value;
                 var valueType = value.GetType();
-                var handler = valueHandlers[valueType];
+                var handler = _valueHandlers[valueType];
                 onHandle(handler, id, value);
             }
         }

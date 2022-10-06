@@ -9,29 +9,29 @@ namespace MassiveCore.Framework
     public class Levels : ILevels
     {
         [Inject]
-        private readonly IProfile profile;
+        private readonly IProfile _profile;
 
         [Inject]
-        private readonly IGameConfig gameConfig;
+        private readonly IGameConfig _gameConfig;
 
         [Inject]
-        private readonly Level.Factory levelsFactory;
+        private readonly Level.Factory _levelsFactory;
 
         public event Action<Level> OnLevelLoaded;
 
-        private LevelsConfig LevelsConfig => gameConfig.Config<LevelsConfig>();
+        private LevelsConfig LevelsConfig => _gameConfig.Config<LevelsConfig>();
         public Level CurrentLevel { get; private set; }
 
         public UniTask LoadCurrentLevel()
         {
-            var levelIndex = new LevelIndex(profile, LevelsConfig);
+            var levelIndex = new LevelIndex(_profile, LevelsConfig);
             var index = levelIndex.Current();
             return LoadLevel(index);
         }
 
         public UniTask LoadNextLevel()
         {
-            var levelIndex = new LevelIndex(profile, LevelsConfig);
+            var levelIndex = new LevelIndex(_profile, LevelsConfig);
             levelIndex.UpdateToNext();
             var index = levelIndex.Current();
             return LoadLevel(index);
@@ -51,7 +51,7 @@ namespace MassiveCore.Framework
         {
             DestroyCurrentLevel();
             await Observable.NextFrame();
-            CurrentLevel = levelsFactory.Create(index);
+            CurrentLevel = _levelsFactory.Create(index);
             SubscribeOnCurrentLevel();
         }
 

@@ -4,9 +4,10 @@ namespace MassiveCore.Framework
 {
     public class GameSessionInitializer : ServiceInitializer
     {
-        public override async UniTask<bool> Initialize()
+        public override UniTask<bool> Initialize()
         {
-            return true;
+            CompleteInitialize(true);
+            return base.Initialize();
         }
     }
 }

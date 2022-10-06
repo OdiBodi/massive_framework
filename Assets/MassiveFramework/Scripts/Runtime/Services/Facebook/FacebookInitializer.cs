@@ -25,16 +25,17 @@ namespace MassiveCore.Framework
 
         private void OnFacebookInitialized()
         {
-            if (FB.IsInitialized)
+            var result = FB.IsInitialized;
+            if (result)
             {
                 FB.ActivateApp();
-                CompleteInitialize();
-                logger.Print("Facebook SDK initialize success!");
+                _logger.Print("Facebook SDK initialize success!");
             }
             else
             {
-                logger.Print("Facebook SDK initialize failed!");
+                _logger.Print("Facebook SDK initialize failed!");
             }
+            CompleteInitialize(result);
         }
     }
 }

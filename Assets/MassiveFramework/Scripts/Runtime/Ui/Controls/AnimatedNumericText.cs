@@ -7,20 +7,20 @@ namespace MassiveCore.Framework
     public class AnimatedNumericText : BaseMonoBehaviour
     {
         [SerializeField]
-        private Text text;
+        private Text _text;
 
         [SerializeField]
-        private string format;
+        private string _format = "{0}";
 
         [Space, SerializeField]
-        private float animationSpeed = 5f;
+        private float _animationSpeed = 5f;
 
-        private AnimatedNumber animation;
+        private AnimatedNumber _animation;
 
         public int Number
         {
-            get => (int)animation.TargetNumber;
-            set => animation.TargetNumber = value;
+            get => (int)_animation.TargetNumber;
+            set => _animation.TargetNumber = value;
         }
 
         private void Awake()
@@ -31,19 +31,19 @@ namespace MassiveCore.Framework
 
         private void InitAnimation()
         {
-            animation = new AnimatedNumber(animationSpeed);
-            animation.AddTo(this);
-            animation.Initialize();
+            _animation = new AnimatedNumber(_animationSpeed);
+            _animation.AddTo(this);
+            _animation.Initialize();
         }
 
         private void SubscribeOnAnimation()
         {
-            animation.Number.Subscribe(value => UpdateText((int)Mathf.Round(value)));
+            _animation.Number.Subscribe(value => UpdateText((int)Mathf.Round(value)));
         }
 
         private void UpdateText(int value)
         {
-            text.text = string.IsNullOrEmpty(format) ? value.ToString() : string.Format(format, value);
+            _text.text = string.IsNullOrEmpty(_format) ? value.ToString() : string.Format(_format, value);
         }
     }
 }

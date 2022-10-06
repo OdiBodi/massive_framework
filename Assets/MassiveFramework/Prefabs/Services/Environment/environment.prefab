@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7273395194899182604}
   m_Father: {fileID: 0}
@@ -44,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfeab880605b4f809c6f51260e826c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalLight: {fileID: 3720730944817460767}
+  _directionalLight: {fileID: 3720730944817460767}
 --- !u!1 &7819134550521899956
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,6 +73,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4413086835301089881}
   m_RootOrder: 0

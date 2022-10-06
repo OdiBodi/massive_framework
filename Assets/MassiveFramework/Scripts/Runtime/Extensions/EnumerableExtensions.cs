@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ModestTree;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace MassiveCore.Framework
 {
     public static class EnumerableExtensions
     {
-        public static string ToString<T>(this IEnumerable<T> array, Func<T, string> argument)
+        public static string ToString<T>(this IEnumerable<T> list, Func<T, string> argument)
         {
             var builder = new StringBuilder();
-            if (!array.Any())
+            if (!list.Any())
             {
-                var first = array.First();
+                var first = list.First();
                 builder.Append(argument(first));
-                foreach (var element in array.Except(first))
+                foreach (var element in list.Except(first))
                 {
                     builder.Append($",{argument(element)}");
                 }
@@ -24,9 +25,9 @@ namespace MassiveCore.Framework
             return $"[{builder}]";
         }
 
-        public static void ForEach<T>(this IEnumerable<T> array, Action<T> predicate)
+        public static void ForEach<T>(this IEnumerable<T> list, Action<T> predicate)
         {
-            foreach (var element in array)
+            foreach (var element in list)
             {
                 predicate(element);
             }
@@ -38,13 +39,13 @@ namespace MassiveCore.Framework
             return list.ElementAt(index);
         }
 
-        public static int IndexOf<TSource>(this IEnumerable<TSource> list, TSource value)
-            where TSource : IEquatable<TSource>
+        public static int IndexOf<T>(this IEnumerable<T> list, T value)
+            where T : IEquatable<T>
         {
-            return list.IndexOf(value, EqualityComparer<TSource>.Default);
+            return list.IndexOf(value, EqualityComparer<T>.Default);
         }
 
-        public static int IndexOf<TSource>(this IEnumerable<TSource> list, TSource value, IEqualityComparer<TSource> comparer)
+        public static int IndexOf<T>(this IEnumerable<T> list, T value, IEqualityComparer<T> comparer)
         {
             var index = 0;
             foreach (var item in list)
@@ -56,6 +57,19 @@ namespace MassiveCore.Framework
                 index++;
             }
             return -1;
+        }
+
+        public static IEnumerable<T> OfInterfaceComponent<T>(this IEnumerable<GameObject> list)
+            where T : class
+        {
+            foreach (var item in list)
+            {
+                var result = item.TryGetComponent<T>(out var component);
+                if (result)
+                {
+                    yield return component;
+                }
+            }
         }
     }
 }

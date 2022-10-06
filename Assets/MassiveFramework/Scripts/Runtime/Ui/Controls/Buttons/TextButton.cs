@@ -6,12 +6,12 @@ namespace MassiveCore.Framework
     public class TextButton : BaseButton
     {
         [SerializeField]
-        private Text text;
+        private Text _text;
 
         public string Text
         {
-            get => text.text;
-            set => text.text = value;
+            get => _text.text;
+            set => _text.text = value;
         }
     }
 }

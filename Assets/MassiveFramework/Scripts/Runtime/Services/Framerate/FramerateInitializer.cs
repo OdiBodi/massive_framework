@@ -6,12 +6,13 @@ namespace MassiveCore.Framework
     public class FramerateInitializer : ServiceInitializer
     {
         [SerializeField]
-        private Framerate rate = Framerate._60;
+        private Framerate _rate = Framerate._60;
 
-        public override async UniTask<bool> Initialize()
+        public override UniTask<bool> Initialize()
         {
-            Application.targetFrameRate = rate.Number();
-            return true;
+            Application.targetFrameRate = _rate.Number();
+            CompleteInitialize(true);
+            return base.Initialize();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MassiveCore.Framework
     public class ItemView : BaseMonoBehaviour
     {
         [SerializeField]
-        private Button button;
+        private Button _button;
 
         protected ItemModel Model { get; private set; }
 
@@ -20,7 +20,7 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnButton()
         {
-            button.onClick.AddListener(() => OnClicked?.Invoke(Model));
+            _button.onClick.AddListener(() => OnClicked?.Invoke(Model));
         }
 
         public virtual void Initialize(ItemModel model)

@@ -7,6 +7,10 @@ namespace MassiveCore.Framework
     {
         protected override void Load(string id, ReactiveCollection<T> collection)
         {
+            if (!PlayerPrefs.HasKey(id))
+            {
+                return;
+            }
             var json = PlayerPrefs.GetString(id, "[]");
             collection.DeserializeFromJson(json);
         }

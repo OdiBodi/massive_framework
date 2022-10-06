@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MassiveCore.Framework
 {
@@ -10,10 +9,5 @@ namespace MassiveCore.Framework
         private EnvironmentConfig[] configs;
 
         public EnvironmentConfig[] Configs => configs;
-
-        public object First(Func<object, bool> func)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

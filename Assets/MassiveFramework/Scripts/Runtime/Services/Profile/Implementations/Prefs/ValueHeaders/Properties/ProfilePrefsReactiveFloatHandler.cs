@@ -7,6 +7,10 @@ namespace MassiveCore.Framework
     {
         protected override void Load(string id, ReactiveProperty<float> property)
         {
+            if (!PlayerPrefs.HasKey(id))
+            {
+                return;
+            }
             property.Value = PlayerPrefs.GetFloat(id);
         }
 

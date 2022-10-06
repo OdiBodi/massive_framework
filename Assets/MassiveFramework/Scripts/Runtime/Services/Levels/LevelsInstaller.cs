@@ -6,22 +6,22 @@ namespace MassiveCore.Framework
     public class LevelsInstaller : ServiceInstaller
     {
         [Inject]
-        private readonly IGameConfig gameConfig;
+        private readonly IGameConfig _gameConfig;
 
         [SerializeField]
-        private Transform root;
+        private Transform _root;
 
         public override void InstallBindings()
         {
-            Container.Bind<Levels>().ToSelf().AsSingle();
+            Container.Bind<ILevels>().To<Levels>().AsSingle();
             Container.BindFactory<int, Level, Level.Factory>().FromMethod
             (
                 (c, i) =>
                 {
-                    var configs = gameConfig.Config<LevelsConfig>().Configs;
+                    var configs = _gameConfig.Config<LevelsConfig>().Configs;
                     var index = i % configs.Length;
                     var prefab = configs[index].Prefab;
-                    var level = c.InstantiatePrefabForComponent<Level>(prefab, root);
+                    var level = c.InstantiatePrefabForComponent<Level>(prefab, _root);
                     level.name = prefab.name;
                     return level;
                 }

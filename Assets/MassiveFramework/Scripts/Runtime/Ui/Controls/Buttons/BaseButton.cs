@@ -7,25 +7,25 @@ namespace MassiveCore.Framework
     public class BaseButton : BaseMonoBehaviour
     {
         [SerializeField]
-        protected CanvasGroup canvasGroup;
+        protected CanvasGroup _canvasGroup;
 
         [SerializeField]
-        private Button button;
+        private Button _button;
 
         public event Action OnClicked;
 
         public virtual bool Enabled
         {
-            get => canvasGroup.interactable;
+            get => _canvasGroup.interactable;
             set => Alpha = value ? 1f : 0.5f;
         }
         public bool Interactable
         {
-            get => button.interactable;
+            get => _button.interactable;
             set
             {
-                button.interactable = value;
-                canvasGroup.blocksRaycasts = value;
+                _button.interactable = value;
+                _canvasGroup.blocksRaycasts = value;
             }
         }
         public bool Visibility
@@ -35,10 +35,10 @@ namespace MassiveCore.Framework
         }
         public float Alpha
         {
-            get => canvasGroup.alpha;
+            get => _canvasGroup.alpha;
             set
             {
-                canvasGroup.alpha = value;
+                _canvasGroup.alpha = value;
                 Interactable = value > 0.98f;
             }
         }
@@ -50,7 +50,7 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnButton()
         {
-            button.onClick.AddListener(() => OnClicked?.Invoke());
+            _button.onClick.AddListener(() => OnClicked?.Invoke());
         }
     }
 }

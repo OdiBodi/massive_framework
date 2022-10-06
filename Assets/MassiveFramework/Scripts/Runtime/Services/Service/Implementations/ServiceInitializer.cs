@@ -5,7 +5,7 @@ namespace MassiveCore.Framework
 {
     public class ServiceInitializer : BaseMonoBehaviour, IServiceInitializer
     {
-        private readonly AsyncSubject<bool> initializerSubject = new AsyncSubject<bool>();
+        private readonly AsyncSubject<bool> _initializerSubject = new();
 
         public ReadOnlyReactiveProperty<bool> Initialized { get; private set; }
 
@@ -16,18 +16,18 @@ namespace MassiveCore.Framework
 
         public virtual UniTask<bool> Initialize()
         {
-            return initializerSubject.ToUniTask();
+            return _initializerSubject.ToUniTask();
         }
 
-        protected void CompleteInitialize()
+        protected void CompleteInitialize(bool result)
         {
-            initializerSubject.OnNext(true);
-            initializerSubject.OnCompleted();
+            _initializerSubject.OnNext(result);
+            _initializerSubject.OnCompleted();
         }
-        
+
         private void InitInitializedReactiveProperty()
         {
-            var initializerReadOnlyProperty = initializerSubject.ToReadOnlyReactiveProperty();
+            var initializerReadOnlyProperty = _initializerSubject.ToReadOnlyReactiveProperty();
             Initialized = new ReadOnlyReactiveProperty<bool>(initializerReadOnlyProperty);
         }
     }

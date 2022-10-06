@@ -6,30 +6,30 @@ namespace MassiveCore.Framework
     public class ItemsPanel : BaseMonoBehaviour
     {
         [SerializeField]
-        private RectTransform content;
+        private RectTransform _content;
 
         [SerializeField]
-        private ItemView itemViewPrefab;
+        private ItemView _itemViewPrefab;
 
-        private ItemModel[] model;
+        private ItemModel[] _model;
 
         public event Action<ItemView, ItemModel> OnItemClicked;
-        
+
         public ItemModel[] Model
         {
-            get => model;
+            get => _model;
             set
             {
-                model = value;
+                _model = value;
                 UpdateView();
             }
         }
 
         private void UpdateView()
         {
-            foreach (var itemModel in model)
+            foreach (var itemModel in _model)
             {
-                var itemView = Instantiate(itemViewPrefab, content);
+                var itemView = Instantiate(_itemViewPrefab, _content);
                 itemView.Initialize(itemModel);
                 itemView.OnClicked += model => OnItemClicked?.Invoke(itemView, itemModel);
             }

@@ -7,12 +7,12 @@ namespace MassiveCore.Framework
 {
     public class ServicesInitializer : BaseMonoBehaviour
     {
-        private ReactiveProperty<bool> initialized;
+        private ReactiveProperty<bool> _initialized;
 
         public ReadOnlyReactiveProperty<bool> Initialized { get; private set; }
 
         private IEnumerable<IServiceInitializer> Initializers => CacheGameObject.Descendants()
-            .OfType<IServiceInitializer>().Where(service => (service as BaseMonoBehaviour).Activity());
+            .OfInterfaceComponent<IServiceInitializer>().Where(service => (service as BaseMonoBehaviour).Activity());
 
         private void Awake()
         {
@@ -22,8 +22,8 @@ namespace MassiveCore.Framework
 
         private void InitLoadedReactiveProperties()
         {
-            initialized = new ReactiveProperty<bool>();
-            var initializedReadOnlyProperty = initialized.ToReadOnlyReactiveProperty();
+            _initialized = new ReactiveProperty<bool>();
+            var initializedReadOnlyProperty = _initialized.ToReadOnlyReactiveProperty();
             Initialized = new ReadOnlyReactiveProperty<bool>(initializedReadOnlyProperty);
         }
 
@@ -31,9 +31,18 @@ namespace MassiveCore.Framework
         {
             foreach (var initializer in Initializers)
             {
-                await initializer.Initialize();
+                var result = await initializer.Initialize();
+                var serviceName = (initializer as BaseMonoBehaviour).name;
+                if (result)
+                {
+                    _logger.Print($"Service \"{serviceName}\" initialized!");
+                }
+                else
+                {
+                    _logger.PrintError($"Service \"{serviceName}\" didn't initialize!");
+                }
             }
-            initialized.Value = true;
+            _initialized.Value = true;
         }
     }
 }

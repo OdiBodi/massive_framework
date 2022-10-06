@@ -5,11 +5,11 @@ namespace MassiveCore.Framework
     public class GameConfigInstaller : ServiceInstaller
     {
         [SerializeField]
-        private GameConfig gameConfig;
+        private GameConfig _gameConfig;
 
         public override void InstallBindings()
         {
-            Container.Bind<IGameConfig>().To<GameConfig>().FromInstance(gameConfig).AsSingle();
+            Container.Bind<IGameConfig>().FromInstance(_gameConfig).AsSingle();
         }
     }
 }

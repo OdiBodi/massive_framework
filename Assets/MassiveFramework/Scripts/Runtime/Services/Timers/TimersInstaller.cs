@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
     {
         public override void InstallBindings()
         {
-            Container.Bind<Timers>().AsSingle();
+            Container.Bind<ITimers>().To<Timers>().AsSingle();
         }
     }
 }

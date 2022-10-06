@@ -5,57 +5,51 @@ namespace MassiveCore.Framework
 {
     public class Timer : ITimer
     {
-        private readonly DateTime startTime;
-        private readonly TimeSpan duration;
-        private readonly IObservable<long> observable;
-        private readonly IDisposable subscription;
-    
-        public event Action<TimeSpan> OnTicked;
+        private readonly DateTime _startTime;
+        private readonly TimeSpan _duration;
+ 
+        private readonly IDisposable _stream;
+
+        public event Action OnTicked;
         public event Action OnCompleted;
-    
-        public Timer(IObservable<long> observable)
+
+        public Timer(TimeSpan duration)
         {
-            startTime = DateTime.Now;
-            this.observable = observable;
-            subscription = observable.Subscribe
-            (
-                x =>
-                {
-                    if (OnTicked == null)
-                    {
-                        return;
-                    }
-                    var passedTime = DateTime.Now - startTime;
-                    OnTicked.Invoke(passedTime);
-                },
-                () => OnCompleted?.Invoke()
-            );
+            _duration = duration;
+            _startTime = DateTime.Now;
+            _stream = Observable.Interval(TimeSpan.FromSeconds(1)).TakeWhile(_ => RemainingTime().TotalSeconds > 0)
+                .Subscribe(_ => OnTicked?.Invoke(), () => OnCompleted?.Invoke());
         }
-    
+
         public void Dispose()
         {
             OnCompleted?.Invoke();
-            subscription?.Dispose();
+            _stream?.Dispose();
         }
 
-        public TimeSpan StartTime()
+        public DateTime StartTime()
         {
-            throw new NotImplementedException();
+            return _startTime;
+        }
+
+        public DateTime EndTime()
+        {
+            return Duration() == TimeSpan.MaxValue ? DateTime.MaxValue : StartTime() + Duration();
         }
 
         public TimeSpan Duration()
         {
-            throw new NotImplementedException();
+            return _duration;
         }
 
         public TimeSpan ElapsedTime()
         {
-            throw new NotImplementedException();
+            return DateTime.Now - StartTime();
         }
 
         public TimeSpan RemainingTime()
         {
-            throw new NotImplementedException();
+            return EndTime() - DateTime.Now;
         }
     }
 }
