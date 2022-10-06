@@ -41,6 +41,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_Bc7TextureCompressor
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_EtcTextureCompressorBehavior
     value: 2
     objectReference: {fileID: 0}
@@ -54,7 +58,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_EtcTextureBestCompressor
-    value: 1
+    value: 2
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ProjectGenerationIncludedExtensions
@@ -121,6 +125,10 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_RefreshImportMode
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_CacheServerMode
     value: 0
     objectReference: {fileID: 0}
@@ -147,5 +155,13 @@ Preset:
   - target: {fileID: 0}
     propertyPath: m_CacheServerEnableTls
     value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_CacheServerValidationMode
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_CacheServerDownloadBatchSize
+    value: 128
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
