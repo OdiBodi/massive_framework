@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ namespace MassiveCore.Framework
         private readonly Dictionary<Type, IProfileValueHandler> _valueHandlers = new();
 
         private bool _loaded;
+
+        public event Action OnPreLoading;
+        public event Action OnPostLoading;
+        public event Action OnPreSaving;
+        public event Action OnPostSaving;
 
         public ProfilePrefs()
         {
@@ -37,14 +43,19 @@ namespace MassiveCore.Framework
             return (ReactiveCollection<T>)value;
         }
 
-        public void Sync()
+        public async UniTask<bool> Synchronize()
         {
             if (!_loaded)
             {
-                _loaded = true;
+                OnPreLoading?.Invoke();
                 Load();
+                _loaded = true;
+                OnPostLoading?.Invoke();
             }
+            OnPreSaving?.Invoke();
             Save();
+            OnPostSaving?.Invoke();
+            return true;
         }
 
         public void BindPropertyHandler<T>(IProfileValueHandler handler)

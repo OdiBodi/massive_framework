@@ -10,7 +10,7 @@ namespace MassiveCore.Framework
         private readonly ILocalNotifications _notifications;
 
         [Inject]
-        private readonly IGameConfig _gameConfig;
+        private readonly IConfigs _configs;
 
         public override UniTask<bool> Initialize()
         {
@@ -30,7 +30,7 @@ namespace MassiveCore.Framework
         {
             Observable.EveryApplicationPause().Where(result => result).Subscribe(_ =>
             {
-                var config = _gameConfig.Config<LocalNotificationsConfig>();
+                var config = _configs.Config<LocalNotificationsConfig>();
                 new LocalNotificationsScheduler(_notifications, _logger, config).Schedule();
             }).AddTo(this);
             Observable.EveryApplicationFocus().Where(result => result).Subscribe(_ =>

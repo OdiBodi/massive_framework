@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     public class LevelsInstaller : ServiceInstaller
     {
         [Inject]
-        private readonly IGameConfig _gameConfig;
+        private readonly IConfigs _configs;
 
         [SerializeField]
         private Transform _root;
@@ -18,7 +18,7 @@ namespace MassiveCore.Framework
             (
                 (c, i) =>
                 {
-                    var configs = _gameConfig.Config<LevelsConfig>().Configs;
+                    var configs = _configs.Config<LevelsConfig>().Configs;
                     var index = i % configs.Length;
                     var prefab = configs[index].Prefab;
                     var level = c.InstantiatePrefabForComponent<Level>(prefab, _root);

@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     public class VisualEffectsInstaller : ServiceInstaller
     {
         [Inject]
-        private readonly IGameConfig _gameConfig;
+        private readonly IConfigs _configs;
 
         public override void InstallBindings()
         {
@@ -15,7 +15,7 @@ namespace MassiveCore.Framework
             (
                 (c, id) =>
                 {
-                    var configs = _gameConfig.Config<VisualEffectsConfig>().Configs;
+                    var configs = _configs.Config<VisualEffectsConfig>().Configs;
                     var prefab = configs.First(x => x.Id == id).VisualEffect;
                     var visualEffect = c.InstantiatePrefabForComponent<VisualEffect>(prefab);
                     visualEffect.name = id;

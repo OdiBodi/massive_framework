@@ -12,14 +12,14 @@ namespace MassiveCore.Framework
         private readonly IProfile _profile;
 
         [Inject]
-        private readonly IGameConfig _gameConfig;
+        private readonly IConfigs _configs;
 
         [Inject]
         private readonly Level.Factory _levelsFactory;
 
         public event Action<Level> OnLevelLoaded;
 
-        private LevelsConfig LevelsConfig => _gameConfig.Config<LevelsConfig>();
+        private LevelsConfig LevelsConfig => _configs.Config<LevelsConfig>();
         public Level CurrentLevel { get; private set; }
 
         public UniTask LoadCurrentLevel()

@@ -9,26 +9,23 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly IProfile _profile;
 
-        public override UniTask<bool> Initialize()
+        public override async UniTask<bool> Initialize()
         {
-            InitializeProfileValues();
-            _profile.Sync();
+            await _profile.Synchronize();
             CompleteInitialize(true);
-            return base.Initialize();
+            return await base.Initialize();
         }
 
-        private void InitializeProfileValues()
+        [Inject]
+        private void Inject(IProfile profile)
+        {
+            profile.OnPreLoading += () => InitializeProfileValues(profile);
+        }
+
+        private void InitializeProfileValues(IProfile profile)
         {
             var nowTime = DateTime.Now;
-
-            _profile.Property(ProfileIds.FirstLaunchDate, nowTime);
-
-            _profile.Property(ProfileIds.SessionNumber, -1);
-            _profile.Property(ProfileIds.LastSessionDate, nowTime);
-
-            _profile.Property(ProfileIds.ApplicationReviewActive, true);
-
-            _profile.Property(ProfileIds.LevelIndex, 0);
+            profile.Property(ProfileIds.FirstLaunchDate, nowTime);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace MassiveCore.Framework
 {
+    // https://learn.microsoft.com/en-us/dotnet/csharp/linq/group-results-by-contiguous-keys
     // A Chunk is a contiguous group of one or more source elements that have the same key. A Chunk
     // has a key and a list of ChunkItem objects, which are copies of the elements in the source sequence.
     public class Chunk<TKey, TSource> : IGrouping<TKey, TSource>
@@ -21,7 +22,7 @@ namespace MassiveCore.Framework
             }
 
             public readonly TSource Value;
-            public ChunkItem? Next = null;
+            public ChunkItem? Next;
         }
 
         // Stores a reference to the enumerator for the source sequence
@@ -39,7 +40,7 @@ namespace MassiveCore.Framework
         private ChunkItem tail;
 
         // Flag to indicate the source iterator has reached the end of the source sequence.
-        internal bool isLastSourceElement = false;
+        internal bool isLastSourceElement;
 
         // Private object for thread syncronization
         private readonly object m_Lock;

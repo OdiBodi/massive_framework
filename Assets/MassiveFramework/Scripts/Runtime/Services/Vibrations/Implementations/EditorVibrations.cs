@@ -10,11 +10,11 @@ namespace MassiveCore.Framework
         private readonly ILogger _logger;
 
         [Inject]
-        private readonly IGameConfig _gameConfig;
+        private readonly IConfigs _configs;
 
         private readonly WaitingList<string> _waitingList = new(8);
 
-        private IEnumerable<VibrationConfig> Configs => _gameConfig.Config<VibrationsConfig>().Configs;
+        private IEnumerable<VibrationConfig> Configs => _configs.Config<VibrationsConfig>().Configs;
 
         public void Vibrate(string id)
         {

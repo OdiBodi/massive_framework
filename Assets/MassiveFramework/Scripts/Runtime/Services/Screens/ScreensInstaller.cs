@@ -8,7 +8,7 @@ namespace MassiveCore.Framework
     public class ScreensInstaller : ServiceInstaller
     {
         [Inject]
-        private readonly IGameConfig _gameConfig;
+        private readonly IConfigs _configs;
 
         [SerializeField]
         private Transform _root;
@@ -16,7 +16,7 @@ namespace MassiveCore.Framework
         [SerializeField]
         private int _originTopOrder = 100;
 
-        private ScreensConfig ScreensConfig => _gameConfig.Config<ScreensConfig>();
+        private ScreensConfig ScreensConfig => _configs.Config<ScreensConfig>();
 
         public override void InstallBindings()
         {
