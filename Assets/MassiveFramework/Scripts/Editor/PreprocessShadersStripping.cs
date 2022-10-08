@@ -11,12 +11,14 @@ using UnityEngine.Rendering;
 
 namespace MassiveCore.Framework
 {
-	public class PreprocessShadersStripping : IPreprocessShaders
+	public class PreProcessShadersStripping : IPreprocessShaders
 	{
-		private const string LogFilePath = "Library/shaders_compilation_result.txt";
+		public const string LogFilePath = "Library/shaders_compilation_result.txt";
 
 		private static readonly string[] StrippedNames =
 		{
+			"Standard",
+			"Legacy Shaders/Bumped",
 			"Hidden/Internal-DeferredShading",
 			"Hidden/Internal-DeferredReflections",
 			"Hidden/Internal-PrePassLighting",
@@ -51,12 +53,12 @@ namespace MassiveCore.Framework
 			new("SHADOWS_CUBE")
 		};
 
-		public int callbackOrder => 0;
+		public int callbackOrder => 5;
 
 		public void OnProcessShader(Shader shader, ShaderSnippetData snippet, IList<ShaderCompilerData> data)
 		{
 #if LOG_SHADERS_COMPILATION
-			System.IO.File.AppendAllText(LogFilePath, $"\n\n-----> {shader.name} {snippet.passName} {snippet.passType} {snippet.shaderType}\n");
+			System.IO.File.AppendAllText(LogFilePath, $"\n\n\"{shader.name}\"{snippet.passName}\"{snippet.passType}\"{snippet.shaderType}\"\n");
 #endif
 
 			var shaderName = shader.name;
