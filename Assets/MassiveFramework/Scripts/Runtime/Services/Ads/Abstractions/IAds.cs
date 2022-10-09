@@ -5,14 +5,14 @@ namespace MassiveCore.Framework
 {
     public interface IAds
     {
-        event Action<bool> OnBannerLoaded;
-        event Action OnBannerShown;
-        event Action<bool> OnInterstitialLoaded;
-        event Action<bool> OnInterstitialOpened;
-        event Action OnInterstitialClosed;
-        event Action<bool, string> OnRewardedLoaded;
-        event Action<bool, string> OnRewardedOpened;
-        event Action<bool, string> OnRewardedClosed;
+        event Action<bool> BannerLoaded;
+        event Action<bool> BannerShown;
+        event Action<bool> InterstitialLoaded;
+        event Action<bool> InterstitialOpened;
+        event Action InterstitialClosed;
+        event Action<bool, string> RewardedLoaded;
+        event Action<bool, string> RewardedOpened;
+        event Action<bool, string> RewardedClosed;
 
         bool InterstitialShowingAvailable { get; }
         bool RewardedShowingAvailable { get; }
@@ -21,8 +21,8 @@ namespace MassiveCore.Framework
         bool RewardedReady { get; }
 
         UniTask<bool> Initialize();
-        void ShowBanner();
-        void ShowInterstitial();
+        bool ShowBanner();
+        bool ShowInterstitial();
         bool ShowRewarded(string tag);
     }
 }

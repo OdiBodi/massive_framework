@@ -1,14 +1,15 @@
 ﻿/*
 using System;
-using AppodealAds.Unity.Api;
-using AppodealAds.Unity.Common;
+using System.Collections.Generic;
+using AppodealStack.Monetization.Api;
+using AppodealStack.Monetization.Common;
 using Cysharp.Threading.Tasks;
-using UniRx;
 using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class AppodealAds : IAds, IBannerAdListener, IInterstitialAdListener, IRewardedVideoAdListener
+    public class AppodealAds : IAds, IAppodealInitializationListener, IBannerAdListener, IInterstitialAdListener,
+        IRewardedVideoAdListener
     {
 #if UNITY_IOS
         private const string AppKey = "";
@@ -25,241 +26,212 @@ namespace MassiveCore.Framework
 
         public bool InterstitialShowingAvailable => !_videoAdShowing;
         public bool RewardedShowingAvailable => !_videoAdShowing;
-        public bool BannerReady => Appodeal.isLoaded(Appodeal.BANNER);
-        public bool InterstitialReady => Appodeal.isLoaded(Appodeal.INTERSTITIAL);
-        public bool RewardedReady => Appodeal.isLoaded(Appodeal.REWARDED_VIDEO);
+        public bool BannerReady => Appodeal.IsLoaded(AppodealAdType.Banner);
+        public bool InterstitialReady => Appodeal.IsLoaded(AppodealAdType.Interstitial);
+        public bool RewardedReady => Appodeal.IsLoaded(AppodealAdType.RewardedVideo);
 
-        public event Action<bool> OnBannerLoaded;
-        public event Action OnBannerShown;
-        public event Action<bool> OnInterstitialLoaded;
-        public event Action<bool> OnInterstitialOpened;
-        public event Action OnInterstitialClosed;
-        public event Action<bool, string> OnRewardedLoaded;
-        public event Action<bool, string> OnRewardedOpened;
-        public event Action<bool, string> OnRewardedClosed;
+        public event Action<bool> BannerLoaded;
+        public event Action<bool> BannerShown;
+        public event Action<bool> InterstitialLoaded;
+        public event Action<bool> InterstitialOpened;
+        public event Action InterstitialClosed;
+        public event Action<bool, string> RewardedLoaded;
+        public event Action<bool, string> RewardedOpened;
+        public event Action<bool, string> RewardedClosed;
 
         public async UniTask<bool> Initialize()
         {
             SubscribeOnInterstitial();
             SubscribeOnRewarded();
 
-            Appodeal.initialize(AppKey, Appodeal.BANNER | Appodeal.INTERSTITIAL | Appodeal.REWARDED_VIDEO);
+            Appodeal.SetLogLevel(AppodealLogLevel.Verbose);
 
             InitBanner();
             InitInterstitial();
             InitRewarded();
+
+            const int adTypes = AppodealAdType.Banner | AppodealAdType.Interstitial | AppodealAdType.RewardedVideo;
+            Appodeal.Initialize(AppKey, adTypes, this);
 
             return true;
         }
 
         private void SubscribeOnInterstitial()
         {
-            OnInterstitialOpened += _ => _videoAdShowing = true;
-            OnInterstitialClosed += () => _videoAdShowing = false;
+            InterstitialOpened += _ => _videoAdShowing = true;
+            InterstitialClosed += () => _videoAdShowing = false;
         }
 
         private void SubscribeOnRewarded()
         {
-            OnRewardedOpened += (_, __) => _videoAdShowing = true;
-            OnRewardedClosed += (_, __) => _videoAdShowing = false;
+            RewardedOpened += (_, __) => _videoAdShowing = true;
+            RewardedClosed += (_, __) => _videoAdShowing = false;
         }
 
         private void InitBanner()
         {
-            Appodeal.setBannerBackground(false);
-            Appodeal.setBannerCallbacks(this);
+            Appodeal.SetBannerCallbacks(this);
         }
-        
+
         private void InitInterstitial()
         {
-            Appodeal.setInterstitialCallbacks(this);
+            Appodeal.SetInterstitialCallbacks(this);
         }
         
         private void InitRewarded()
         {
-            Appodeal.setRewardedVideoCallbacks(this);
+            Appodeal.SetRewardedVideoCallbacks(this);
         }
 
-        public void ShowBanner()
+        public bool ShowBanner()
         {
-            Appodeal.show(Appodeal.BANNER_BOTTOM);
+            var result = Appodeal.Show(AppodealShowStyle.BannerBottom);
+            return result;
         }
 
-        public void ShowInterstitial()
+        public bool ShowInterstitial()
         {
-            Appodeal.show(Appodeal.INTERSTITIAL);
+            var result = Appodeal.Show(AppodealShowStyle.Interstitial);
+            return result;
         }
 
         public bool ShowRewarded(string tag)
         {
-            if (Appodeal.show(Appodeal.REWARDED_VIDEO))
+            var result = Appodeal.Show(AppodealShowStyle.RewardedVideo); 
+            _rewardedTag = result ? tag : string.Empty;
+            return result;
+        }
+
+        public void OnInitializationFinished(List<string> errors)
+        {
+            if (errors == null)
             {
-                _rewardedTag = tag;
-                return true;
+                _logger.Print("Appodeal Ads: Initialized!");
             }
-            _rewardedTag = string.Empty;
-            return false;
-        }
-
-        public void onBannerLoaded(int height, bool isPrecache)
-        {
-            InvokeOnMainThread(() =>
+            else
             {
-                _logger.Print("Banner loaded!");
-                OnBannerLoaded?.Invoke(true);
-            });
+                _logger.PrintError($"Appodeal Ads: Initialized with errors: {errors}");
+            }
         }
 
-        public void onBannerFailedToLoad()
+        public void OnBannerLoaded(int height, bool isPrecache)
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Banner failed to load!");
-                OnBannerLoaded?.Invoke(false);
-            });
+            _logger.Print("Appodeal Ads: Banner loaded!");
+            BannerLoaded?.Invoke(true);
         }
 
-        public void onBannerShown()
+        public void OnBannerFailedToLoad()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Banner shown!");
-                OnBannerShown?.Invoke();
-            });
+            _logger.PrintError("Appodeal Ads: Banner failed to load!");
+            BannerLoaded?.Invoke(false);
         }
 
-        public void onBannerClicked()
+        public void OnBannerShown()
         {
-            InvokeOnMainThread(() => _logger.Print("Banner clicked!"));
+            _logger.Print("Appodeal Ads: Banner shown!");
+            BannerShown?.Invoke(true);
         }
 
-        public void onBannerExpired()
+        public void OnBannerShowFailed()
         {
-            InvokeOnMainThread(() => _logger.Print("Banner expired!"));
+            _logger.PrintError("Appodeal Ads: Banner show failed!");
+            BannerShown?.Invoke(false);
         }
 
-        public void onInterstitialLoaded(bool isPrecache)
+        public void OnBannerClicked()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Interstitial loaded!");
-                OnInterstitialLoaded?.Invoke(true);
-            });
+            _logger.Print("Appodeal Ads: Banner clicked!");
         }
 
-        public void onInterstitialFailedToLoad()
+        public void OnBannerExpired()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Interstitial failed to load!");
-                OnInterstitialLoaded?.Invoke(false);
-            });
+            _logger.Print("Appodeal Ads: Banner expired!");
         }
 
-        public void onInterstitialShowFailed()
+        public void OnInterstitialLoaded(bool isPrecache)
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Interstitial show failed!");
-                OnInterstitialOpened?.Invoke(false);
-            });
+            _logger.Print("Appodeal Ads: Interstitial loaded!");
+            InterstitialLoaded?.Invoke(true);
         }
 
-        public void onInterstitialShown()
+        public void OnInterstitialFailedToLoad()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Interstitial shown!");
-                OnInterstitialOpened?.Invoke(true);
-            });
+            _logger.PrintError("Appodeal Ads: Interstitial failed to load!");
+            InterstitialLoaded?.Invoke(false);
         }
 
-        public void onInterstitialClosed()
+        public void OnInterstitialShowFailed()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Interstitial closed!");
-                OnInterstitialClosed?.Invoke();
-            });
+            _logger.PrintError("Appodeal Ads: Interstitial show failed!");
+            InterstitialOpened?.Invoke(false);
         }
 
-        public void onInterstitialClicked()
+        public void OnInterstitialShown()
         {
-            InvokeOnMainThread(() => _logger.Print("Interstitial clicked!"));
+            _logger.Print("Appodeal Ads: Interstitial shown!");
+            InterstitialOpened?.Invoke(true);
         }
 
-        public void onInterstitialExpired()
+        public void OnInterstitialClosed()
         {
-            InvokeOnMainThread(() => _logger.Print("Interstitial expired!"));
+            _logger.Print("Appodeal Ads: Interstitial closed!");
+            InterstitialClosed?.Invoke();
         }
 
-        public void onRewardedVideoLoaded(bool precache)
+        public void OnInterstitialClicked()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Rewarded loaded!");
-                OnRewardedLoaded?.Invoke(true, _rewardedTag);
-            });
+            _logger.Print("Appodeal Ads: Interstitial clicked!");
         }
 
-        public void onRewardedVideoFailedToLoad()
+        public void OnInterstitialExpired()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Rewarded failed to load!");
-                OnRewardedLoaded?.Invoke(false, _rewardedTag);
-            });
+            _logger.Print("Appodeal Ads: Interstitial expired!");
         }
 
-        public void onRewardedVideoShowFailed()
+        public void OnRewardedVideoLoaded(bool precache)
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Rewarded show failed!");
-                OnRewardedOpened?.Invoke(false, _rewardedTag);
-            });
+            _logger.Print("Appodeal Ads: Rewarded loaded!");
+            RewardedLoaded?.Invoke(true, _rewardedTag);
         }
 
-        public void onRewardedVideoShown()
+        public void OnRewardedVideoFailedToLoad()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Rewarded shown!");
-                OnRewardedOpened?.Invoke(true, _rewardedTag);
-            });
+            _logger.PrintError("Appodeal Ads: Rewarded failed to load!");
+            RewardedLoaded?.Invoke(false, _rewardedTag);
         }
 
-        public void onRewardedVideoFinished(double amount, string name)
+        public void OnRewardedVideoShowFailed()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Rewarded finished!");
-                OnRewardedClosed?.Invoke(true, _rewardedTag);
-            });
+            _logger.PrintError("Appodeal Ads: Rewarded show failed!");
+            RewardedOpened?.Invoke(false, _rewardedTag);
         }
 
-        public void onRewardedVideoClosed(bool finished)
+        public void OnRewardedVideoShown()
         {
-            InvokeOnMainThread(() =>
-            {
-                _logger.Print("Rewarded closed!");
-                OnRewardedClosed?.Invoke(false, _rewardedTag);
-            });
+            _logger.Print("Appodeal Ads: Rewarded shown!");
+            RewardedOpened?.Invoke(true, _rewardedTag);
         }
 
-        public void onRewardedVideoExpired()
+        public void OnRewardedVideoFinished(double amount, string name)
         {
-            InvokeOnMainThread(() => _logger.Print("Rewarded expired!"));
+            _logger.Print("Appodeal Ads: Rewarded finished!");
+            RewardedClosed?.Invoke(true, _rewardedTag);
         }
 
-        public void onRewardedVideoClicked()
+        public void OnRewardedVideoClosed(bool finished)
         {
-            InvokeOnMainThread(() => _logger.Print("Rewarded clicked!"));
+            _logger.Print("Appodeal Ads: Rewarded closed!");
+            RewardedClosed?.Invoke(false, _rewardedTag);
         }
 
-        private static void InvokeOnMainThread(Action action)
+        public void OnRewardedVideoExpired()
         {
-            Scheduler.MainThread.Schedule(action);
+            _logger.Print("Appodeal Ads: Rewarded expired!");
+        }
+
+        public void OnRewardedVideoClicked()
+        {
+            _logger.Print("Appodeal Ads: Rewarded clicked!");
         }
     }
 }

@@ -24,14 +24,14 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnAds()
         {
-            _ads.OnRewardedLoaded += OnRewardedLoaded;
-            _ads.OnRewardedClosed += OnRewardedClosed;
+            _ads.RewardedLoaded += OnRewardedLoaded;
+            _ads.RewardedClosed += OnRewardedClosed;
         }
 
         private void UnsubscribeFromAds()
         {
-            _ads.OnRewardedLoaded -= OnRewardedLoaded;
-            _ads.OnRewardedClosed -= OnRewardedClosed;
+            _ads.RewardedLoaded -= OnRewardedLoaded;
+            _ads.RewardedClosed -= OnRewardedClosed;
         }
 
         private void UpdateView()

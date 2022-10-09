@@ -15,14 +15,14 @@ namespace MassiveCore.Framework
         public bool InterstitialReady => true;
         public bool RewardedReady => true;
 
-        public event Action<bool> OnBannerLoaded;
-        public event Action OnBannerShown;
-        public event Action<bool> OnInterstitialLoaded;
-        public event Action<bool> OnInterstitialOpened;
-        public event Action OnInterstitialClosed;
-        public event Action<bool, string> OnRewardedLoaded;
-        public event Action<bool, string> OnRewardedOpened;
-        public event Action<bool, string> OnRewardedClosed;
+        public event Action<bool> BannerLoaded;
+        public event Action<bool> BannerShown;
+        public event Action<bool> InterstitialLoaded;
+        public event Action<bool> InterstitialOpened;
+        public event Action InterstitialClosed;
+        public event Action<bool, string> RewardedLoaded;
+        public event Action<bool, string> RewardedOpened;
+        public event Action<bool, string> RewardedClosed;
 
         public async UniTask<bool> Initialize()
         {
@@ -30,27 +30,29 @@ namespace MassiveCore.Framework
             return true;
         }
 
-        public void ShowBanner()
+        public bool ShowBanner()
         {
             _logger.Print("EditorAds.ShowBanner()");
-            OnBannerLoaded?.Invoke(true);
-            OnBannerShown?.Invoke();
+            BannerLoaded?.Invoke(true);
+            BannerShown?.Invoke(true);
+            return true;
         }
 
-        public void ShowInterstitial()
+        public bool ShowInterstitial()
         {
             _logger.Print("EditorAds.ShowInterstitial()");
-            OnInterstitialLoaded?.Invoke(true);
-            OnInterstitialOpened?.Invoke(true);
-            OnInterstitialClosed?.Invoke();
+            InterstitialLoaded?.Invoke(true);
+            InterstitialOpened?.Invoke(true);
+            InterstitialClosed?.Invoke();
+            return true;
         }
 
         public bool ShowRewarded(string tag)
         {
             _logger.Print($"EditorAds.ShowRewarded(\"{tag}\")");
-            OnRewardedLoaded?.Invoke(true, tag);
-            OnRewardedOpened?.Invoke(true, tag);
-            OnRewardedClosed?.Invoke(true, tag);
+            RewardedLoaded?.Invoke(true, tag);
+            RewardedOpened?.Invoke(true, tag);
+            RewardedClosed?.Invoke(true, tag);
             return true;
         }
     }
