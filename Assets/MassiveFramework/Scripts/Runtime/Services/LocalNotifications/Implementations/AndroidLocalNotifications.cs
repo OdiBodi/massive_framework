@@ -10,7 +10,7 @@ namespace MassiveCore.Framework
     {
         private const string ChannelId = "generic";
 
-        public event Action<LocalNotification> OnNotificationReceived;
+        public event Action<LocalNotification> NotificationReceived;
 
         public void Initialize()
         {
@@ -60,13 +60,13 @@ namespace MassiveCore.Framework
         {
             AndroidNotificationCenter.OnNotificationReceived += data =>
             {
-                if (OnNotificationReceived == null)
+                if (NotificationReceived == null)
                 {
                     return;
                 }
                 var androidNotification = data.Notification;
                 var notification = NotificationBy(androidNotification);
-                OnNotificationReceived(notification);
+                NotificationReceived(notification);
             };
         }
 

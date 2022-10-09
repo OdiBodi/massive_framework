@@ -20,13 +20,13 @@ namespace MassiveCore.Framework
             }
 
             var timer = Activator.CreateInstance(typeof(T), arguments) as ITimer;
-            timer.OnTicked += () =>
+            timer.Ticked += () =>
             {
                 var elapsedTime = (int)timer.ElapsedTime().TotalSeconds;
                 var duration = timer.Duration() == TimeSpan.MaxValue ? int.MaxValue : (int)timer.Duration().TotalSeconds;
                 _logger.Print($"Timer[\"{id}\"] ticked: {elapsedTime}s < {duration}s");
             };
-            timer.OnCompleted += () =>
+            timer.Completed += () =>
             {
                 _timers.Remove(id);
                 _logger.Print($"Timer[\"{id}\"] stopped!");

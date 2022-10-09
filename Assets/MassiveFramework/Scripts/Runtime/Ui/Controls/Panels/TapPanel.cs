@@ -5,7 +5,7 @@ namespace MassiveCore.Framework
 {
     public class TapPanel : BaseMonoBehaviour, IPointerDownHandler
     {
-        public event Action OnTapped;
+        public event Action Tapped;
 
         public bool Active { get; set; } = true;
 
@@ -13,7 +13,7 @@ namespace MassiveCore.Framework
         {
             if (Active)
             {
-                OnTapped?.Invoke();
+                Tapped?.Invoke();
             }
         }
     }

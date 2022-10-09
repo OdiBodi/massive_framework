@@ -10,20 +10,20 @@ namespace MassiveCore.Framework
  
         private readonly IDisposable _stream;
 
-        public event Action OnTicked;
-        public event Action OnCompleted;
+        public event Action Ticked;
+        public event Action Completed;
 
         public Timer(TimeSpan duration)
         {
             _duration = duration;
             _startTime = DateTime.Now;
             _stream = Observable.Interval(TimeSpan.FromSeconds(1)).TakeWhile(_ => RemainingTime().TotalSeconds > 0)
-                .Subscribe(_ => OnTicked?.Invoke(), () => OnCompleted?.Invoke());
+                .Subscribe(_ => Ticked?.Invoke(), () => Completed?.Invoke());
         }
 
         public void Dispose()
         {
-            OnCompleted?.Invoke();
+            Completed?.Invoke();
             _stream?.Dispose();
         }
 

@@ -17,7 +17,7 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly Level.Factory _levelsFactory;
 
-        public event Action<Level> OnLevelLoaded;
+        public event Action<Level> LevelLoaded;
 
         private LevelsConfig LevelsConfig => _configs.Config<LevelsConfig>();
         public Level CurrentLevel { get; private set; }
@@ -57,7 +57,7 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnCurrentLevel()
         {
-            CurrentLevel.OnLoaded += () => OnLevelLoaded?.Invoke(CurrentLevel);
+            CurrentLevel.Loaded += () => LevelLoaded?.Invoke(CurrentLevel);
         }
     }
 }

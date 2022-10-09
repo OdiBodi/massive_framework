@@ -9,11 +9,11 @@ namespace MassiveCore.Framework
         {
         }
 
-        public event Action OnLoaded;
+        public event Action Loaded;
 
         private void Start()
         {
-            OnLoaded?.Invoke();
+            Loaded?.Invoke();
         }
     }
 }

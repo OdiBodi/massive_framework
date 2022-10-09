@@ -13,10 +13,10 @@ namespace MassiveCore.Framework
 
         private bool _loaded;
 
-        public event Action OnPreLoading;
-        public event Action OnPostLoading;
-        public event Action OnPreSaving;
-        public event Action OnPostSaving;
+        public event Action PreLoading;
+        public event Action PostLoading;
+        public event Action PreSaving;
+        public event Action PostSaving;
 
         public ProfilePrefs()
         {
@@ -47,14 +47,14 @@ namespace MassiveCore.Framework
         {
             if (!_loaded)
             {
-                OnPreLoading?.Invoke();
+                PreLoading?.Invoke();
                 Load();
                 _loaded = true;
-                OnPostLoading?.Invoke();
+                PostLoading?.Invoke();
             }
-            OnPreSaving?.Invoke();
+            PreSaving?.Invoke();
             Save();
-            OnPostSaving?.Invoke();
+            PostSaving?.Invoke();
             return true;
         }
 

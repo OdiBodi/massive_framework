@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
 {
     public interface ILocalNotifications
     {
-        event Action<LocalNotification> OnNotificationReceived;
+        event Action<LocalNotification> NotificationReceived;
         void Initialize();
         void Reset();
         LocalNotification LastEntryNotification();

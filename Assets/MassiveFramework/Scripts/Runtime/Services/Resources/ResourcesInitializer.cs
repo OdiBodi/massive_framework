@@ -21,7 +21,7 @@ namespace MassiveCore.Framework
         [Inject]
         private void Inject(IProfile profile)
         {
-            profile.OnPreLoading += () => InitializeProfileValues(profile);
+            profile.PreLoading += () => InitializeProfileValues(profile);
         }
 
         protected virtual void BindResources()

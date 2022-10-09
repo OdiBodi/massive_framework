@@ -29,11 +29,11 @@ namespace MassiveCore.Framework
         [SerializeField]
         private Button _spendCurrencyButton;
 
-        public event Action OnCloseButtonClicked;
-        public event Action OnShowAppReviewButtonClicked;
-        public event Action OnPlayVfxButtonClicked;
-        public event Action OnIncreaseCurrencyButtonClicked;
-        public event Action OnSpendCurrencyButtonClicked;
+        public event Action CloseButtonClicked;
+        public event Action ShowAppReviewButtonClicked;
+        public event Action PlayVfxButtonClicked;
+        public event Action IncreaseCurrencyButtonClicked;
+        public event Action SpendCurrencyButtonClicked;
 
         private void Start()
         {
@@ -48,10 +48,11 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnButtons()
         {
-            _closeButton.onClick.AddListener(() => OnCloseButtonClicked?.Invoke());
-            _showAppReviewButton.onClick.AddListener(() => OnShowAppReviewButtonClicked?.Invoke());
-            _increaseCurrencyButton.onClick.AddListener(() => OnIncreaseCurrencyButtonClicked?.Invoke());
-            _spendCurrencyButton.onClick.AddListener(() => OnSpendCurrencyButtonClicked?.Invoke());
+            _closeButton.onClick.AddListener(() => CloseButtonClicked?.Invoke());
+            _showAppReviewButton.onClick.AddListener(() => ShowAppReviewButtonClicked?.Invoke());
+            _playVfxButton.onClick.AddListener(() => PlayVfxButtonClicked?.Invoke());
+            _increaseCurrencyButton.onClick.AddListener(() => IncreaseCurrencyButtonClicked?.Invoke());
+            _spendCurrencyButton.onClick.AddListener(() => SpendCurrencyButtonClicked?.Invoke());
         }
 
         private void StartIncreasingNumber()

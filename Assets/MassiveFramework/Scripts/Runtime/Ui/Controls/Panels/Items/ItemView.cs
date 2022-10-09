@@ -11,7 +11,7 @@ namespace MassiveCore.Framework
 
         protected ItemModel Model { get; private set; }
 
-        public event Action<ItemModel> OnClicked;
+        public event Action<ItemModel> Clicked;
 
         protected void Awake()
         {
@@ -20,7 +20,7 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnButton()
         {
-            _button.onClick.AddListener(() => OnClicked?.Invoke(Model));
+            _button.onClick.AddListener(() => Clicked?.Invoke(Model));
         }
 
         public virtual void Initialize(ItemModel model)

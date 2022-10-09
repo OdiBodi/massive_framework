@@ -9,7 +9,7 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ILogger _logger;
 
-        public event Action<LocalNotification> OnNotificationReceived;
+        public event Action<LocalNotification> NotificationReceived;
 
         public void Initialize()
         {

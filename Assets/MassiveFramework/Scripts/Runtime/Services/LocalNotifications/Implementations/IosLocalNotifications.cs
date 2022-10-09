@@ -8,7 +8,7 @@ namespace MassiveCore.Framework
 {
     public class IosLocalNotifications : ILocalNotifications
     {
-        public event Action<LocalNotification> OnNotificationReceived;
+        public event Action<LocalNotification> NotificationReceived;
 
         public void Initialize()
         {
@@ -36,12 +36,12 @@ namespace MassiveCore.Framework
         {
             iOSNotificationCenter.OnNotificationReceived += iosNotification =>
             {
-                if (OnNotificationReceived == null)
+                if (NotificationReceived == null)
                 {
                     return;
                 }
                 var notification = NotificationBy(iosNotification);
-                OnNotificationReceived(notification);
+                NotificationReceived(notification);
             };
         }
 

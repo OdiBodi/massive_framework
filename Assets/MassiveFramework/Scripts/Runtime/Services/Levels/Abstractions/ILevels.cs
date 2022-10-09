@@ -5,7 +5,7 @@ namespace MassiveCore.Framework
 {
     public interface ILevels
     {
-        public event Action<Level> OnLevelLoaded;
+        public event Action<Level> LevelLoaded;
 
         public Level CurrentLevel { get; }
 

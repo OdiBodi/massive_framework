@@ -12,7 +12,7 @@ namespace MassiveCore.Framework
         [SerializeField]
         private Button _button;
 
-        public event Action OnClicked;
+        public event Action Clicked;
 
         public virtual bool Enabled
         {
@@ -50,7 +50,7 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnButton()
         {
-            _button.onClick.AddListener(() => OnClicked?.Invoke());
+            _button.onClick.AddListener(() => Clicked?.Invoke());
         }
     }
 }

@@ -20,8 +20,8 @@ namespace MassiveCore.Framework
 
         private State _state;
 
-        public event Action<State> OnClicked;
-        public event Action<State> OnStateChanged;
+        public event Action<State> Clicked;
+        public event Action<State> StateChanged;
 
         public State CurrentState => _state;
 
@@ -33,7 +33,7 @@ namespace MassiveCore.Framework
 
         private void Subscribe()
         {
-            _states.ForEach(state => state.button.OnClicked += () => OnClicked?.Invoke(state));
+            _states.ForEach(state => state.button.Clicked += () => Clicked?.Invoke(state));
         }
 
         public T Button<T>(string id)
@@ -56,7 +56,7 @@ namespace MassiveCore.Framework
             }
             _state = _states.First(x => x.id == id);
             _states.ForEach(x => x.button.UpdateActivity(_state.id == x.id));
-            OnStateChanged?.Invoke(_state);
+            StateChanged?.Invoke(_state);
         }
 
         public IEnumerator<State> GetEnumerator()

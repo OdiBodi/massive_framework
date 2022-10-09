@@ -28,23 +28,23 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnView()
         {
-            _view.OnCloseButtonClicked += () =>
+            _view.CloseButtonClicked += () =>
             {
                 _view.Close(ScreenClosingResult.Close);
             };
-            _view.OnShowAppReviewButtonClicked += () =>
+            _view.ShowAppReviewButtonClicked += () =>
             {
                 _applicationReview.Request();
             };
-            _view.OnPlayVfxButtonClicked += () =>
+            _view.PlayVfxButtonClicked += () =>
             {
                 _visualEffects.PlayVisualEffect("example", Vector3.zero, Quaternion.identity, Vector3.one);
             };
-            _view.OnIncreaseCurrencyButtonClicked += () =>
+            _view.IncreaseCurrencyButtonClicked += () =>
             {
                 CurrencyResource.Increase(100);
             };
-            _view.OnSpendCurrencyButtonClicked += () =>
+            _view.SpendCurrencyButtonClicked += () =>
             {
                 CurrencyResource.Spend(100);
             };
