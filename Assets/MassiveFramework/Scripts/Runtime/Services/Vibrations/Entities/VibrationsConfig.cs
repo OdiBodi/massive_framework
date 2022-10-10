@@ -5,12 +5,13 @@ namespace MassiveCore.Framework
     [CreateAssetMenu(fileName = "vibrations_config", menuName = "Massive Framework/Configs/Vibrations Config")]
     public class VibrationsConfig : Config
     {
+#if UNITY_IOS
         [SerializeField]
-        private VibrationConfig[] iosConfigs;
-
+        private VibrationConfig[] _iosConfigs;
+#elif UNITY_ANDROID
         [SerializeField]
-        private VibrationConfig[] androidConfigs;
-
+        private VibrationConfig[] _androidConfigs;
+#endif
         public VibrationConfig[] Configs
         {
             get
@@ -18,7 +19,7 @@ namespace MassiveCore.Framework
 #if UNITY_IOS
                 return iosConfigs;
 #elif UNITY_ANDROID
-                return androidConfigs;
+                return _androidConfigs;
 #endif
             }
         }

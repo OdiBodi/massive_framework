@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3a3d3801c5c2bd94f3ac7832d78831ebcde41cd69b058651a5308222cd582a2a
-size 575
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3837eb14db9e24c3eb39f38c173eb4ac, type: 3}
+  m_Name: vibrations
+  m_EditorClassIdentifier: 
+  _androidConfigs:
+  - {fileID: 11400000, guid: 2306aab91ff204fb6a40fa7cf408bde3, type: 2}

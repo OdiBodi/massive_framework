@@ -8,6 +8,9 @@ namespace MassiveCore.Framework
     public class Vibrations : IVibrations
     {
         [Inject]
+        private readonly ILogger _logger;
+
+        [Inject]
         private readonly IConfigs _configs;
 
         private readonly WaitingList<string> _waitingList = new(8);
@@ -19,13 +22,16 @@ namespace MassiveCore.Framework
             var config = Configs.FirstOrDefault(config => config.Id == id);
             if (!config)
             {
+                _logger.Print($"Vibration \"{id}\" config is not found!");
                 return;
             }
             if (config.CooldownTime > 0f && !_waitingList.Add(id, config.CooldownTime))
             {
+                _logger.Print($"Vibration \"{id}\" is not available by cooldown time!");
                 return;
             }
             HapticPatterns.PlayPreset(config.Preset);
+            _logger.Print($"Vibration \"{id}\" play!");
         }
     }
 }

@@ -7,16 +7,16 @@ namespace MassiveCore.Framework
     public class VibrationConfig : ScriptableObject
     {
         [SerializeField]
-        private string id;
+        private string _id;
 
         [SerializeField]
-        private HapticPatterns.PresetType preset;
+        private HapticPatterns.PresetType _preset;
 
         [SerializeField]
-        private float cooldownTime;
+        private float _cooldownTime;
 
-        public string Id => id;
-        public HapticPatterns.PresetType Preset => preset;
-        public float CooldownTime => cooldownTime;
+        public string Id => _id;
+        public HapticPatterns.PresetType Preset => _preset;
+        public float CooldownTime => _cooldownTime;
     }
 }
