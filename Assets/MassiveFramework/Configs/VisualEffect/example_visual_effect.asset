@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 647bac635b862410dbe85b7b6b60d6d1, type: 3}
-  m_Name: visual_effect_example
+  m_Name: example_visual_effect
   m_EditorClassIdentifier: 
   _id: example
   _visualEffect: {fileID: 1245593982189086947, guid: 88024fa52035a43f7a028af950a29874, type: 3}
+  _cooldownTime: 0
