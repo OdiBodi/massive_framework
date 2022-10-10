@@ -4,9 +4,9 @@ namespace MassiveCore.Framework
 {
     public class VisualEffectPoolFactory : IPoolObjectFactory
     {
-        private readonly VisualEffect.Factory _factory;
+        private readonly VisualEffectFactory _factory;
 
-        public VisualEffectPoolFactory(VisualEffect.Factory factory)
+        public VisualEffectPoolFactory(VisualEffectFactory factory)
         {
             _factory = factory;
         }

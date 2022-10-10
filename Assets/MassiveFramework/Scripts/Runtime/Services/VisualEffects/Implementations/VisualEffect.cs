@@ -1,16 +1,11 @@
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
-using Zenject;
 
 namespace MassiveCore.Framework
 {
     public class VisualEffect : PoolObject, IVisualEffect
     {
-        public class Factory : PlaceholderFactory<string, VisualEffect>
-        {
-        }
-
         [SerializeField]
         private ParticleSystem _particleSystem;
 
@@ -28,6 +23,7 @@ namespace MassiveCore.Framework
                 return;
             }
             _particleSystem.Play();
+            _logger.Print($"Visual effect \"{Id}\" play!");
             await Observable.EveryUpdate().TakeWhile(_ => _particleSystem.isPlaying && this.Activity());
             Return();
         }
@@ -52,6 +48,7 @@ namespace MassiveCore.Framework
         private void Reset()
         {
             _particleSystem.Stop();
+            _logger.Print($"Visual effect \"{Id}\" stop!");
         }
     }
 }

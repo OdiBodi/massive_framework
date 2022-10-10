@@ -9,7 +9,7 @@ namespace MassiveCore.Framework
         private readonly IPool _pool;
 
         [Inject]
-        private readonly VisualEffect.Factory _visualEffectFactory;
+        private readonly VisualEffectFactory _visualEffectFactory;
 
         public override UniTask<bool> Initialize()
         {

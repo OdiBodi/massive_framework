@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 8476427247525717406}
   - component: {fileID: 1245593982189086947}
   m_Layer: 7
-  m_Name: visual_effect_example
+  m_Name: example_visual_effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

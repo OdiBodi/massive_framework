@@ -11,7 +11,11 @@ namespace MassiveCore.Framework
         [SerializeField]
         private VisualEffect _visualEffect;
 
+        [SerializeField]
+        private float _cooldownTime;
+
         public string Id => _id;
         public VisualEffect VisualEffect => _visualEffect;
+        public float CooldownTime => _cooldownTime;
     }
 }

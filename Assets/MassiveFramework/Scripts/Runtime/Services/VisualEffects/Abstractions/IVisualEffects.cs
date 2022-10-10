@@ -1,7 +1,10 @@
-﻿namespace MassiveCore.Framework
+﻿using System;
+using Cysharp.Threading.Tasks;
+
+namespace MassiveCore.Framework
 {
     public interface IVisualEffects
     {
-        IVisualEffect VisualEffect(string id);
+        UniTask PlayVisualEffect(string id, Action<IVisualEffect> prepare);
     }
 }
