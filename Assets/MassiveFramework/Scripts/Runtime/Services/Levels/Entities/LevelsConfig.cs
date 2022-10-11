@@ -6,8 +6,8 @@ namespace MassiveCore.Framework
     public class LevelsConfig : Config
     {
         [SerializeField]
-        private LevelConfig[] configs;
+        private LevelConfig[] _configs;
 
-        public LevelConfig[] Configs => configs;
+        public LevelConfig[] Configs => _configs;
     }
 }

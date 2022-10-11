@@ -4,16 +4,16 @@ namespace MassiveCore.Framework
 {
     public class LevelIndex
     {
-        private readonly IProfile profile;
-        private readonly LevelsConfig levelsConfig;
+        private readonly IProfile _profile;
+        private readonly LevelsConfig _levelsConfig;
 
         public LevelIndex(IProfile profile, LevelsConfig levelsConfig)
         {
-            this.profile = profile;
-            this.levelsConfig = levelsConfig;
+            _profile = profile;
+            _levelsConfig = levelsConfig;
         }
 
-        private ReactiveProperty<int> CurrentLevelIndex => profile.Property<int>(ProfileIds.LevelIndex);
+        private ReactiveProperty<int> CurrentLevelIndex => _profile.Property<int>(ProfileIds.LevelIndex);
 
         public int Current()
         {
@@ -23,7 +23,7 @@ namespace MassiveCore.Framework
         public void UpdateToNext()
         {
             CurrentLevelIndex.Value++;
-            CurrentLevelIndex.Value %= levelsConfig.Configs.Length;
+            CurrentLevelIndex.Value %= _levelsConfig.Configs.Length;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using UniRx;
 using Unity.Linq;
+using UnityEngine;
 using Zenject;
 
 namespace MassiveCore.Framework
@@ -15,9 +16,16 @@ namespace MassiveCore.Framework
         private readonly IConfigs _configs;
 
         [Inject]
-        private readonly Level.Factory _levelsFactory;
+        private readonly LevelFactory _levelsFactory;
+
+        private readonly Transform _root;
 
         public event Action<Level> LevelLoaded;
+
+        public Levels(Transform root)
+        {
+            _root = root;
+        }
 
         private LevelsConfig LevelsConfig => _configs.Config<LevelsConfig>();
         public Level CurrentLevel { get; private set; }
@@ -51,7 +59,7 @@ namespace MassiveCore.Framework
         {
             DestroyCurrentLevel();
             await Observable.NextFrame();
-            CurrentLevel = _levelsFactory.Create(index);
+            CurrentLevel = _levelsFactory.Create(index, _root);
             SubscribeOnCurrentLevel();
         }
 

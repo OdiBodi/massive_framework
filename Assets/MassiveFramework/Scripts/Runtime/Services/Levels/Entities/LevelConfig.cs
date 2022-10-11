@@ -6,8 +6,8 @@ namespace MassiveCore.Framework
     public class LevelConfig : ScriptableObject
     {
         [SerializeField]
-        private Level prefab;
+        private Level _prefab;
 
-        public Level Prefab => prefab;
+        public Level Prefab => _prefab;
     }
 }
