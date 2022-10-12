@@ -1,17 +1,11 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
-using Zenject;
 
 namespace MassiveCore.Framework
 {
     public class Screen : BaseMonoBehaviour
     {
-        public class Factory : PlaceholderFactory<Type, Screen>
-        {
-        }
-
         [SerializeField]
         private Canvas _canvas;
 

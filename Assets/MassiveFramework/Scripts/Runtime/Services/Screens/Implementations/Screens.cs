@@ -12,7 +12,7 @@ namespace MassiveCore.Framework
     public class Screens : IScreens
     {
         [Inject]
-        private readonly Screen.Factory _screenFactory;
+        private readonly ScreenFactory _screenFactory;
 
         private readonly Transform _root;
         private readonly int _originTopOrder;
@@ -54,8 +54,7 @@ namespace MassiveCore.Framework
         private async UniTask<ScreenClosingResult> ShowScreen<T>(int order, Action<T> onCreated = null)
             where T : Screen
         {
-            var screen = _screenFactory.Create(typeof(T)) as T;
-            screen.CacheTransform.SetParent(_root, false);
+            var screen = _screenFactory.Create(typeof(T), _root) as T;
             screen.Order = order;
             onCreated?.Invoke(screen);
             var result = await screen.WaitForClose();
