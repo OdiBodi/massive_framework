@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
 namespace MassiveCore.Framework
 {
     public interface IVisualEffects
     {
-        UniTask PlayVisualEffect(string id, Action<IVisualEffect> prepare);
+        IEnumerable<IVisualEffect> VisualEffectsBy(string id = "");
+        UniTask PlayVisualEffect(string id, Action<IVisualEffect> prepare = null);
     }
 }

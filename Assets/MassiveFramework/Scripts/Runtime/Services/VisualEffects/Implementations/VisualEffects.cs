@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Zenject;
@@ -17,6 +18,12 @@ namespace MassiveCore.Framework
         private readonly IPool _pool;
 
         private readonly WaitingList<string> _waitingList = new(8);
+
+        public IEnumerable<IVisualEffect> VisualEffectsBy(string id)
+        {
+            var visualEffects = _pool.Objects<VisualEffect>(id);
+            return visualEffects;
+        }
 
         public UniTask PlayVisualEffect(string id, Action<IVisualEffect> prepare)
         {
