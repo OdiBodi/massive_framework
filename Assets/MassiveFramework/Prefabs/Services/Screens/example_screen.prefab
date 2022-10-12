@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 208009277}
   - component: {fileID: 8111668934940367612}
   - component: {fileID: 2800766074234904146}
+  - component: {fileID: 1960771774174947361}
   - component: {fileID: 208009276}
   - component: {fileID: 208009275}
   - component: {fileID: 208009274}
@@ -69,6 +70,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vibrationId: button_click
+--- !u!114 &1960771774174947361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208009273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510bb7f721c7e4042aeaf8c9174f5566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: button_click
 --- !u!222 &208009276
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -515,6 +529,7 @@ GameObject:
   - component: {fileID: 6907501090058603579}
   - component: {fileID: 5970884106855771899}
   - component: {fileID: 6033870380884797523}
+  - component: {fileID: 6053414741225370719}
   - component: {fileID: 2458498282974793338}
   - component: {fileID: 1766119220051751917}
   - component: {fileID: 1610902312457724593}
@@ -573,6 +588,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vibrationId: button_click
+--- !u!114 &6053414741225370719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381737545583544970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510bb7f721c7e4042aeaf8c9174f5566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: button_click
 --- !u!222 &2458498282974793338
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -902,6 +930,7 @@ GameObject:
   - component: {fileID: 7624795778859628015}
   - component: {fileID: 7114693120218773453}
   - component: {fileID: 8649189846440765108}
+  - component: {fileID: 2105854309650469552}
   - component: {fileID: 685815848452095811}
   - component: {fileID: 6098885714588034520}
   - component: {fileID: 5953591887395241648}
@@ -960,6 +989,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vibrationId: button_click
+--- !u!114 &2105854309650469552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5307503014146312352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510bb7f721c7e4042aeaf8c9174f5566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: button_click
 --- !u!222 &685815848452095811
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1053,6 +1095,7 @@ GameObject:
   - component: {fileID: 534509288751909078}
   - component: {fileID: 3760922765012408490}
   - component: {fileID: 5525431228200895958}
+  - component: {fileID: 4802508789954277116}
   - component: {fileID: 7825003394854343121}
   - component: {fileID: 4190425741026393573}
   - component: {fileID: 2646545116895002076}
@@ -1111,6 +1154,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vibrationId: button_click
+--- !u!114 &4802508789954277116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749065431058092730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510bb7f721c7e4042aeaf8c9174f5566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: button_click
 --- !u!222 &7825003394854343121
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1204,6 +1260,7 @@ GameObject:
   - component: {fileID: 3245688411082822067}
   - component: {fileID: 1036397049164823713}
   - component: {fileID: 30553967561137956}
+  - component: {fileID: 8785419198321425496}
   - component: {fileID: 7116959706312211382}
   - component: {fileID: 3674008652669649026}
   - component: {fileID: 2503241116676611874}
@@ -1262,6 +1319,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _vibrationId: button_click
+--- !u!114 &8785419198321425496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564107693407001305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510bb7f721c7e4042aeaf8c9174f5566, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: button_click
 --- !u!222 &7116959706312211382
 CanvasRenderer:
   m_ObjectHideFlags: 0
