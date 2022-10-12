@@ -27,6 +27,17 @@ namespace MassiveCore.Framework
             _objectFactories.Add(typeof(T), factory);
         }
 
+        public IEnumerable<T> Objects<T>(string id)
+            where T : class, IPoolObject
+        {
+            var objects = _objects.OfType<T>();
+            if (!string.IsNullOrEmpty(id))
+            {
+                objects = objects.Where(x => x.Id == id);
+            }
+            return objects;
+        }
+
         public T Request<T>(string id = "")
             where T : class, IPoolObject
         {
