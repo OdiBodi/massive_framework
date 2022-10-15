@@ -63,6 +63,10 @@ namespace MassiveCore.Framework
         
         private void Reset()
         {
+            if (!_audioSource.isPlaying)
+            {
+                return;
+            }
             _audioSource.Stop();
             _logger.Print($"Sound \"{Id}\" stop!");
         }
