@@ -14,6 +14,9 @@ namespace MassiveCore.Framework
         private readonly ITimers _timers;
 
         [Inject]
+        private readonly IRemoteParameters _remoteParameters;
+
+        [Inject]
         private readonly IEnvironment _environment;
 
         [Inject]
@@ -53,6 +56,12 @@ namespace MassiveCore.Framework
         {
             _timers.Start<Timer>("000", TimeSpan.FromSeconds(15));
             _timers.Start<Timer>("111", TimeSpan.MaxValue);
+        }
+
+        private void TestRemoteParameters()
+        {
+            var numberValue = _remoteParameters[RemoteParameterIds.Number].As<int>();
+            var stringValue = _remoteParameters[RemoteParameterIds.String];
         }
     }
 }
