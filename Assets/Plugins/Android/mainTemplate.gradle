@@ -27,8 +27,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-gamingservices:[14.1, 15)' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:9
     implementation 'com.facebook.android:facebook-login:[14.1, 15)' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:7
     implementation 'com.facebook.android:facebook-share:[14.1, 15)' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:8
-    implementation 'com.google.android.play:core-common:2.0.0' // Assets/MassiveFramework/Plugins/GooglePlayPlugins/com.google.play.core/Editor/Dependencies.xml:3
-    implementation 'com.google.android.play:review:2.0.0' // Assets/MassiveFramework/Plugins/GooglePlayPlugins/com.google.play.review/Editor/Dependencies.xml:3
+    implementation 'com.google.android.play:core-common:2.0.0' // Packages/com.google.play.core/Editor/Dependencies.xml:3
+    implementation 'com.google.android.play:review:2.0.0' // Packages/com.google.play.review/Editor/Dependencies.xml:3
     implementation 'com.parse.bolts:bolts-android:1.4.0' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:4
     implementation 'com.yandex.android:mobmetricalib:5.0.0' // Assets/MassiveFramework/Plugins/AppMetrica/Editor/AppMetricaDependencies.xml:4
 // Android Resolver Dependencies End
