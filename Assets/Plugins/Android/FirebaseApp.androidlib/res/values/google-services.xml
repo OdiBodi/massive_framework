@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">1039575109023</string>
+  <string name="google_storage_bucket" translatable="false">massive-framework.appspot.com</string>
+  <string name="project_id" translatable="false">massive-framework</string>
+  <string name="google_api_key" translatable="false">AIzaSyDHrtHM8DJE_nu8oVcx2UFzWmLw4pI333Q</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDHrtHM8DJE_nu8oVcx2UFzWmLw4pI333Q</string>
+  <string name="google_app_id" translatable="false">1:1039575109023:android:588d9f111b536e328d41aa</string>
+  <string name="default_web_client_id" translatable="false">1039575109023-e44150v6fnskj45j19rcttk55v4t81nu.apps.googleusercontent.com</string>
+</resources>

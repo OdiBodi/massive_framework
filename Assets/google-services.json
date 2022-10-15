@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1039575109023",
+    "project_id": "massive-framework",
+    "storage_bucket": "massive-framework.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039575109023:android:588d9f111b536e328d41aa",
+        "android_client_info": {
+          "package_name": "com.massivecore.framework"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039575109023-e44150v6fnskj45j19rcttk55v4t81nu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHrtHM8DJE_nu8oVcx2UFzWmLw4pI333Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039575109023-e44150v6fnskj45j19rcttk55v4t81nu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1039575109023-uhb65md04vghum377f99gtno29ubc1bd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.massivecore.framework"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

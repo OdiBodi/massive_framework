@@ -2,6 +2,9 @@
   "dependencies": {
     "com.google.android.appbundle": "file:Google/com.google.android.appbundle-1.8.0.tgz",
     "com.google.external-dependency-manager": "file:Google/com.google.external-dependency-manager-1.2.174.tgz",
+    "com.google.firebase.analytics": "file:Google/com.google.firebase.analytics-9.6.0.tgz",
+    "com.google.firebase.app": "file:Google/com.google.firebase.app-9.6.0.tgz",
+    "com.google.firebase.remote-config": "file:Google/com.google.firebase.remote-config-9.6.0.tgz",
     "com.google.play.common": "file:Google/com.google.play.common-1.8.1.tgz",
     "com.google.play.core": "file:Google/com.google.play.core-1.8.1.tgz",
     "com.google.play.review": "file:Google/com.google.play.review-1.8.1.tgz",
