@@ -7,11 +7,11 @@ namespace MassiveCore.Framework
     public class Configs : ScriptableObject, IConfigs
     {
         [SerializeField]
-        private Config[] configs;
+        private Config[] _configs;
 
         public T Config<T>() where T : Config
         {
-            return (T)configs.First(x => x.GetType() == typeof(T));
+            return _configs.OfType<T>().First();
         }
     }
 }

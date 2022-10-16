@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71bae4944cba493281f48e3b257515c, type: 3}
   m_Name: configs
   m_EditorClassIdentifier: 
-  configs:
+  _configs:
   - {fileID: 11400000, guid: bc47fde2a38534cf3b311e6d34ba0223, type: 2}
   - {fileID: 11400000, guid: 19f47c8e07baf4d3f97ecf784904b6a0, type: 2}
-  - {fileID: 11400000, guid: 29f9b1caf1a5947c79b388b0f30862fc, type: 2}
   - {fileID: 11400000, guid: 747e8063712484aae84123faa4a56086, type: 2}
+  - {fileID: 11400000, guid: 29f9b1caf1a5947c79b388b0f30862fc, type: 2}
   - {fileID: 11400000, guid: cd5d76cf006e44ff4b954222efbd5c30, type: 2}
   - {fileID: 11400000, guid: ec1835554623d4e9bad28a3c5d077337, type: 2}
   - {fileID: 11400000, guid: ffc70933b3ef64c5ebffdee827f3defc, type: 2}
