@@ -35,7 +35,11 @@ namespace MassiveCore.Framework
 
         public async UniTask<bool> Fetch()
         {
+#if DEBUG
             var logger = new DebugLogger();
+#else
+            var logger = new ReleaseLogger();
+#endif
             var firebase = new Firebase(logger);
             var fetchResult = await firebase.FetchRemoteConfig();
             if (!fetchResult)
