@@ -2,11 +2,11 @@ using System;
 
 namespace MassiveCore.Framework
 {
-    public class Level : BaseMonoBehaviour
+    public class Level : BaseMonoBehaviour, ILevel
     {
         public event Action Loaded;
 
-        private void Start()
+        protected virtual void Start()
         {
             Loaded?.Invoke();
         }

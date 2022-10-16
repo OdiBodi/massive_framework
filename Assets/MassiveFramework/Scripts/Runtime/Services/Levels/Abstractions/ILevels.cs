@@ -5,12 +5,12 @@ namespace MassiveCore.Framework
 {
     public interface ILevels
     {
-        public event Action<Level> LevelLoaded;
+        event Action<ILevel> LevelLoaded;
 
-        public Level CurrentLevel { get; }
+        ILevel CurrentLevel { get; }
 
-        public UniTask LoadCurrentLevel();
-        public UniTask LoadNextLevel();
-        public void DestroyCurrentLevel();
+        UniTask LoadCurrentLevel();
+        UniTask LoadNextLevel();
+        void DestroyCurrentLevel();
     }
 }

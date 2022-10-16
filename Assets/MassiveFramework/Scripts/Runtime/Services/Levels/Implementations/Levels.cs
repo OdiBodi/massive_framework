@@ -20,7 +20,7 @@ namespace MassiveCore.Framework
 
         private readonly Transform _root;
 
-        public event Action<Level> LevelLoaded;
+        public event Action<ILevel> LevelLoaded;
 
         public Levels(Transform root)
         {
@@ -28,7 +28,7 @@ namespace MassiveCore.Framework
         }
 
         private LevelsConfig LevelsConfig => _configs.Config<LevelsConfig>();
-        public Level CurrentLevel { get; private set; }
+        public ILevel CurrentLevel { get; private set; }
 
         public UniTask LoadCurrentLevel()
         {
@@ -51,7 +51,7 @@ namespace MassiveCore.Framework
             {
                 return;
             }
-            CurrentLevel.gameObject.Destroy();
+            (CurrentLevel as BaseMonoBehaviour).gameObject.Destroy();
             CurrentLevel = null;
         }
 
