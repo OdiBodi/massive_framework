@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:23ee98202eb96ea7d6c3a8ccae96ae70fa2673a852d764af55f7fc9242604fd1
-size 873
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed4b02bf178745a4912f4cc0cc3dd3d, type: 3}
+  m_Name: example
+  m_EditorClassIdentifier: 
+  directionalLight:
+    rotation: {x: 45, y: 45}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    shadowType: 1
+    shadowStrength: 0.6
+  ambientLighting:
+    shadowColor: {r: 0.41960785, g: 0.47843137, b: 0.627451, a: 1}
+    type: 0
+    color: {r: 0.21176471, g: 0.22745098, b: 0.25882354, a: 0}
+    skyColor: {r: 0.21176471, g: 0.22745098, b: 0.25882354, a: 0}
+    equatorColor: {r: 0.11372549, g: 0.1254902, b: 0.25882354, a: 0}
+    groundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
