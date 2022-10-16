@@ -10,7 +10,7 @@ namespace MassiveCore.Framework
 
         public override UniTask<bool> Initialize()
         {
-            _analytics.Init();
+            _analytics.Initialize();
             CompleteInitialize(true);
             return base.Initialize();
         }

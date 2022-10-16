@@ -8,7 +8,7 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ILogger _logger;
 
-        public void Init()
+        public void Initialize()
         {
         }
 

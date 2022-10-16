@@ -2,6 +2,6 @@
 {
     public interface IConfigs
     {
-        public T Config<T>() where T : Config;
+        T Config<T>() where T : Config;
     }
 }

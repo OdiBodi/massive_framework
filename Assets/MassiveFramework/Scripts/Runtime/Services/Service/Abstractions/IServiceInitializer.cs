@@ -5,7 +5,7 @@ namespace MassiveCore.Framework
 {
     public interface IServiceInitializer
     {
-        public ReadOnlyReactiveProperty<bool> Initialized { get; }
+        ReadOnlyReactiveProperty<bool> Initialized { get; }
         UniTask<bool> Initialize();
     }
 }

@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
 {
     public interface IAnalytics
     {
-        void Init();
+        void Initialize();
         void LogEvent(string name, IDictionary<string, object> parameters);
     }
 }

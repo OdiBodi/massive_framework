@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
 {
     public class Analytics : IAnalytics
     {
-        public void Init()
+        public void Initialize()
         {
         }
 
