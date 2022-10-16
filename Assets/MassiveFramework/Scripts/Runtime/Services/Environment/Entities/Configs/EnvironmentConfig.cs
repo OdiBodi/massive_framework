@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     public class EnvironmentConfig : ScriptableObject
     {
         [SerializeField]
-        private DirectionalLightParams directionalLightParams = new()
+        private DirectionalLightParams _directionalLightParams = new()
         {
             rotation = Vector2.zero,
             color = Color.white,
@@ -15,7 +15,7 @@ namespace MassiveCore.Framework
         };
 
         [SerializeField]
-        private AmbientLightingParams ambientLightingParams = new()
+        private AmbientLightingParams _ambientLightingParams = new()
         {
             shadowColor = new Color(0.42f, 0.48f, 0.63f),
             type = AmbientLightingParams.Type.Flat,
@@ -25,7 +25,7 @@ namespace MassiveCore.Framework
             groundColor = new Color(0.05f, 0.04f, 0.04f)
         };
 
-        public DirectionalLightParams DirectionalLightParams => directionalLightParams;
-        public AmbientLightingParams AmbientLightingParams => ambientLightingParams;
+        public DirectionalLightParams DirectionalLightParams => _directionalLightParams;
+        public AmbientLightingParams AmbientLightingParams => _ambientLightingParams;
     }
 }

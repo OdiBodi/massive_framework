@@ -6,8 +6,8 @@ namespace MassiveCore.Framework
     public class EnvironmentsConfig : Config
     {
         [SerializeField]
-        private EnvironmentConfig[] configs;
+        private EnvironmentConfig[] _configs;
 
-        public EnvironmentConfig[] Configs => configs;
+        public EnvironmentConfig[] Configs => _configs;
     }
 }
