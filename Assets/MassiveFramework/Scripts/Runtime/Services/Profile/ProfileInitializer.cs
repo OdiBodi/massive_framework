@@ -22,7 +22,7 @@ namespace MassiveCore.Framework
             profile.PreLoading += () => InitializeProfileValues(profile);
         }
 
-        private void InitializeProfileValues(IProfile profile)
+        protected virtual void InitializeProfileValues(IProfile profile)
         {
             var nowTime = DateTime.Now;
             profile.Property(ProfileIds.FirstLaunchDate, nowTime);
