@@ -16,15 +16,14 @@ namespace MassiveCore.Framework
 
         private void Awake()
         {
-            InitLoadedReactiveProperties();
+            InitializeLoadedReactiveProperties();
             InitializeServices();
         }
 
-        private void InitLoadedReactiveProperties()
+        private void InitializeLoadedReactiveProperties()
         {
             _initialized = new ReactiveProperty<bool>();
-            var initializedReadOnlyProperty = _initialized.ToReadOnlyReactiveProperty();
-            Initialized = new ReadOnlyReactiveProperty<bool>(initializedReadOnlyProperty);
+            Initialized = _initialized.ToReadOnlyReactiveProperty();
         }
 
         private async void InitializeServices()
