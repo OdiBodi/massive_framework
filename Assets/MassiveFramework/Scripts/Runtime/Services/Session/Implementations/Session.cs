@@ -23,7 +23,7 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnInitializer()
         {
-            _initializer.Initialized.Where(result => result).Subscribe(_ => {}, () =>
+            _initializer.Initialized.Where(result => result).Subscribe(_ =>
             {
                 IncreaseSession();
                 Observable.EveryApplicationPause().Where(result => result).Subscribe(_ =>
