@@ -36,7 +36,7 @@ namespace MassiveCore.Framework
             return state as T;
         }
 
-        public async UniTask GoTo<T>()
+        public async UniTask ChangeState<T>()
             where T : class, IState
         {
             var previousState = CurrentState; 

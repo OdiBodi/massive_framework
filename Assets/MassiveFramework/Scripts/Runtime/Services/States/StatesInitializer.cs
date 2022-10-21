@@ -14,7 +14,7 @@ namespace MassiveCore.Framework
         public override UniTask<bool> Initialize()
         {
             BindStates();
-            _states.GoTo<ExampleState>();
+            _states.ChangeState<ExampleState>();
             CompleteInitialize(true);
             return base.Initialize();
         }
