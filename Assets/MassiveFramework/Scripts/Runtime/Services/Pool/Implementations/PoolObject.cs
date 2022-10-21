@@ -13,13 +13,13 @@ namespace MassiveCore.Framework
         {
             _root = root;
             CacheTransform.SetParent(root);
-            this.UpdateActivity(true);
+            this.ChangeActivity(true);
         }
 
         public virtual void Return()
         {
             CacheTransform.SetParent(_root);
-            this.UpdateActivity(false);
+            this.ChangeActivity(false);
         }
 
         public virtual void Remove()
