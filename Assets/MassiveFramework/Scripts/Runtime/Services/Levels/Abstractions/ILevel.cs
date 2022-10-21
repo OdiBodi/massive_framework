@@ -1,9 +1,9 @@
-﻿using System;
+﻿using UniRx;
 
 namespace MassiveCore.Framework
 {
     public interface ILevel
     {
-        event Action Loaded;
+        ReadOnlyReactiveProperty<bool> Loaded { get; }
     }
 }

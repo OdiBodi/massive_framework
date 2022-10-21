@@ -12,12 +12,12 @@ namespace MassiveCore.Framework
         }
 
         [Inject]
-        private void Inject(IProfile profile)
+        protected virtual void Inject(IProfile profile)
         {
             profile.PreLoading += () => InitializeProfileValues(profile);
         }
 
-        private void InitializeProfileValues(IProfile profile)
+        protected virtual void InitializeProfileValues(IProfile profile)
         {
             profile.Property(ProfileIds.LevelIndex, 0);
         }

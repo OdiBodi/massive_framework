@@ -60,12 +60,8 @@ namespace MassiveCore.Framework
             DestroyCurrentLevel();
             await Observable.NextFrame();
             CurrentLevel = _levelsFactory.Create(index, _root);
-            SubscribeOnCurrentLevel();
-        }
-
-        private void SubscribeOnCurrentLevel()
-        {
-            CurrentLevel.Loaded += () => LevelLoaded?.Invoke(CurrentLevel);
+            await CurrentLevel.Loaded;
+            LevelLoaded?.Invoke(CurrentLevel);
         }
     }
 }
