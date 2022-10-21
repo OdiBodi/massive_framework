@@ -11,7 +11,7 @@ namespace MassiveCore.Framework
 
         private void Awake()
         {
-            InitInitializedReactiveProperty();
+            InitializeInitializedReactiveProperty();
         }
 
         public virtual UniTask<bool> Initialize()
@@ -25,10 +25,9 @@ namespace MassiveCore.Framework
             _initializerSubject.OnCompleted();
         }
 
-        private void InitInitializedReactiveProperty()
+        private void InitializeInitializedReactiveProperty()
         {
-            var initializerReadOnlyProperty = _initializerSubject.ToReadOnlyReactiveProperty();
-            Initialized = new ReadOnlyReactiveProperty<bool>(initializerReadOnlyProperty);
+            Initialized = _initializerSubject.ToReadOnlyReactiveProperty();
         }
     }
 }
