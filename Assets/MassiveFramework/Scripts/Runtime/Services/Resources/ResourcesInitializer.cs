@@ -6,10 +6,10 @@ namespace MassiveCore.Framework
     public class ResourcesInitializer : ServiceInitializer
     {
         [Inject]
-        private readonly ResourceFactory _resourceFactory;
+        protected readonly ResourceFactory _resourceFactory;
 
         [Inject]
-        private readonly IResources _resources;
+        protected readonly IResources _resources;
 
         public override UniTask<bool> Initialize()
         {

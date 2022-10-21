@@ -47,6 +47,12 @@ namespace MassiveCore.Framework
             return true;
         }
 
+        public UniTask Reset(int value)
+        {
+            CurrencyProperty.Value = value;
+            return UniTask.CompletedTask;
+        }
+
         private void InitAmountReactiveProperty()
         {
             Amount = CurrencyProperty.ToReadOnlyReactiveProperty();

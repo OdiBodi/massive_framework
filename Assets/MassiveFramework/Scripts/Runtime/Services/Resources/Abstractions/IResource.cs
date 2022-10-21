@@ -11,5 +11,6 @@ namespace MassiveCore.Framework
         IEnumerable<T> Configs<T>() where T : ResourceConfig;
         UniTask<bool> Spend(int amount);
         UniTask<bool> Increase(int amount);
+        UniTask Reset(int value);
     }
 }
