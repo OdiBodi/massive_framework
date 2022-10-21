@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
 {
     public static class MonoBehaviourExtensions
     {
-        public static void UpdateActivity(this MonoBehaviour monoBehaviour, bool value)
+        public static void ChangeActivity(this MonoBehaviour monoBehaviour, bool value)
         {
             monoBehaviour.gameObject.SetActive(value);
         }
