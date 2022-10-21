@@ -28,7 +28,7 @@ namespace MassiveCore.Framework
         private void Awake()
         {
             Subscribe();
-            UpdateState(_states[0].id);
+            ChangeState(_states[0].id);
         }
 
         private void Subscribe()
@@ -48,14 +48,14 @@ namespace MassiveCore.Framework
             return (T)_state.button;
         }
 
-        public void UpdateState(string id)
+        public void ChangeState(string id)
         {
             if (_state.id == id)
             {
                 return;
             }
             _state = _states.First(x => x.id == id);
-            _states.ForEach(x => x.button.UpdateActivity(_state.id == x.id));
+            _states.ForEach(x => x.button.ChangeActivity(_state.id == x.id));
             StateChanged?.Invoke(_state);
         }
 
