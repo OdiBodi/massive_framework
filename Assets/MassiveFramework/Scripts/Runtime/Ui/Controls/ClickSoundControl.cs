@@ -7,6 +7,9 @@ namespace MassiveCore.Framework
     public class ClickSoundControl : BaseMonoBehaviour, IPointerClickHandler
     {
         [Inject]
+        private readonly IProfile _profile;
+
+        [Inject]
         private readonly ISounds _sounds;
 
         [SerializeField]
@@ -14,7 +17,7 @@ namespace MassiveCore.Framework
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _sounds.PlaySound(_soundId);
+            _sounds.PlaySoundByEnable(_soundId, _profile);
         }
     }
 }
