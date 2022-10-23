@@ -3,7 +3,7 @@ using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class StateCustomFactory : IFactory<Type, IState>
+    public class StateCustomFactory<T> : IFactory<Type, IState<T>>
     {
         private readonly DiContainer _diContainer;
 
@@ -12,9 +12,9 @@ namespace MassiveCore.Framework
             _diContainer = diContainer;
         }
 
-        public IState Create(Type type)
+        public IState<T> Create(Type type)
         {
-            var state = _diContainer.Instantiate(type) as IState; 
+            var state = _diContainer.Instantiate(type) as IState<T>; 
             return state;
         }
     }

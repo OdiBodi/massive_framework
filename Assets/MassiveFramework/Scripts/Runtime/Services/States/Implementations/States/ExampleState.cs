@@ -5,7 +5,7 @@ using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class ExampleState : IState
+    public class ExampleState : IState<UniTask>
     {
         [Inject]
         private readonly IAnalytics _analytics;
@@ -25,7 +25,7 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly IScreens _screens;
 
-        public async UniTask Enter(IState previous)
+        public async UniTask Enter(IStateArguments arguments)
         {
             _environment.ApplyConfig("example");
             _levels.LoadCurrentLevel();
@@ -54,8 +54,10 @@ namespace MassiveCore.Framework
 
         private void TestTimers()
         {
-            _timers.Start<Timer>("000", TimeSpan.FromSeconds(15));
-            _timers.Start<Timer>("111", TimeSpan.MaxValue);
+            var arguments0 = new TimerArguments(TimeSpan.FromSeconds(15));
+            var arguments1 = new TimerArguments(TimeSpan.MaxValue);
+            _timers.Start<Timer>("000", arguments0);
+            _timers.Start<Timer>("111", arguments1);
         }
 
         private void TestRemoteParameters()

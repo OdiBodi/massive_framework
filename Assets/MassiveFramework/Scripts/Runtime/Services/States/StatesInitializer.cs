@@ -6,7 +6,7 @@ namespace MassiveCore.Framework
     public class StatesInitializer : ServiceInitializer
     {
         [Inject]
-        private readonly StateFactory _stateFactory;
+        private readonly StateFactory<UniTask> _stateFactory;
 
         [Inject]
         private readonly IStates _states;

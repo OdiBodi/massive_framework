@@ -4,16 +4,16 @@ using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class StateFactory : PlaceholderFactory<Type, IState>
+    public class StateFactory<T> : PlaceholderFactory<Type, IState<T>>
     {
-        public virtual T Create<T>()
-            where T : class, IState
+        public virtual S Create<S>()
+            where S : class, IState<T>
         {
             var arguments = new List<TypeValuePair>
             {
-                InjectUtil.CreateTypePair(typeof(T))
+                InjectUtil.CreateTypePair(typeof(S))
             };
-            var state = CreateInternal(arguments) as T; 
+            var state = CreateInternal(arguments) as S; 
             return state;
         }
     };

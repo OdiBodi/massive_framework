@@ -10,12 +10,12 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ILogger _logger;
 
-        private readonly Dictionary<Type, IState> _states = new();
+        private readonly Dictionary<Type, IState<UniTask>> _states = new();
 
-        public IState CurrentState { get; private set; }
+        public IState<UniTask> CurrentState { get; private set; }
 
         public void BindState<T>(T state)
-            where T : class, IState
+            where T : class, IState<UniTask>
         {
             if (State<T>() != null)
             {
@@ -26,7 +26,7 @@ namespace MassiveCore.Framework
         }
 
         public T State<T>()
-            where T : class, IState
+            where T : class, IState<UniTask>
         {
             var result = _states.TryGetValue(typeof(T), out var state);
             if (!result)
@@ -36,10 +36,9 @@ namespace MassiveCore.Framework
             return state as T;
         }
 
-        public async UniTask ChangeState<T>()
-            where T : class, IState
+        public async UniTask ChangeState<T>(IStateArguments arguments)
+            where T : class, IState<UniTask>
         {
-            var previousState = CurrentState; 
             if (CurrentState != null)
             {
                 await CurrentState.Exit();
@@ -47,7 +46,7 @@ namespace MassiveCore.Framework
             CurrentState = State<T>();
             if (CurrentState != null)
             {
-                await CurrentState.Enter(previousState);
+                await CurrentState.Enter(arguments);
             }
         }
     }

@@ -2,11 +2,9 @@
 
 namespace MassiveCore.Framework
 {
-    public interface IStates
+    public interface IStates : IStateContext<UniTask>
     {
-        IState CurrentState { get; }
-        T State<T>() where T : class, IState;
-        void BindState<T>(T state) where T : class, IState;
-        UniTask ChangeState<T>() where T : class, IState;
+        T State<T>() where T : class, IState<UniTask>;
+        void BindState<T>(T state) where T : class, IState<UniTask>;
     }
 }
