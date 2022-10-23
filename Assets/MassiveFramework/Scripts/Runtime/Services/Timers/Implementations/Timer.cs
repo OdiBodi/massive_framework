@@ -6,20 +6,21 @@ namespace MassiveCore.Framework
     public class Timer : ITimer
     {
         private readonly DateTime _startTime;
-        private readonly TimeSpan _duration;
- 
+
         private readonly IDisposable _stream;
 
         public event Action Ticked;
         public event Action Completed;
 
-        public Timer(TimeSpan duration)
+        public Timer(ITimerArguments arguments)
         {
-            _duration = duration;
+            Arguments = arguments;
             _startTime = DateTime.Now;
             _stream = Observable.Interval(TimeSpan.FromSeconds(1)).TakeWhile(_ => RemainingTime().TotalSeconds > 0)
                 .Subscribe(_ => Ticked?.Invoke(), () => Completed?.Invoke());
         }
+
+        public ITimerArguments Arguments { get; }
 
         public void Dispose()
         {
@@ -39,7 +40,7 @@ namespace MassiveCore.Framework
 
         public TimeSpan Duration()
         {
-            return _duration;
+            return Arguments.Duration;
         }
 
         public TimeSpan ElapsedTime()

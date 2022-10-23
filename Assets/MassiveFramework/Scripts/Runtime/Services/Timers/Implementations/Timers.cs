@@ -11,8 +11,8 @@ namespace MassiveCore.Framework
 
         private readonly Dictionary<string, ITimer> _timers = new();
 
-        public void Start<T>(string id, params object[] arguments)
-            where T : ITimer
+        public void Start<T>(string id, ITimerArguments arguments)
+            where T : class, ITimer
         {
             if (TimerBy(id) != null)
             {

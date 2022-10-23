@@ -2,7 +2,7 @@
 {
     public interface ITimers
     {
-        void Start<T>(string id, params object[] arguments) where T : ITimer;
+        void Start<T>(string id, ITimerArguments arguments) where T : class, ITimer;
         void Stop(string id);
         ITimer TimerBy(string id);
     }
