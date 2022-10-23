@@ -6,22 +6,26 @@ namespace MassiveCore.Framework
 {
     public static class SoundsExtensions
     {
-        public static UniTask PlaySound(this ISounds sounds, string id, Vector3 position, Action<Sound> prepare = null)
+        public static UniTask PlaySoundByEnable(this ISounds sounds, string id, IProfile profile, Action<ISound> prepare = null)
         {
-            var result = sounds.PlaySound(id, sound =>
+            var enabled = profile.Property<bool>(ProfileIds.SoundsEnabled).Value;
+            if (!enabled)
             {
-                var sound_ = sound as Sound;
-                sound_.CacheTransform.position = position;
-                prepare?.Invoke(sound_);
-            });
+                return UniTask.CompletedTask;
+            }
+            var result = sounds.PlaySound(id, prepare);
             return result;
         }
 
-        public static UniTask PlaySound(this ISounds sounds, string id, Camera camera, Vector3 position,
-            Action<Sound> prepare = null)
+        public static UniTask PlayMusicByEnable(this ISounds sounds, string id, IProfile profile, Action<ISound> prepare = null)
         {
-            var worldPoint = camera.ViewportToWorldPoint(position);
-            return sounds.PlaySound(id, worldPoint, prepare);
+            var enabled = profile.Property<bool>(ProfileIds.MusicEnabled).Value;
+            if (!enabled)
+            {
+                return UniTask.CompletedTask;
+            }
+            var result = sounds.PlaySound(id, prepare);
+            return result;
         }
     }
 }

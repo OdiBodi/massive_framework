@@ -32,7 +32,8 @@ namespace MassiveCore.Framework
 
         private void InitializeProfileValues(IProfile profile)
         {
-            profile.Property(ProfileIds.SoundEnabled, true);
+            profile.Property(ProfileIds.SoundsEnabled, true);
+            profile.Property(ProfileIds.MusicEnabled, true);
         }
     }
 }
