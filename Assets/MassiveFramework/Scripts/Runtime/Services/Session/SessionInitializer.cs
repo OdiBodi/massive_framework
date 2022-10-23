@@ -21,7 +21,7 @@ namespace MassiveCore.Framework
         private void InitializeProfileValues(IProfile profile)
         {
             var nowTime = DateTime.Now;
-            profile.Property(ProfileIds.SessionNumber, -1);
+            profile.Property(ProfileIds.SessionNumber, 1);
             profile.Property(ProfileIds.LastSessionDate, nowTime);
         }
     }
