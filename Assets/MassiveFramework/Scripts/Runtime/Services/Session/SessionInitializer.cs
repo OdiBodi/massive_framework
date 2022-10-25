@@ -6,8 +6,12 @@ namespace MassiveCore.Framework
 {
     public class SessionInitializer : ServiceInitializer
     {
+        [Inject]
+        private readonly IProfile _profile; 
+
         public override UniTask<bool> Initialize()
         {
+            InitializeSession();
             CompleteInitialize(true);
             return base.Initialize();
         }
@@ -16,6 +20,11 @@ namespace MassiveCore.Framework
         private void Inject(IProfile profile)
         {
             profile.PreLoading += () => InitializeProfileValues(profile);
+        }
+
+        private void InitializeSession()
+        {
+            new Session(_profile, this).Initialize();
         }
 
         private void InitializeProfileValues(IProfile profile)

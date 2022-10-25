@@ -1,67 +1,60 @@
 ﻿using System;
 using UniRx;
-using UnityEngine;
-using Zenject;
 
 namespace MassiveCore.Framework
 {
-    public class Session : BaseMonoBehaviour
+    public class Session
     {
-        [Inject]
         private readonly IProfile _profile;
+        private readonly SessionInitializer _initializer;
 
-        [SerializeField]
-        private SessionInitializer _initializer;
-
-        private ReactiveProperty<int> SessionNumber => _profile.Property<int>(ProfileIds.SessionNumber);
-        private ReactiveProperty<DateTime> LastSessionDate => _profile.Property<DateTime>(ProfileIds.LastSessionDate);
-
-        private void Start()
+        public Session(IProfile profile, SessionInitializer initializer)
         {
-            SubscribeOnInitializer();
+            _profile = profile;
+            _initializer = initializer;
         }
 
-        private void SubscribeOnInitializer()
+        private ReactiveProperty<int> SessionNumberProperty => _profile.Property<int>(ProfileIds.SessionNumber);
+        private ReactiveProperty<DateTime> LastSessionDateProperty => _profile.Property<DateTime>(ProfileIds.LastSessionDate);
+
+        public void Initialize()
         {
-            _initializer.Initialized.Where(result => result).Subscribe(_ =>
+            IncreaseSession();
+            Observable.EveryApplicationPause().Where(result => result).Subscribe(_ =>
+            { 
+                UpdateLastSessionDate();
+                _profile.Synchronize();
+            }).AddTo(_initializer);
+            Observable.EveryApplicationFocus().Where(result => result).Subscribe(_ =>
             {
-                IncreaseSession();
-                Observable.EveryApplicationPause().Where(result => result).Subscribe(_ =>
-                {
-                    UpdateLastSessionDate();
-                    _profile.Synchronize();
-                }).AddTo(this);
-                Observable.EveryApplicationFocus().Where(result => result).Subscribe(_ =>
-                {
-                    UpdateSession();
-                }).AddTo(this);
-                Observable.OnceApplicationQuit().Subscribe(_ =>
-                {
-                    UpdateLastSessionDate();
-                    _profile.Synchronize();
-                }).AddTo(this);
-            }).AddTo(this);
+                UpdateSession();
+            }).AddTo(_initializer);
+            Observable.OnceApplicationQuit().Subscribe(_ =>
+            {
+                UpdateLastSessionDate();
+                _profile.Synchronize();
+            }).AddTo(_initializer);
         }
 
         private void IncreaseSession()
         {
-            SessionNumber.Value++;
+            SessionNumberProperty.Value++;
             UpdateLastSessionDate();
         }
 
         private void UpdateSession()
         {
-            var time = (DateTime.Now - LastSessionDate.Value).TotalMinutes;
+            var time = (DateTime.Now - LastSessionDateProperty.Value).TotalMinutes;
             if (time > 30)
             {
-                SessionNumber.Value++;
+                SessionNumberProperty.Value++;
             }
             UpdateLastSessionDate();
         }
 
         private void UpdateLastSessionDate()
         {
-            LastSessionDate.Value = DateTime.Now;
+            LastSessionDateProperty.Value = DateTime.Now;
         }
     }
 }
