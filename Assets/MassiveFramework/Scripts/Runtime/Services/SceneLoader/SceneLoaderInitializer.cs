@@ -31,7 +31,7 @@ namespace MassiveCore.Framework
             {
                 return;
             }
-            await servicesInitialized.Where(result => result).ToReactiveProperty();
+            await servicesInitialized.Where(result => result).ToReadOnlyReactiveProperty();
         }
 
         private void UnloadCurrentScene()
