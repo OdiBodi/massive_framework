@@ -9,8 +9,8 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ILogger _logger;
 
-        public bool InterstitialShowingAvailable => true;
-        public bool RewardedShowingAvailable => true;
+        public bool InterstitialAvailable => true;
+        public bool RewardedAvailable => true;
         public bool BannerReady => true;
         public bool InterstitialReady => true;
         public bool RewardedReady => true;

@@ -4,7 +4,7 @@ namespace MassiveCore.Framework
     {
         public override void InstallBindings()
         {
-#if DEBUG
+#if UNITY_EDITOR
             Container.Bind<IAds>().To<EditorAds>().AsSingle();
 #else
             Container.Bind<IAds>().To<EditorAds>().AsSingle(); // AppodealAds

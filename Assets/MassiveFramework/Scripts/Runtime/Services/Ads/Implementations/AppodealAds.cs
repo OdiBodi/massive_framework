@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using AppodealStack.Monetization.Api;
 using AppodealStack.Monetization.Common;
 using Cysharp.Threading.Tasks;
+using UniRx;
 using Zenject;
 
 namespace MassiveCore.Framework
@@ -20,12 +21,14 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ILogger _logger;
 
+        private readonly ReactiveProperty<bool> _initialized = new(); 
+        
         private bool _videoAdShowing;
 
         private string _rewardedTag;
 
-        public bool InterstitialShowingAvailable => !_videoAdShowing;
-        public bool RewardedShowingAvailable => !_videoAdShowing;
+        public bool InterstitialAvailable => !_videoAdShowing;
+        public bool RewardedAvailable => !_videoAdShowing;
         public bool BannerReady => Appodeal.IsLoaded(AppodealAdType.Banner);
         public bool InterstitialReady => Appodeal.IsLoaded(AppodealAdType.Interstitial);
         public bool RewardedReady => Appodeal.IsLoaded(AppodealAdType.RewardedVideo);
@@ -39,21 +42,21 @@ namespace MassiveCore.Framework
         public event Action<bool, string> RewardedOpened;
         public event Action<bool, string> RewardedClosed;
 
-        public async UniTask<bool> Initialize()
+        public UniTask<bool> Initialize()
         {
             SubscribeOnInterstitial();
             SubscribeOnRewarded();
 
             Appodeal.SetLogLevel(AppodealLogLevel.Verbose);
 
-            InitBanner();
-            InitInterstitial();
-            InitRewarded();
+            InitializeBanner();
+            InitializeInterstitial();
+            InitializeRewarded();
 
             const int adTypes = AppodealAdType.Banner | AppodealAdType.Interstitial | AppodealAdType.RewardedVideo;
             Appodeal.Initialize(AppKey, adTypes, this);
 
-            return true;
+            return _initialized.WaitUntilValueChangedAsync().AsUniTask();
         }
 
         private void SubscribeOnInterstitial()
@@ -68,17 +71,17 @@ namespace MassiveCore.Framework
             RewardedClosed += (_, __) => _videoAdShowing = false;
         }
 
-        private void InitBanner()
+        private void InitializeBanner()
         {
             Appodeal.SetBannerCallbacks(this);
         }
 
-        private void InitInterstitial()
+        private void InitializeInterstitial()
         {
             Appodeal.SetInterstitialCallbacks(this);
         }
         
-        private void InitRewarded()
+        private void InitializeRewarded()
         {
             Appodeal.SetRewardedVideoCallbacks(this);
         }
@@ -112,6 +115,7 @@ namespace MassiveCore.Framework
             {
                 _logger.PrintError($"Appodeal Ads: Initialized with errors: {errors}");
             }
+            _initialized.Value = errors == null;
         }
 
         public void OnBannerLoaded(int height, bool isPrecache)

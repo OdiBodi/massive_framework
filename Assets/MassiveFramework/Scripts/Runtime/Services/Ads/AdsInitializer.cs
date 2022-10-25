@@ -10,8 +10,8 @@ namespace MassiveCore.Framework
 
         public override async UniTask<bool> Initialize()
         {
-            await _ads.Initialize();
-            CompleteInitialize(true);
+            var result = await _ads.Initialize();
+            CompleteInitialize(result);
             return await base.Initialize();
         }
     }

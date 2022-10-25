@@ -14,8 +14,8 @@ namespace MassiveCore.Framework
         event Action<bool, string> RewardedOpened;
         event Action<bool, string> RewardedClosed;
 
-        bool InterstitialShowingAvailable { get; }
-        bool RewardedShowingAvailable { get; }
+        bool InterstitialAvailable { get; }
+        bool RewardedAvailable { get; }
         bool BannerReady { get; }
         bool InterstitialReady { get; }
         bool RewardedReady { get; }
