@@ -15,11 +15,12 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly IProfile _profile;
 
-        private ReactiveProperty<bool> ApplicationReviewActive => _profile.Property<bool>(ProfileIds.ApplicationReviewActive);
+        private ReactiveProperty<bool> ApplicationReviewActiveProperty =>
+            _profile.Property<bool>(ProfileIds.ApplicationReviewActive);
 
         public async UniTask<bool> Request()
         {
-            if (!ApplicationReviewActive.Value)
+            if (!ApplicationReviewActiveProperty.Value)
             {
                 return true;
             }
@@ -39,7 +40,7 @@ namespace MassiveCore.Framework
                 return false;
             }
 
-            ApplicationReviewActive.Value = false;
+            ApplicationReviewActiveProperty.Value = false;
             return true;
         }
     }
