@@ -10,5 +10,10 @@ namespace MassiveCore.Framework
             Container.Bind<IStates>().To<States>().AsSingle();
             Container.BindFactory<Type, IState<UniTask>, StateFactory<UniTask>>().FromFactory<StateCustomFactory<UniTask>>();
         }
+
+        private void AOTCodeGeneration()
+        {
+            new StateCustomFactory<UniTask>(Container);
+        }
     }
 }
