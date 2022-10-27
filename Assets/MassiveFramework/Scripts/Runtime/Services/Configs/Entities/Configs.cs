@@ -9,7 +9,8 @@ namespace MassiveCore.Framework
         [SerializeField]
         private Config[] _configs;
 
-        public T Config<T>() where T : Config
+        public T Config<T>()
+            where T : Config
         {
             return _configs.OfType<T>().First();
         }
