@@ -24,7 +24,8 @@ namespace MassiveCore.Framework
             InitAmountReactiveProperty();
         }
 
-        public IEnumerable<T> Configs<T>() where T : ResourceConfig
+        public IEnumerable<T> Configs<T>()
+            where T : ResourceConfig
         {
             var resourcesConfig = _configs.Config<ResourcesConfig>(); 
             var configs = resourcesConfig.ConfigsBy<T>("currency");
