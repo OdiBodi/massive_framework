@@ -1,8 +1,8 @@
 namespace MassiveCore.Framework
 {
-    public interface ICaretaker
+    public interface ICaretaker<out T>
     {
-        void Save();
-        void Restore();
+        T Save();
+        T Restore();
     }
 }

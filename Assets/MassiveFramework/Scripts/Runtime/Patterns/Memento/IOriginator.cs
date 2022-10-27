@@ -1,8 +1,8 @@
 namespace MassiveCore.Framework
 {
-    public interface IOriginator
+    public interface IOriginator<out T>
     {
         IMemento Memento();
-        void RestoreFromMemento(IMemento memento);
+        T RestoreFromMemento(IMemento memento);
     }
 }
