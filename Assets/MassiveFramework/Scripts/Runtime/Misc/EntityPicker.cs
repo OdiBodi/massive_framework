@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Lean.Touch;
+using UniRx;
 using UnityEngine;
 
 namespace MassiveCore.Framework
@@ -34,32 +35,14 @@ namespace MassiveCore.Framework
             _pickType = pickType;
             _maxDistance = maxDistance;
             _layerMask = layerMask;
+            Active.Subscribe(OnActiveChanged);
         }
 
-        public bool Active
-        {
-            get => _active;
-            set
-            {
-                if (_active == value)
-                {
-                    return;
-                }
-                _active = value;
-                if (value)
-                {
-                    SubscribeOnLeanTouch();
-                }
-                else
-                {
-                    UnsubscribeFromLeanTouch();
-                }
-            }
-        }
+        public ReactiveProperty<bool> Active { get; } = new();
 
         public void Dispose()
         {
-            Active = false;
+            Active.Value = false;
         }
 
         private void SubscribeOnLeanTouch()
@@ -128,6 +111,18 @@ namespace MassiveCore.Framework
             if (entity && !_disabledEntities.Contains(entity))
             {
                 Picked?.Invoke(entity);
+            }
+        }
+
+        private void OnActiveChanged(bool value)
+        {
+            if (value)
+            {
+                SubscribeOnLeanTouch();
+            }
+            else
+            {
+                UnsubscribeFromLeanTouch();
             }
         }
 
