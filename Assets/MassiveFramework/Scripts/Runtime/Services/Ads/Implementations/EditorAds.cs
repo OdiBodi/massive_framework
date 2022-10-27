@@ -26,21 +26,21 @@ namespace MassiveCore.Framework
 
         public async UniTask<bool> Initialize()
         {
-            _logger.Print("EditorAds.Initialize()");
+            _logger.Print("Editor Ads: Initialized!");
+            BannerLoaded?.Invoke(true);
             return true;
         }
 
         public bool ShowBanner()
         {
-            _logger.Print("EditorAds.ShowBanner()");
-            BannerLoaded?.Invoke(true);
+            _logger.Print("Editor Ads: Banner shown!");
             BannerShown?.Invoke(true);
             return true;
         }
 
         public bool ShowInterstitial()
         {
-            _logger.Print("EditorAds.ShowInterstitial()");
+            _logger.Print("Editor Ads: Interstitial shown!");
             InterstitialLoaded?.Invoke(true);
             InterstitialOpened?.Invoke(true);
             InterstitialClosed?.Invoke();
@@ -49,7 +49,7 @@ namespace MassiveCore.Framework
 
         public bool ShowRewarded(string tag)
         {
-            _logger.Print($"EditorAds.ShowRewarded(\"{tag}\")");
+            _logger.Print($"Editor Ads: Rewarded \"{tag}\" shown!");
             RewardedLoaded?.Invoke(true, tag);
             RewardedOpened?.Invoke(true, tag);
             RewardedClosed?.Invoke(true, tag);
