@@ -12,6 +12,12 @@ namespace MassiveCore.Framework
         {
         }
 
+        public void LogEvent(string name)
+        {
+            var text = $"Analytics event \"{name}\"";
+            _logger.Print(text);
+        }
+
         public void LogEvent(string name, IDictionary<string, object> parameters)
         {
             var formattedParameters = parameters.ToFormattedString();

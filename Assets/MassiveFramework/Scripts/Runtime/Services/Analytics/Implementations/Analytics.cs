@@ -8,6 +8,11 @@ namespace MassiveCore.Framework
         {
         }
 
+        public void LogEvent(string name)
+        {
+            AppMetrica.Instance.ReportEvent(name);
+        }
+
         public void LogEvent(string name, IDictionary<string, object> parameters)
         {
             AppMetrica.Instance.ReportEvent(name, parameters);
