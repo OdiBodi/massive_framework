@@ -42,7 +42,7 @@ namespace MassiveCore.Framework
 
         public void Dispose()
         {
-            Active.Value = false;
+            UnsubscribeFromLeanTouch();
         }
 
         private void SubscribeOnLeanTouch()
