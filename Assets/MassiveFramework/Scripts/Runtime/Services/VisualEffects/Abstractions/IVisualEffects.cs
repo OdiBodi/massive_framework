@@ -8,5 +8,6 @@ namespace MassiveCore.Framework
     {
         IEnumerable<IVisualEffect> VisualEffectsBy(string id = "");
         UniTask PlayVisualEffect(string id, Action<IVisualEffect> prepare = null);
+        void StopVisualEffects();
     }
 }

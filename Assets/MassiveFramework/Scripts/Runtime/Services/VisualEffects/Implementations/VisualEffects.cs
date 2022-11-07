@@ -38,6 +38,11 @@ namespace MassiveCore.Framework
             return result;
         }
 
+        public void StopVisualEffects()
+        {
+            _pool.ReturnAll<VisualEffect>();
+        }
+
         private IVisualEffect EffectBy(string id)
         {
             var effect = _pool.Request<VisualEffect>(id);
