@@ -24,8 +24,8 @@ namespace MassiveCore.Framework
         }
 
         private IEnumerable<Screen> ScreenAllInstances => _root.gameObject.Descendants().OfComponent<Screen>();
-        private IEnumerable<Screen> ScreenInstances => ScreenAllInstances.Where(Screen);
-        private IEnumerable<Screen> TopScreenInstances => ScreenAllInstances.Where(TopScreen);
+        public IEnumerable<Screen> ScreenInstances => ScreenAllInstances.Where(Screen);
+        public IEnumerable<Screen> TopScreenInstances => ScreenAllInstances.Where(TopScreen);
         private int LastScreenOrder => ScreenAllInstances.Count(Screen);
         private int LastTopScreenOrder => _originTopOrder + ScreenAllInstances.Count(TopScreen);
 
@@ -49,6 +49,20 @@ namespace MassiveCore.Framework
         public void CloseTopScreens()
         {
             TopScreenInstances.ForEach(x => x.Close(ScreenClosingResult.Close));
+        }
+
+        public T ScreenInstance<T>()
+            where T : Screen
+        {
+            var screen = ScreenInstances.First(x => x.GetType() == typeof(T)) as T;
+            return screen;
+        }
+
+        public T TopScreenInstance<T>()
+            where T : Screen
+        {
+            var screen = TopScreenInstances.First(x => x.GetType() == typeof(T)) as T;
+            return screen;
         }
 
         private async UniTask<ScreenClosingResult> ShowScreen<T>(int order, Action<T> onCreated = null)
