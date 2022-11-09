@@ -17,6 +17,7 @@ MonoBehaviour:
     logBehaviour: 2
     nestedTweenFailureBehaviour: 0
   timeScale: 1
+  unscaledTimeScale: 1
   useSmoothDeltaTime: 0
   maxSmoothUnscaledTime: 0.15
   rewindCallbackMode: 0
@@ -35,7 +36,7 @@ MonoBehaviour:
   debugMode: 0
   debugStoreTargetId: 1
   showPreviewPanel: 1
-  storeSettingsLocation: 1
+  storeSettingsLocation: 2
   modules:
     showPanel: 0
     audioEnabled: 1
