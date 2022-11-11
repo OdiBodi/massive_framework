@@ -63,7 +63,7 @@ namespace MassiveCore.Framework
             var title = notificationConfig.Title;
             var text = notificationConfig.Text;
             var timeString = time.ToString(CultureInfo.InvariantCulture); 
-            _logger.Print($"Schedule Local Notification: day {day} - \"{title}\" - \"{text}\" - \"{timeString}\"");
+            _logger.Print($"Schedule local notification: day {day} - \"{title}\" - \"{text}\" - \"{timeString}\"");
         }
     }
 }

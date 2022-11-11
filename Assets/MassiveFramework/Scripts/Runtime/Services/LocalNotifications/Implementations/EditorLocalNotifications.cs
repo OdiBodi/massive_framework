@@ -9,28 +9,27 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly ILogger _logger;
 
-        public event Action<LocalNotification> NotificationReceived;
+        public event Action<ILocalNotification> NotificationReceived;
 
         public void Initialize()
         {
-            _logger.Print("EditorLocalNotifications::Init");
+            _logger.Print("EditorLocalNotifications initialized!");
         }
 
         public void Reset()
         {
-            _logger.Print("EditorLocalNotifications::Reset");
+            _logger.Print("EditorLocalNotifications reset!");
         }
 
-        public LocalNotification LastEntryNotification()
+        public ILocalNotification LastEntryNotification()
         {
-            _logger.Print("EditorLocalNotifications::LastEntryNotification");
-            return default;
+            return null;
         }
 
         public void ScheduleNotification(string title, string text, DateTime time)
         {
             var timeString = time.ToString(CultureInfo.InvariantCulture); 
-            _logger.Print($"EditorLocalNotifications::ScheduleNotification(\"{title}\", \"{text}\", \"{timeString}\")");
+            _logger.Print($"EditorLocalNotifications schedule notification: \"{title}\", \"{text}\", \"{timeString}");
         }
     }
 }

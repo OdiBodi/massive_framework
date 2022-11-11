@@ -8,7 +8,7 @@ namespace MassiveCore.Framework
 {
     public class IosLocalNotifications : ILocalNotifications
     {
-        public event Action<LocalNotification> NotificationReceived;
+        public event Action<ILocalNotification> NotificationReceived;
 
         public void Initialize()
         {
@@ -22,14 +22,14 @@ namespace MassiveCore.Framework
             iOSNotificationCenter.ApplicationBadge = 0;
         }
 
-        public LocalNotification LastEntryNotification()
+        public ILocalNotification LastEntryNotification()
         {
             var notification = iOSNotificationCenter.GetLastRespondedNotification();
-            if (notification != null)
+            if (notification == null)
             {
-                return NotificationBy(notification);
+                return null;
             }
-            return default;
+            return NotificationBy(notification);
         }
 
         private void Subscribe()
@@ -45,18 +45,21 @@ namespace MassiveCore.Framework
             };
         }
 
-        private LocalNotification NotificationBy(iOSNotification iosNotification)
+        private ILocalNotification NotificationBy(iOSNotification iosNotification)
         {
-            var trigger = (iOSNotificationCalendarTrigger)iosNotification.Trigger;
-            var time = new DateTime(trigger.Year.GetValueOrDefault(), trigger.Month.GetValueOrDefault(),
-                trigger.Day.GetValueOrDefault(), trigger.Hour.GetValueOrDefault(), trigger.Minute.GetValueOrDefault(),
-                trigger.Second.GetValueOrDefault());
-            var notification = new LocalNotification
-            {
-                title = iosNotification.Title,
-                text = iosNotification.Body,
-                time = time
-            };
+            var title = iosNotification.Title;
+            var text = iosNotification.Body;
+
+            var trigger = (iOSNotificationCalendarTrigger) iosNotification.Trigger;
+            var year = trigger.Year.GetValueOrDefault();
+            var month = trigger.Month.GetValueOrDefault();
+            var day = trigger.Day.GetValueOrDefault();
+            var hour = trigger.Hour.GetValueOrDefault();
+            var minute = trigger.Minute.GetValueOrDefault();
+            var second = trigger.Second.GetValueOrDefault(); 
+            var time = new DateTime(year, month, day, hour, minute, second);
+
+            var notification = new LocalNotification(title, text, time);
             return notification;
         }
 

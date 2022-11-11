@@ -4,10 +4,10 @@ namespace MassiveCore.Framework
 {
     public interface ILocalNotifications
     {
-        event Action<LocalNotification> NotificationReceived;
+        event Action<ILocalNotification> NotificationReceived;
         void Initialize();
         void Reset();
-        LocalNotification LastEntryNotification();
+        ILocalNotification LastEntryNotification();
         void ScheduleNotification(string title, string text, DateTime time);
     }
 }

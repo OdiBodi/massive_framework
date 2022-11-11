@@ -2,10 +2,17 @@
 
 namespace MassiveCore.Framework
 {
-    public struct LocalNotification
+    public class LocalNotification : ILocalNotification
     {
-        public string title;
-        public string text;
-        public DateTime time;
+        public LocalNotification(string title, string text, DateTime time)
+        {
+            Title = title;
+            Text = text;
+            Time = time;
+        }
+
+        public string Title { get; }
+        public string Text { get; }
+        public DateTime Time { get; }
     }
 }

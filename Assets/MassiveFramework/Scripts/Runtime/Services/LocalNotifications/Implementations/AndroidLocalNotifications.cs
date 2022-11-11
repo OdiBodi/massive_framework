@@ -10,7 +10,7 @@ namespace MassiveCore.Framework
     {
         private const string ChannelId = "generic";
 
-        public event Action<LocalNotification> NotificationReceived;
+        public event Action<ILocalNotification> NotificationReceived;
 
         public void Initialize()
         {
@@ -24,12 +24,12 @@ namespace MassiveCore.Framework
             AndroidNotificationCenter.CancelAllNotifications();
         }
 
-        public LocalNotification LastEntryNotification()
+        public ILocalNotification LastEntryNotification()
         {
             var notificationIntent = AndroidNotificationCenter.GetLastNotificationIntent();
             if (notificationIntent == null)
             {
-                return default;
+                return null;
             }
             var androidNotification = notificationIntent.Notification; 
             return NotificationBy(androidNotification);
@@ -70,14 +70,12 @@ namespace MassiveCore.Framework
             };
         }
 
-        private LocalNotification NotificationBy(AndroidNotification androidNotification)
+        private ILocalNotification NotificationBy(AndroidNotification androidNotification)
         {
-            var notification = new LocalNotification
-            {
-                title = androidNotification.Title,
-                text = androidNotification.Text,
-                time = androidNotification.FireTime
-            };
+            var title = androidNotification.Title;
+            var text = androidNotification.Text;
+            var time = androidNotification.FireTime;
+            var notification = new LocalNotification(title, text, time);
             return notification;
         }
 
