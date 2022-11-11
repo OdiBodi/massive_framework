@@ -9,8 +9,6 @@ namespace MassiveCore.Framework
         [SerializeField]
         private ParticleSystem _particleSystem;
 
-        public override string Id => name;
-
         private void OnDisable()
         {
             Stop();
