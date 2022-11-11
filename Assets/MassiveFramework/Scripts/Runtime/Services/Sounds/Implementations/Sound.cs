@@ -12,8 +12,6 @@ namespace MassiveCore.Framework
         private float _initialVolume;
         private float _initialPitch;
 
-        public string Id => name;
-
         private void Awake()
         {
             InitializeInitialAudioSourceValues();
