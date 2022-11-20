@@ -5,11 +5,14 @@ namespace MassiveCore.Framework
     public class PoolInstaller : ServiceInstaller
     {
         [SerializeField]
-        private Pool _pool;
+        private Transform _root;
+
+        [SerializeField]
+        private int _capacity = 100;
 
         public override void InstallBindings()
         {
-            Container.Bind<IPool>().FromInstance(_pool).AsSingle();
+            Container.Bind<IPool>().To<Pool>().AsSingle().WithArguments(_root, _capacity);
         }
     }
 }

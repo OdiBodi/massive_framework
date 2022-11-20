@@ -4,6 +4,8 @@ namespace MassiveCore.Framework
 {
     public interface IPool
     {
+        void Initialize();
+
         IEnumerable<T> Objects<T>(string id = "") where T : class, IPoolObject;
 
         T Request<T>(string id = "") where T : class, IPoolObject;

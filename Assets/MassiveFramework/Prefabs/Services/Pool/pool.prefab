@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141320ac6783b40c485a8a5c84855acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pool: {fileID: 4224272420961102664}
+  _root: {fileID: 0}
+  _capacity: 100
 --- !u!114 &4224272420961102664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,8 +56,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1437960587557240803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d097fa7ff592241fe9a39cca907eb858, type: 3}
+  m_Script: {fileID: 11500000, guid: b7c6479bb0aab4939a80811a3d4c5070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 1437960587557240802}
-  _capacity: 100

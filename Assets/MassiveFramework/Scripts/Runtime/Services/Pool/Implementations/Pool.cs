@@ -5,19 +5,22 @@ using UnityEngine;
 
 namespace MassiveCore.Framework
 {
-    public class Pool : BaseMonoBehaviour, IPool
+    public class Pool : IPool
     {
-        [SerializeField]
-        private Transform _root;
-
-        [SerializeField]
-        private int _capacity = 100;
+        private readonly Transform _root;
+        private readonly int _capacity;
 
         private readonly Dictionary<Type, IPoolObjectFactory> _objectFactories = new();
 
         private IPoolObject[] _objects;
 
-        private void Awake()
+        public Pool(Transform root, int capacity)
+        {
+            _root = root;
+            _capacity = capacity;
+        }
+        
+        public void Initialize()
         {
             InitializeEmptyObjects();
         }
