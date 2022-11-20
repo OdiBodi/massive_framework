@@ -1,13 +1,16 @@
 ﻿/*
+#if UNITY_IOS || UNITY_ANDROID
+
 using System;
 using System.Collections.Generic;
 using AppodealStack.Monetization.Api;
 using AppodealStack.Monetization.Common;
 using Cysharp.Threading.Tasks;
+using MassiveCore.Framework;
 using UniRx;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace Client
 {
     public class AppodealAds : IAds, IAppodealInitializationListener, IBannerAdListener, IInterstitialAdListener,
         IRewardedVideoAdListener
@@ -22,7 +25,7 @@ namespace MassiveCore.Framework
         private readonly ILogger _logger;
 
         private readonly AsyncSubject<bool> _initializerSubject = new(); 
-        
+
         private bool _videoAdShowing;
 
         private string _rewardedTag;
@@ -67,13 +70,13 @@ namespace MassiveCore.Framework
 
         private void SubscribeOnInterstitial()
         {
-            InterstitialOpened += _ => _videoAdShowing = true;
+            InterstitialOpened += result => _videoAdShowing = result;
             InterstitialClosed += () => _videoAdShowing = false;
         }
 
         private void SubscribeOnRewarded()
         {
-            RewardedOpened += (_, __) => _videoAdShowing = true;
+            RewardedOpened += (result, __) => _videoAdShowing = result;
             RewardedClosed += (_, __) => _videoAdShowing = false;
         }
 
@@ -100,12 +103,14 @@ namespace MassiveCore.Framework
 
         public bool ShowInterstitial()
         {
+            _videoAdShowing = true;
             var result = Appodeal.Show(AppodealShowStyle.Interstitial);
             return result;
         }
 
         public bool ShowRewarded(string tag)
         {
+            _videoAdShowing = true;
             var result = Appodeal.Show(AppodealShowStyle.RewardedVideo); 
             _rewardedTag = result ? tag : string.Empty;
             return result;
@@ -318,4 +323,6 @@ namespace MassiveCore.Framework
         }
     }
 }
+
+#endif // UNITY_IOS || UNITY_ANDROID
 */
