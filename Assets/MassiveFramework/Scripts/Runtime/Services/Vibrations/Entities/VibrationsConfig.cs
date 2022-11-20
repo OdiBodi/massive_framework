@@ -11,6 +11,8 @@ namespace MassiveCore.Framework
 #elif UNITY_ANDROID
         [SerializeField]
         private VibrationConfig[] _androidConfigs;
+#else
+        private readonly VibrationConfig[] _configs = {};
 #endif
         public VibrationConfig[] Configs
         {
@@ -20,6 +22,8 @@ namespace MassiveCore.Framework
                 return iosConfigs;
 #elif UNITY_ANDROID
                 return _androidConfigs;
+#else
+                return _configs;
 #endif
             }
         }
