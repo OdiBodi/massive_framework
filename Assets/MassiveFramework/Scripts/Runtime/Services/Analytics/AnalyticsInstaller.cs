@@ -4,10 +4,10 @@ namespace MassiveCore.Framework
     {
         public override void InstallBindings()
         {
-#if DEBUG
-            Container.Bind<IAnalytics>().To<EditorAnalytics>().AsSingle();
-#else
+#if UNITY_IOS || UNITY_ANDROID
             Container.Bind<IAnalytics>().To<Analytics>().AsSingle();
+#else
+            Container.Bind<IAnalytics>().To<EditorAnalytics>().AsSingle();
 #endif
         }
     }

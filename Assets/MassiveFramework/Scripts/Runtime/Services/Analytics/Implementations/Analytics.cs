@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_IOS || UNITY_ANDROID
+
+using System.Collections.Generic;
 
 namespace MassiveCore.Framework
 {
@@ -19,3 +21,5 @@ namespace MassiveCore.Framework
         }
     }
 }
+
+#endif
