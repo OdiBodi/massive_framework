@@ -12,6 +12,8 @@ namespace MassiveCore.Framework
         private float _initialVolume;
         private float _initialPitch;
 
+        public bool Playing => Active;
+
         private void Awake()
         {
             InitializeInitialAudioSourceValues();
