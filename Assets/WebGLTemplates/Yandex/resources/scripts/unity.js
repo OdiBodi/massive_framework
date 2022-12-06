@@ -23,30 +23,27 @@ const progressBarFull = document.querySelector("#unity-progress-bar-full");
 
 if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
   container.className = "unity-mobile";
-  config.devicePixelRatio = 1;
 }
 
-#if BACKGROUND_FILENAME
-canvas.style.background = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
-#endif
 loadingCover.style.display = "";
 
 const script = document.createElement("script");
 script.src = loaderUrl;
 script.onload = () => {
-  createUnityInstance(canvas, config, onUnityLoadingProgress).then(onUnityInstanceCreated).catch(onUnityMessage);
+  createUnityInstance(canvas, config, progress => {
+    progressBarFull.style.width = `${100 * progress}%`;
+  })
+  .then(instance => {
+    console.log('Unity initialized!');
+    loadingCover.style.display = "none";
+    window.unityInstance = instance;
+    window.unityInstance.SendMessage('engine', 'OnInitialized');
+    window.onbeforeunload = () => {
+      return "Are you sure to leave this page?";
+    };
+  })
+  .catch(message => {
+    alert(message);
+  });
 };
 document.body.appendChild(script);
-
-function onUnityLoadingProgress(progress) {
-  progressBarFull.style.width = `${100 * progress}%`;
-}
-
-function onUnityInstanceCreated(instance) {
-  loadingCover.style.display = "none";
-  window.unityInstance = instance;
-}
-
-function onUnityMessage() {
-  alert(message);
-}
