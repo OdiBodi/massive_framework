@@ -12,7 +12,7 @@ namespace MassiveCore.Framework
         private float _initialVolume;
         private float _initialPitch;
 
-        public bool Playing => Active;
+        public bool Playing => _audioSource.isPlaying;
 
         private void Awake()
         {
@@ -60,10 +60,10 @@ namespace MassiveCore.Framework
             _initialVolume = _audioSource.volume;
             _initialPitch = _audioSource.pitch;
         }
-        
+
         private void Reset()
         {
-            if (!_audioSource.isPlaying)
+            if (!Playing)
             {
                 return;
             }
