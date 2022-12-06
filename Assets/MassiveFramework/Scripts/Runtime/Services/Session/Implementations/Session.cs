@@ -20,20 +20,19 @@ namespace MassiveCore.Framework
         public void Initialize()
         {
             IncreaseSession();
-            Observable.EveryApplicationPause().Where(result => result).Subscribe(_ =>
-            { 
-                UpdateLastSessionDate();
-                _profile.Synchronize();
-            }).AddTo(_initializer);
-            Observable.EveryApplicationFocus().Where(result => result).Subscribe(_ =>
+            Observable.EveryApplicationPause().Where(result => result).Subscribe(_ => OnApplicationInactive()).AddTo(_initializer);
+            Observable.EveryApplicationFocus().Subscribe(result =>
             {
-                UpdateSession();
+                if (result)
+                {
+                    UpdateSession();
+                }
+                else
+                {
+                    OnApplicationInactive();
+                }
             }).AddTo(_initializer);
-            Observable.OnceApplicationQuit().Subscribe(_ =>
-            {
-                UpdateLastSessionDate();
-                _profile.Synchronize();
-            }).AddTo(_initializer);
+            Observable.OnceApplicationQuit().Subscribe(_ => OnApplicationInactive()).AddTo(_initializer);
         }
 
         private void IncreaseSession()
@@ -55,6 +54,12 @@ namespace MassiveCore.Framework
         private void UpdateLastSessionDate()
         {
             LastSessionDateProperty.Value = DateTime.Now;
+        }
+
+        private void OnApplicationInactive()
+        {
+            UpdateLastSessionDate();
+            _profile.Synchronize();
         }
     }
 }
