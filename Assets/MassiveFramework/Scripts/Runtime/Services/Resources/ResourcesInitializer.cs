@@ -11,17 +11,17 @@ namespace MassiveCore.Framework
         [Inject]
         protected readonly IResources _resources;
 
+        [Inject]
+        private void Inject(IProfile profile)
+        {
+            profile.PreLoading += () => InitializeProfileValues(profile);
+        }
+
         public override UniTask<bool> Initialize()
         {
             BindResources();
             CompleteInitialize(true);
             return base.Initialize();
-        }
-
-        [Inject]
-        private void Inject(IProfile profile)
-        {
-            profile.PreLoading += () => InitializeProfileValues(profile);
         }
 
         protected virtual void BindResources()

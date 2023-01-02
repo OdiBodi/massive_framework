@@ -5,16 +5,16 @@ namespace MassiveCore.Framework
 {
     public class LevelsInitializer : ServiceInitializer
     {
-        public override UniTask<bool> Initialize()
-        {
-            CompleteInitialize(true);
-            return base.Initialize();
-        }
-
         [Inject]
         protected virtual void Inject(IProfile profile)
         {
             profile.PreLoading += () => InitializeProfileValues(profile);
+        }
+
+        public override UniTask<bool> Initialize()
+        {
+            CompleteInitialize(true);
+            return base.Initialize();
         }
 
         protected virtual void InitializeProfileValues(IProfile profile)

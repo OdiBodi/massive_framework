@@ -11,17 +11,17 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly SoundFactory _soundFactory;
 
+        [Inject]
+        private void Inject(IProfile profile)
+        {
+            profile.PreLoading += () => InitializeProfileValues(profile);
+        }
+
         public override UniTask<bool> Initialize()
         {
             BindPoolFactories();
             CompleteInitialize(true);
             return base.Initialize();
-        }
-
-        [Inject]
-        private void Inject(IProfile profile)
-        {
-            profile.PreLoading += () => InitializeProfileValues(profile);
         }
 
         protected virtual void BindPoolFactories()

@@ -9,17 +9,17 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly IProfile _profile; 
 
+        [Inject]
+        private void Inject(IProfile profile)
+        {
+            profile.PreLoading += () => InitializeProfileValues(profile);
+        }
+
         public override UniTask<bool> Initialize()
         {
             InitializeSession();
             CompleteInitialize(true);
             return base.Initialize();
-        }
-
-        [Inject]
-        private void Inject(IProfile profile)
-        {
-            profile.PreLoading += () => InitializeProfileValues(profile);
         }
 
         private void InitializeSession()
