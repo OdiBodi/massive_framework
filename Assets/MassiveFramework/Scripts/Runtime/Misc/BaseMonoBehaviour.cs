@@ -6,6 +6,15 @@ namespace MassiveCore.Framework
 {
     public class BaseMonoBehaviour : MonoBehaviour
     {
+        [Inject]
+        protected readonly ILogger _logger;
+
+        private GameObject _cacheGameObject;
+        private Transform _cacheTransform;
+        private RectTransform _cacheRectTransform;
+        private Image _cacheImage;
+        private Rigidbody _cacheRigidbody;
+
         public GameObject CacheGameObject
         {
             get
@@ -65,14 +74,5 @@ namespace MassiveCore.Framework
                 return _cacheRigidbody;
             }
         }
-
-        private GameObject _cacheGameObject;
-        private Transform _cacheTransform;
-        private RectTransform _cacheRectTransform;
-        private Image _cacheImage;
-        private Rigidbody _cacheRigidbody;
-
-        [Inject]
-        protected readonly ILogger _logger;
     }
 }
