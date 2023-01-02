@@ -48,5 +48,11 @@ namespace MassiveCore.Framework
             property.Clear();
             collection.ForEach(property.Add);
         }
+
+        public static void ChangeAsStruct<T>(this ReactiveProperty<T> property, Func<T, T> change)
+            where T : struct
+        {
+            property.Value = change(property.Value);
+        }
     }
 }
