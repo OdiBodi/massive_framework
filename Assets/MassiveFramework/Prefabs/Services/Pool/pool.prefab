@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1437960587557240802}
   - component: {fileID: 8763511069395551289}
-  - component: {fileID: 3604289132202074198}
+  - component: {fileID: 8392765004620816995}
   m_Layer: 0
   m_Name: pool
   m_TagString: Untagged
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _root: {fileID: 1437960587557240802}
   _capacity: 100
---- !u!114 &3604289132202074198
+--- !u!114 &8392765004620816995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
