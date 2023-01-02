@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MassiveCore.Framework
 {
-    [CreateAssetMenu(fileName = "remote_parameters", menuName = "Massive Framework/Configs/Remote Parameters")]
+    [CreateAssetMenu(fileName = "remote_parameters_config", menuName = "Massive Framework/Configs/Remote Parameters")]
     public class FirebaseRemoteParameters : Config, IRemoteParameters
     {
         [SerializeField]
