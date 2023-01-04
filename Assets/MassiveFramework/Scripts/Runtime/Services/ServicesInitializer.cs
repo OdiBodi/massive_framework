@@ -39,6 +39,7 @@ namespace MassiveCore.Framework
                 else
                 {
                     _logger.PrintError($"Service \"{serviceName}\" didn't initialize!");
+                    return;
                 }
             }
             _initialized.Value = true;
