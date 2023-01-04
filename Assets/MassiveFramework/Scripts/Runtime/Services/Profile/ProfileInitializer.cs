@@ -17,8 +17,8 @@ namespace MassiveCore.Framework
 
         public override async UniTask<bool> Initialize()
         {
-            await _profile.Synchronize();
-            CompleteInitialize(true);
+            var result = await _profile.Synchronize();
+            CompleteInitialize(result);
             return await base.Initialize();
         }
 
