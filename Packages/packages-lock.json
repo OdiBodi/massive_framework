@@ -7,33 +7,33 @@
       "dependencies": {}
     },
     "com.google.external-dependency-manager": {
-      "version": "file:Google/com.google.external-dependency-manager-1.2.174.tgz",
+      "version": "file:Google/com.google.external-dependency-manager-1.2.175.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
     },
     "com.google.firebase.analytics": {
-      "version": "file:Google/com.google.firebase.analytics-9.6.0.tgz",
+      "version": "file:Google/com.google.firebase.analytics-10.3.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.firebase.app": "9.6.0"
+        "com.google.firebase.app": "10.3.0"
       }
     },
     "com.google.firebase.app": {
-      "version": "file:Google/com.google.firebase.app-9.6.0.tgz",
+      "version": "file:Google/com.google.firebase.app-10.3.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.external-dependency-manager": "1.2.172"
+        "com.google.external-dependency-manager": "1.2.175"
       }
     },
     "com.google.firebase.remote-config": {
-      "version": "file:Google/com.google.firebase.remote-config-9.6.0.tgz",
+      "version": "file:Google/com.google.firebase.remote-config-10.3.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.firebase.app": "9.6.0"
+        "com.google.firebase.app": "10.3.0"
       }
     },
     "com.google.play.common": {
