@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.EventSystems;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class TapPanel : BaseMonoBehaviour, IPointerDownHandler
     {

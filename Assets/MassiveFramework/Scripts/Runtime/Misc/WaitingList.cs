@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UniRx;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class WaitingList<T>
     {

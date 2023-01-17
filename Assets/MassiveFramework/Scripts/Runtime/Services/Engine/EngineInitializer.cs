@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine.Scripting;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class EngineInitializer : ServiceInitializer
     {

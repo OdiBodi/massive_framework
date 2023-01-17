@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "vibrations_config", menuName = "Massive Framework/Configs/Vibrations Config")]
     public class VibrationsConfig : Config

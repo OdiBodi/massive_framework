@@ -3,7 +3,7 @@ using System.Linq;
 using Lofelt.NiceVibrations;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class Vibrations : IVibrations
     {

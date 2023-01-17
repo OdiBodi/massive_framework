@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "resources_config", menuName = "Massive Framework/Configs/Resources Config")]
     public class ResourcesConfig : Config

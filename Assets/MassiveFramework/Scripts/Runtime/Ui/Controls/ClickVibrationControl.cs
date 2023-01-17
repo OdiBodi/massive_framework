@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ClickVibrationControl : BaseMonoBehaviour, IPointerClickHandler
     {

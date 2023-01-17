@@ -5,7 +5,7 @@ using System;
 using Google.Play.Common;
 using Google.Play.Review;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class PlayAsyncOperationExtensions
     {

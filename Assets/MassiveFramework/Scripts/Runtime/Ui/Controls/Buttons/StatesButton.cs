@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class StatesButton : StatesControl<BaseButton>
     {

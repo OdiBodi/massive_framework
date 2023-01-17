@@ -5,7 +5,7 @@ using Google.Play.Review;
 using UniRx;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class AndroidApplicationReview : IApplicationReview
     {

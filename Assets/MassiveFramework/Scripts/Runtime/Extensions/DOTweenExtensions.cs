@@ -3,7 +3,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class DOTweenExtensions
     {

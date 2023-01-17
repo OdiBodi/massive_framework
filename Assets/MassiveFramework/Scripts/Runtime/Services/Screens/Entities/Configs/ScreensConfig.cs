@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "screens_config", menuName = "Massive Framework/Configs/Screens Config")]
     public class ScreensConfig : Config

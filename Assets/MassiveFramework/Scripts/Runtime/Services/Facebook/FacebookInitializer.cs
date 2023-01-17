@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Facebook.Unity;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class FacebookInitializer : ServiceInitializer
     {

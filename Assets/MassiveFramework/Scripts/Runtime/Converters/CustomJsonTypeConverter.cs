@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class CustomJsonTypeConverter<T> : TypeConverter
     {

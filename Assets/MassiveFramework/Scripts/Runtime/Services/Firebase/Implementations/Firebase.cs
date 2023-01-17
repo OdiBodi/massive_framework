@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.RemoteConfig;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class Firebase
     {

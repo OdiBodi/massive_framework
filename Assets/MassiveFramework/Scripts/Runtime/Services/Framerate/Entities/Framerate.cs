@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public enum Framerate
     {

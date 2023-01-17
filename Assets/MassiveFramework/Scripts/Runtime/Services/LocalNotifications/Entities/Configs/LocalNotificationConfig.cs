@@ -2,7 +2,7 @@
 using System.Globalization;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "local_notification_config", menuName = "Massive Framework/Configs/Local Notification Config")]
     public class LocalNotificationConfig : ScriptableObject

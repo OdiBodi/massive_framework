@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "remote_parameters_config", menuName = "Massive Framework/Configs/Remote Parameters")]
     public class FirebaseRemoteParameters : Config, IRemoteParameters

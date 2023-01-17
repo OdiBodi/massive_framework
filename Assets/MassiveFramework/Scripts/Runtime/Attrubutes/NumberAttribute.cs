@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class NumberAttribute : Attribute

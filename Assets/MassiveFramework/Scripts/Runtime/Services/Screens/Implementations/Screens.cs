@@ -7,7 +7,7 @@ using Unity.Linq;
 using UnityEngine;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class Screens : IScreens
     {

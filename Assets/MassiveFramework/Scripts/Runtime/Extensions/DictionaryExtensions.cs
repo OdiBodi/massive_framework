@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class DictionaryExtensions
     {

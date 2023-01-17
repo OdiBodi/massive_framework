@@ -1,6 +1,6 @@
 ﻿using UniRx;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public interface IScreenResolution
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class ListExtensions
     {

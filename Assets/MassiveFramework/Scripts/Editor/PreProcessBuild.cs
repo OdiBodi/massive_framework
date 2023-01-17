@@ -1,7 +1,7 @@
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Editor
 {
 	public class PreProcessBuild : IPreprocessBuildWithReport
 	{

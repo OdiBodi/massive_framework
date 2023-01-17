@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class StringExtensions
     {

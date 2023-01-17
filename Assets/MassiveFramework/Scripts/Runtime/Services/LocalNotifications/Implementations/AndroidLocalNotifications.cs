@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using Unity.Notifications.Android;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class AndroidLocalNotifications : ILocalNotifications
     {

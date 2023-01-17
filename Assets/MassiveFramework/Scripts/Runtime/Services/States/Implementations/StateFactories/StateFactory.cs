@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class StateFactory<T> : PlaceholderFactory<Type, IState<T>>
     {

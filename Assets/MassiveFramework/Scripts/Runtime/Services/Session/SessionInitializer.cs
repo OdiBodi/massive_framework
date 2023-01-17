@@ -2,7 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class SessionInitializer : ServiceInitializer
     {

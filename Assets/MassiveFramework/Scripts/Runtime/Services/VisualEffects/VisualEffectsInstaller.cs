@@ -1,4 +1,4 @@
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class VisualEffectsInstaller : ServiceInstaller
     {

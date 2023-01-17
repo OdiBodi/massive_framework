@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class ScreensExtensions
     {

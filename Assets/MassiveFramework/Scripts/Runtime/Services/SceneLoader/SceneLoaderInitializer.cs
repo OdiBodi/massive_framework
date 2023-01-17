@@ -5,7 +5,7 @@ using Unity.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class SceneLoaderInitializer : ServiceInitializer
     {

@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public interface IStates : IStateContext<UniTask>
     {

@@ -2,7 +2,7 @@
 using UniRx;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class LocalNotificationsInitializer : ServiceInitializer
     {

@@ -6,7 +6,7 @@ using ModestTree;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class EnumerableExtensions
     {

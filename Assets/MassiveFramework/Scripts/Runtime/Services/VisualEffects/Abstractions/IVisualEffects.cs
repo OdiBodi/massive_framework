@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public interface IVisualEffects
     {

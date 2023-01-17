@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [RequireComponent(typeof(Image))]
     public class ImageOffsetAnimation : BaseMonoBehaviour

@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class PoolInitializer : ServiceInitializer
     {

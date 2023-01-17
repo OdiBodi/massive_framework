@@ -1,7 +1,7 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class SoundsExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "sound_config", menuName = "Massive Framework/Configs/Sound Config")]
     public class SoundConfig : ScriptableObject

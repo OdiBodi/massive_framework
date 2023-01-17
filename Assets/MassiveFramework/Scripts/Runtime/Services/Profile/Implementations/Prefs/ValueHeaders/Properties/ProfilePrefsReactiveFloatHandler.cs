@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ProfilePrefsReactiveFloatHandler : ProfileReactiveValueHandler<float>
     {

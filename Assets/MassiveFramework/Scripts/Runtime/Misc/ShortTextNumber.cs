@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ShortTextNumber
     {

@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEditor.Callbacks;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Editor
 {
     public class PostProcessBuild
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "configs", menuName = "Massive Framework/Configs/Configs")]
     public class Configs : ScriptableObject, IConfigs

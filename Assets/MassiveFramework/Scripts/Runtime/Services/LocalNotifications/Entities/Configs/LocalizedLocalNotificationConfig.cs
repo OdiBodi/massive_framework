@@ -1,7 +1,7 @@
 ﻿using I2.Loc;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "localized_local_notification_config", menuName = "Massive Framework/Configs/Localized Local Notification Config")]
     public class LocalizedLocalNotificationConfig : LocalNotificationConfig

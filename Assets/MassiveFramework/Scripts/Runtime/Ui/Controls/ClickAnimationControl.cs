@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ClickAnimationControl : BaseMonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {

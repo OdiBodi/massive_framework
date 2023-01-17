@@ -9,7 +9,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Editor
 {
 	public class PreProcessShadersStripping : IPreprocessShaders
 	{

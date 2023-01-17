@@ -1,7 +1,7 @@
 ﻿using System;
 using UniRx;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class Timer : ITimer
     {

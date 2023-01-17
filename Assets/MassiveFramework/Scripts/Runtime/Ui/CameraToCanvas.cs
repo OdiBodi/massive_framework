@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [RequireComponent(typeof(Canvas))]
     public class CameraToCanvas : BaseMonoBehaviour

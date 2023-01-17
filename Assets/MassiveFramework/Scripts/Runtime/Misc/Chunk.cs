@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     // https://learn.microsoft.com/en-us/dotnet/csharp/linq/group-results-by-contiguous-keys
     // A Chunk is a contiguous group of one or more source elements that have the same key. A Chunk

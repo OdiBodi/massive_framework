@@ -1,7 +1,7 @@
 ﻿using System;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ResourceCustomFactory : IFactory<Type, IResource>
     {

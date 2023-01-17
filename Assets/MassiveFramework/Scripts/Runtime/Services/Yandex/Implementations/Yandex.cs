@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 #endif
 using UnityEngine.Scripting;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class Yandex : BaseMonoBehaviour, IYandex
     {

@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using UniRx;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class EditorApplicationReview : IApplicationReview
     {

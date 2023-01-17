@@ -1,7 +1,7 @@
 ﻿using Lofelt.NiceVibrations;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "vibration_config", menuName = "Massive Framework/Configs/Vibration Config")]
     public class VibrationConfig : ScriptableObject

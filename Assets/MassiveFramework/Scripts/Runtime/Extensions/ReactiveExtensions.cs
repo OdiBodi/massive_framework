@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using UniRx;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class ReactiveExtensions
     {

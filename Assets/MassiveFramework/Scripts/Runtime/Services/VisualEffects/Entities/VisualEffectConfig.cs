@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "visual_effect_config", menuName = "Massive Framework/Configs/Visual Effect Config")]
     public class VisualEffectConfig : ScriptableObject

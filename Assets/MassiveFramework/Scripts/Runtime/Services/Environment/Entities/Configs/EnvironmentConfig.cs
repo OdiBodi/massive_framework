@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "environment_config", menuName = "Massive Framework/Configs/Environment Config")]
     public class EnvironmentConfig : ScriptableObject

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "local_notifications_config", menuName = "Massive Framework/Configs/Local Notifications Config")]
     public class LocalNotificationsConfig : Config

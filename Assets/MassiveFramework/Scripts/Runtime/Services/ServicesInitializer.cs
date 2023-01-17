@@ -3,7 +3,7 @@ using System.Linq;
 using UniRx;
 using Unity.Linq;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ServicesInitializer : BaseMonoBehaviour
     {

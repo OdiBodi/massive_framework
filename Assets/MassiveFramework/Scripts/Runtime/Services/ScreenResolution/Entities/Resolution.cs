@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [Serializable]
     public struct Resolution : IEquatable<Resolution>

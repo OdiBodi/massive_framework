@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Zenject;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class SoundCustomFactory : IFactory<string, Sound>
     {

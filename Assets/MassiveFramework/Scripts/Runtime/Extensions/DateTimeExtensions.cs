@@ -1,6 +1,6 @@
 using System;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public static class DateTimeExtensions
     {

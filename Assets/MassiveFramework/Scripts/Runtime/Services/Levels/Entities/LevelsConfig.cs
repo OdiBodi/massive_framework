@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     [CreateAssetMenu(fileName = "levels_config", menuName = "Massive Framework/Configs/Levels Config")]
     public class LevelsConfig : Config

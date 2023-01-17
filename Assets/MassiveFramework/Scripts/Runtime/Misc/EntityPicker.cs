@@ -4,7 +4,7 @@ using Lean.Touch;
 using UniRx;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class EntityPicker<T> : IDisposable
         where T : BaseMonoBehaviour

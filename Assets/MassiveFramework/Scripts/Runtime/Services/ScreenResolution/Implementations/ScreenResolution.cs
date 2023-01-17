@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityScreen = UnityEngine.Screen;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ScreenResolution : IScreenResolution
     {

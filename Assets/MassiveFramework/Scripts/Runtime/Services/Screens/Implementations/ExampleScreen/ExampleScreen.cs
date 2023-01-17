@@ -4,7 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ExampleScreen : Screen
     {

@@ -4,7 +4,7 @@ using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 
-namespace MassiveCore.Framework
+namespace MassiveCore.Framework.Runtime
 {
     public class ProfilePrefs : IProfile
     {
