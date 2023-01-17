@@ -1,6 +1,6 @@
 ﻿----------------------------------------------
               I2 Localization
-                  2.8.20 f2
+                  2.8.21 f3
         http://www.inter-illusion.com
           inter.illusion@gmail.com
 ----------------------------------------------
@@ -66,6 +66,12 @@ AssetStore Deals   - A bot that constantly checks the Store to find you the late
 -----------------------
  Version History
 -----------------------
+2.8.21
+NEW: Added "Untranslated" filter to the Term's list popup (thanks to @Hosnkobf)
+NEW: Option "Sort Rows" when exporting to CSV or Google Spreadsheet 
+FIX: Fixed exception when saving languages without a name
+FIX: Compile errors when there was a class named Action in the project
+
 2.8.20
 NEW: Missing translations are now shown in the console log.
 FIX: Null Exception when running in 2021.3

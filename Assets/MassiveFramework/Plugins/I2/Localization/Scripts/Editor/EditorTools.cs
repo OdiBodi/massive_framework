@@ -20,11 +20,11 @@ namespace I2.Loc
         static public GUILayoutOption DontExpandWidth = GUILayout.ExpandWidth(false);
         static public GUIContent EmptyContent = new GUIContent ();
 
-        static List<Action> mDelayedEditorCallbacks = new List<Action>();
+        static List<System.Action> mDelayedEditorCallbacks = new List<System.Action>();
 
         #region Delayed Editor Callback
 
-        public static void DelayedCall( Action action )
+        public static void DelayedCall( System.Action action )
         {
             if (mDelayedEditorCallbacks.Count == 0)
                 EditorApplication.update += OnDelayedCall;

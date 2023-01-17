@@ -370,9 +370,12 @@ namespace I2.Loc
 
             GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
+                GUILayout.BeginVertical();
                 EditorGUIUtility.labelWidth += 10;
                 EditorGUILayout.PropertyField(mProp_Spreadsheet_SpecializationAsRows, new GUIContent("Show Specializations as Rows", "true: Make each specialization a separate row (e.g. Term[VR]..., Term[Touch]....\nfalse: Merge specializations into same cell separated by [i2s_XXX]"));
+                EditorGUILayout.PropertyField(mProp_Spreadsheet_SortRows, new GUIContent("Sort Rows", "true: Sort each term by its name....\nfalse: Keep the terms order"));
                 EditorGUIUtility.labelWidth -= 10;
+                GUILayout.EndVertical();
             GUILayout.EndHorizontal();
             GUILayout.Space(10);
 
