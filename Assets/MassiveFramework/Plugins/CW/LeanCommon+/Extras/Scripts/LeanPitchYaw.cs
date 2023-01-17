@@ -18,7 +18,7 @@ namespace Lean.Common
 		/// 10 = Quickly change.</summary>
 		public float Damping { set { damping = value; } get { return damping; } } [SerializeField] private float damping = -1.0f;
 
-		/// <summary>This allows you to set the Pitch andYaw rotation value when calling the ResetRotation method.</summary>
+		/// <summary>This allows you to set the <b>Pitch</b> and <b>Yaw</b> rotation value when calling the <b>ResetRotation</b> method.</summary>
 		public Vector2 DefaultRotation { set { defaultRotation = value; } get { return defaultRotation; } } [SerializeField] private Vector2 defaultRotation;
 
 		/// <summary>Pitch of the rotation in degrees.</summary>

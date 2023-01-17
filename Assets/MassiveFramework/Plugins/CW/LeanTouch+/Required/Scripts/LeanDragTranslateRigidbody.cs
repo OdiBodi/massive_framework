@@ -75,8 +75,7 @@ namespace Lean.Touch
 				var oldPosition = transform.position;
 				var newPosition = cachedCamera.ScreenToWorldPoint(targetScreenPoint);
 				var velocity    = (newPosition - oldPosition) / Time.fixedDeltaTime;
-
-				var factor = CwHelper.DampenFactor(damping, Time.fixedDeltaTime);
+				var factor      = CwHelper.DampenFactor(damping, Time.fixedDeltaTime);
 
 				// Apply the velocity
 				cachedRigidbody.velocity = velocity * factor;

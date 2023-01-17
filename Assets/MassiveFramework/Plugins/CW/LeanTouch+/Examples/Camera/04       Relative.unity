@@ -1402,7 +1402,7 @@ MonoBehaviour:
   clamp: 0
   clampMin: 10
   clampMax: 60
-  relative: 0
+  relative: 1
   ignoreZ: 0
   ScreenDepth:
     Conversion: 0
@@ -1443,6 +1443,7 @@ MonoBehaviour:
   sensitivity: 1
   damping: -1
   inertia: 0
+  defaultPosition: {x: 0, y: 0, z: 0}
   remainingDelta: {x: 0, y: 0, z: 0}
 --- !u!81 &2059961158
 AudioListener:

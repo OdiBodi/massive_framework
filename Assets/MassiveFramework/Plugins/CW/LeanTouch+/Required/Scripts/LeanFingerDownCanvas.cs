@@ -16,6 +16,13 @@ namespace Lean.Touch
 				base.HandleFingerDown(finger);
 			}
 		}
+
+#if UNITY_EDITOR
+		protected override void Reset()
+		{
+			IgnoreStartedOverGui = false;
+		}
+#endif
 	}
 }
 

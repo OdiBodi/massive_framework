@@ -12,6 +12,13 @@ namespace Lean.Touch
 		{
 			return UseFinger(finger) == true && LeanTouch.ElementOverlapped(gameObject, finger.ScreenPosition) == true;
 		}
+
+#if UNITY_EDITOR
+		protected override void Reset()
+		{
+			IgnoreStartedOverGui = false;
+		}
+#endif
 	}
 }
 

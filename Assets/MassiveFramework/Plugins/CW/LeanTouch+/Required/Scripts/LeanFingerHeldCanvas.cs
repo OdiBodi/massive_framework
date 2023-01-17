@@ -7,15 +7,6 @@ namespace Lean.Touch
 	[AddComponentMenu(LeanTouch.ComponentPathPrefix + "Finger Held Canvas")]
 	public class LeanFingerHeldCanvas : LeanFingerHeld
 	{
-#if UNITY_EDITOR
-		protected override void Reset()
-		{
-			base.Reset();
-
-			IgnoreStartedOverGui = false;
-		}
-#endif
-
 		protected override void HandleFingerDown(LeanFinger finger)
 		{
 			if (LeanTouch.ElementOverlapped(gameObject, finger.ScreenPosition) == true)
@@ -23,6 +14,13 @@ namespace Lean.Touch
 				base.HandleFingerDown(finger);
 			}
 		}
+
+#if UNITY_EDITOR
+		protected override void Reset()
+		{
+			IgnoreStartedOverGui = false;
+		}
+#endif
 	}
 }
 

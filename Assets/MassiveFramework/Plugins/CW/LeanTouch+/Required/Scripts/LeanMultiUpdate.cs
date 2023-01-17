@@ -17,6 +17,13 @@ namespace Lean.Touch
 			ScreenPercentage
 		}
 
+		public enum ConstrainType
+		{
+			None,
+			HorizontalOrVertical1,
+			HorizontalOrVertical2
+		}
+
 		[System.Serializable] public class LeanFingerListEvent : UnityEvent<List<LeanFinger>> {}
 		[System.Serializable] public class FloatEvent : UnityEvent<float> {}
 		[System.Serializable] public class Vector2Event : UnityEvent<Vector2> {}
@@ -35,6 +42,14 @@ namespace Lean.Touch
 
 		/// <summary>The coordinate space of the OnDelta values.</summary>
 		public CoordinateType Coordinate { set { coordinate = value; } get { return coordinate; } } [SerializeField] private CoordinateType coordinate;
+
+		/// <summary>Should the delta values be locked to the horizontal or vertical axes?
+		/// HorizontalOrVertical1 = This component won't output any delta until the finger(s) have moved more than <b>Threshold</b> scaled pixels.
+		/// HorizontalOrVertical2 = This component will output normal delta values until the finger(s) have moved more than <b>Threshold</b> scaled pixels.</summary>
+		public ConstrainType Constrain { set { constrain = value; } get { return constrain; } } [SerializeField] private ConstrainType constrain;
+
+		/// <summary>This finger(s) must move this many scaled pixels for the constraint to begin.</summary>
+		public float ConstrainThreshold { set { constrainThreshold = value; } get { return constrainThreshold; } } [SerializeField] private float constrainThreshold = 5.0f;
 
 		/// <summary>The delta values will be multiplied by this when output.</summary>
 		public float Multiplier { set { multiplier = value; } get { return multiplier; } } [SerializeField] private float multiplier = 1.0f;
@@ -66,6 +81,12 @@ namespace Lean.Touch
 		/// Vector3 = Start point in world space.
 		/// Vector3 = End point in world space.</summary>
 		public Vector3Vector3Event OnWorldFromTo { get { if (onWorldFromTo == null) onWorldFromTo = new Vector3Vector3Event(); return onWorldFromTo; } } [SerializeField] private Vector3Vector3Event onWorldFromTo;
+
+		[System.NonSerialized]
+		private bool constrained;
+
+		[System.NonSerialized]
+		private Vector2 cumilativeDelta;
 
 		/// <summary>If you've set Use to ManuallyAddedFingers, then you can call this method to manually add a finger.</summary>
 		public void AddFinger(LeanFinger finger)
@@ -105,6 +126,9 @@ namespace Lean.Touch
 		protected virtual void OnDisable()
 		{
 			LeanTouch.OnFingerDown -= HandleFingerDown;
+
+			constrained     = false;
+			cumilativeDelta = Vector2.zero;
 		}
 
 		protected virtual void Update()
@@ -117,6 +141,49 @@ namespace Lean.Touch
 				var screenFrom = LeanGesture.GetLastScreenCenter(fingers);
 				var screenTo   = LeanGesture.GetScreenCenter(fingers);
 				var finalDelta = screenTo - screenFrom;
+
+				if (constrain != ConstrainType.None && constrained == false)
+				{
+					cumilativeDelta += finalDelta * LeanTouch.ScalingFactor;
+
+					if (cumilativeDelta.magnitude >= constrainThreshold)
+					{
+						constrained = true;
+					}
+
+					switch (constrain)
+					{
+						case ConstrainType.HorizontalOrVertical1:
+						{
+							if (constrained == false)
+							{
+								finalDelta = Vector2.zero;
+								screenTo   = screenFrom;
+							}
+						}
+						break;
+
+						case ConstrainType.HorizontalOrVertical2:
+						{
+							// Do nothing
+						}
+						break;
+					}
+				}
+
+				if (constrained == true)
+				{
+					if (Mathf.Abs(cumilativeDelta.x) > Mathf.Abs(cumilativeDelta.y))
+					{
+						finalDelta.y = 0.0f;
+					}
+					else
+					{
+						finalDelta.x = 0.0f;
+					}
+
+					screenTo = screenFrom + finalDelta;
+				}
 
 				if (ignoreIfStatic == true && finalDelta.sqrMagnitude <= 0.0f)
 				{
@@ -169,6 +236,11 @@ namespace Lean.Touch
 					onWorldFromTo.Invoke(worldFrom, worldTo);
 				}
 			}
+			else
+			{
+				constrained     = false;
+				cumilativeDelta = Vector2.zero;
+			}
 		}
 
 		protected virtual List<LeanFinger> GetFingers()
@@ -209,6 +281,16 @@ namespace Lean.Touch.Editor
 
 			Draw("Use");
 			DrawIgnore();
+
+			Separator();
+
+			Draw("constrain", "Should the delta values be locked to the horizontal or vertical axes?\n\nHorizontalOrVertical1 = This component won't output any delta until the finger(s) have moved more than <b>Threshold</b> scaled pixels.\n\nHorizontalOrVertical2 = This component will output normal delta values until the finger(s) have moved more than <b>Threshold</b> scaled pixels.");
+			if (Any(tgts, t => t.Constrain != TARGET.ConstrainType.None))
+			{
+				BeginIndent();
+					Draw("constrainThreshold", "This finger(s) must move this many scaled pixels for the constraint to begin.", "Threshold");
+				EndIndent();
+			}
 
 			Separator();
 

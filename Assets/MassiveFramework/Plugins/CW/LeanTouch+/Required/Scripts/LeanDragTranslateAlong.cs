@@ -4,7 +4,6 @@ using CW.Common;
 namespace Lean.Touch
 {
 	/// <summary>This component allows you to translate the current GameObject along the specified surface.</summary>
-	[ExecuteInEditMode]
 	[HelpURL(LeanTouch.PlusHelpUrlPrefix + "LeanDragTranslateAlong")]
 	[AddComponentMenu(LeanTouch.ComponentPathPrefix + "Drag Translate Along")]
 	public class LeanDragTranslateAlong : MonoBehaviour
@@ -19,9 +18,6 @@ namespace Lean.Touch
 		/// <summary>The method used to find world coordinates from a finger. See LeanScreenDepth documentation for more information.</summary>
 		public LeanScreenDepth ScreenDepth = new LeanScreenDepth(LeanScreenDepth.ConversionType.DepthIntercept);
 
-		/// <summary>If your ScreenDepth settings cause the position values to clamp, there will be a difference between where the finger is and where the object is. Should this difference be tracked?</summary>
-		public bool TrackScreenPosition { set { trackScreenPosition = value; } get { return trackScreenPosition; } } [SerializeField] private bool trackScreenPosition = true;
-
 		/// <summary>If you want this component to change smoothly over time, then this allows you to control how quick the changes reach their target value.
 		/// -1 = Instantly change.
 		/// 1 = Slowly change.
@@ -29,9 +25,12 @@ namespace Lean.Touch
 		public float Damping { set { damping = value; } get { return damping; } } [SerializeField] private float damping = -1.0f;
 
 		[System.NonSerialized]
-		private Vector2 deltaDifference;
+		protected bool targetSet;
 
-		[SerializeField]
+		[System.NonSerialized]
+		protected Vector3 targetScreenPoint;
+
+		[System.NonSerialized]
 		private Vector3 remainingDelta;
 
 		/// <summary>If you've set Use to ManuallyAddedFingers, then you can call this method to manually add a finger.</summary>
@@ -52,6 +51,18 @@ namespace Lean.Touch
 			Use.RemoveAllFingers();
 		}
 
+		[ContextMenu("Snap Position")]
+		protected virtual void SnapPosition()
+		{
+			var finalTransform       = target != null ? target : transform;
+			var snappedWorldPosition = finalTransform.position;
+
+			if (TryGetSnappedWorldPosition(ref snappedWorldPosition) == true)
+			{
+				finalTransform.position = snappedWorldPosition;
+			}
+		}
+
 #if UNITY_EDITOR
 		protected virtual void Reset()
 		{
@@ -66,80 +77,89 @@ namespace Lean.Touch
 
 		protected virtual void Update()
 		{
+			SnapPosition();
+
+			UpdateTarget();
+
 			var finalTransform = target != null ? target : transform;
+			var oldPosition    = finalTransform.position;
+			var newPosition    = oldPosition;
 
-			// Store smoothed position
-			var smoothPosition = finalTransform.localPosition;
-
-			// Snap to target
-			finalTransform.localPosition += remainingDelta;
-
-			// Store old position
-			var oldPosition = finalTransform.localPosition;
-
-			// Update to new position
-			UpdateTranslation();
-
-			// Shift delta by old new delta
-			remainingDelta += finalTransform.localPosition - oldPosition;
-
-			// Get t value
-			var factor = CwHelper.DampenFactor(damping, Time.deltaTime);
+			// If we're dragging this object, update the remainingDelta
+			if (targetSet == true)
+			{
+				if (ScreenDepth.TryConvert(ref newPosition, targetScreenPoint, gameObject) == true)
+				{
+					remainingDelta = newPosition - oldPosition;
+				}
+			}
 
 			// Dampen remainingDelta
+			var factor   = CwHelper.DampenFactor(damping, Time.deltaTime);
 			var newDelta = Vector3.Lerp(remainingDelta, Vector3.zero, factor);
 
 			// Shift this position by the change in delta
-			finalTransform.localPosition = smoothPosition + remainingDelta - newDelta;
+			finalTransform.position = oldPosition + remainingDelta - newDelta;
 
 			// Update remainingDelta with the dampened value
 			remainingDelta = newDelta;
 		}
 
-		private void UpdateTranslation()
+		protected bool TryGetSnappedWorldPosition(ref Vector3 worldPosition)
 		{
-			var finalTransform = target != null ? target : transform;
+			var camera = CwHelper.GetCamera(ScreenDepth.Camera, gameObject);
 
-			// Get the fingers we want to use
-			var fingers = Use.UpdateAndGetFingers();
-
-			// Calculate the screenDelta value based on these fingers and make sure there is movement
-			var screenDelta = LeanGesture.GetScreenDelta(fingers);
-
-			if (screenDelta != Vector2.zero)
+			if (camera != null)
 			{
-				// Make sure the camera exists
-				var camera = CwHelper.GetCamera(ScreenDepth.Camera, gameObject);
+				var screenPointA  = camera.WorldToScreenPoint(worldPosition);
+				var screenPointB  = screenPointA + Vector3.right;
+				var worldPositionA = worldPosition;
+				var worldPositionB = worldPosition;
 
-				if (camera != null)
+				if (ScreenDepth.TryConvert(ref worldPositionA, screenPointA, gameObject) == true && ScreenDepth.TryConvert(ref worldPositionB, screenPointB, gameObject) == true)
 				{
-					var worldPosition  = finalTransform.position;
-					var oldScreenPoint = camera.WorldToScreenPoint(worldPosition);
+					// Only snap if the snap distance is more than one pixel movement
+					// This is to avoid floating point inaccuracy drift
+					var snpPixelDelta = Vector3.Distance(worldPosition, worldPositionA);
+					var onePixelDelta = Vector3.Distance(worldPositionA, worldPositionB);
 
-					if (trackScreenPosition == true)
+					if (snpPixelDelta >= onePixelDelta * 0.5f)
 					{
-						if (ScreenDepth.TryConvert(ref worldPosition, oldScreenPoint + (Vector3)(screenDelta + deltaDifference), gameObject) == true)
-						{
-							finalTransform.position = worldPosition;
-						}
+						worldPosition = worldPositionA;
 
-						var newScreenPoint = camera.WorldToScreenPoint(worldPosition);
-						var oldNewDelta    = (Vector2)(newScreenPoint - oldScreenPoint);
-
-						deltaDifference += screenDelta - oldNewDelta;
-					}
-					else
-					{
-						if (ScreenDepth.TryConvert(ref worldPosition, oldScreenPoint + (Vector3)screenDelta, gameObject) == true)
-						{
-							finalTransform.position = worldPosition;
-						}
+						return true;
 					}
 				}
-				else
+			}
+
+			return false;
+		}
+
+		protected void UpdateTarget()
+		{
+			var fingers = Use.UpdateAndGetFingers();
+			var camera  = CwHelper.GetCamera(ScreenDepth.Camera, gameObject);
+
+			if (fingers.Count > 0 && camera != null)
+			{
+				var finalTransform = Target != null ? Target : transform;
+
+				if (targetSet == false)
 				{
-					Debug.LogError("Failed to find camera. Either tag your cameras MainCamera, or set one in this component.", this);
+					targetSet         = true;
+					targetScreenPoint = camera.WorldToScreenPoint(finalTransform.position);
 				}
+
+				targetScreenPoint += (Vector3)LeanGesture.GetScreenDelta(fingers);
+			}
+			else
+			{
+				targetSet = false;
+			}
+
+			if (camera == null)
+			{
+				Debug.LogError("Failed to find camera. Either tag your cameras MainCamera, or set one in this component.", this);
 			}
 		}
 	}
@@ -162,7 +182,6 @@ namespace Lean.Touch.Editor
 			Draw("target", "This allows you to control how quickly the target value is reached.");
 			Draw("Use");
 			Draw("ScreenDepth");
-			Draw("trackScreenPosition", "If your ScreenDepth settings cause the position values to clamp, there will be a difference between where the finger is and where the object is. Should this difference be tracked?");
 			Draw("damping", "If you want this component to change smoothly over time, then this allows you to control how quick the changes reach their target value.\n\n-1 = Instantly change.\n\n1 = Slowly change.\n\n10 = Quickly change.");
 		}
 	}

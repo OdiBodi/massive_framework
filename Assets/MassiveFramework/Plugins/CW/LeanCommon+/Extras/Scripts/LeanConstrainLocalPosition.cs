@@ -45,11 +45,11 @@ namespace Lean.Common
 			}
 			else
 			{
-				var position = transform.position;
+				var position = transform.localPosition;
 
 				if (DoClamp(ref position) == true)
 				{
-					transform.position = position;
+					transform.localPosition = position;
 				}
 			}
 		}
