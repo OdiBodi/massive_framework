@@ -8,11 +8,11 @@ namespace MassiveCore.Framework.Runtime
         [Inject]
         private readonly IPool _pool;
 
-        public override async UniTask<bool> Initialize()
+        public override UniTask<bool> Initialize()
         {
             _pool.Initialize();
             CompleteInitialize(true);
-            return await base.Initialize();
+            return base.Initialize();
         }
     }
 }
