@@ -1,0 +1,566 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1942f01d48d24e86a8fc56bd9f57d31, type: 3}
+  m_Name: player_loop
+  m_EditorClassIdentifier: 
+  _initializationPhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 1
+      typeName: ProfilerStartFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+ProfilerStartFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PlayerUpdateTime
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+PlayerUpdateTime,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateCameraMotionVectors
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+UpdateCameraMotionVectors,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorSampleTime
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+DirectorSampleTime,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: AsyncUploadTimeSlicedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+AsyncUploadTimeSlicedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: SynchronizeState
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+SynchronizeState,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: SynchronizeInputs
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+SynchronizeInputs,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: XREarlyUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Initialization+XREarlyUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _timeUpdatePhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.TimeUpdate, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 1
+      typeName: WaitForLastPresentationAndUpdateTime
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.TimeUpdate+WaitForLastPresentationAndUpdateTime,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProfilerStartFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.TimeUpdate+ProfilerStartFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _fixedUpdatePhase:
+    enabled: 0
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 1
+      typeName: ClearLines
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+ClearLines, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorFixedSampleTime
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+DirectorFixedSampleTime,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: AudioFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+AudioFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunBehaviourFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+ScriptRunBehaviourFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+DirectorFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: LegacyFixedAnimationUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+LegacyFixedAnimationUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: XRFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+XRFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PhysicsFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+PhysicsFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: Physics2DFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+Physics2DFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: PhysicsClothFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+PhysicsClothFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorFixedUpdatePostPhysics
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+DirectorFixedUpdatePostPhysics,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunDelayedFixedFrameRate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+ScriptRunDelayedFixedFrameRate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: NewInputFixedUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.FixedUpdate+NewInputFixedUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _earlyUpdatePhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 1
+      typeName: PollPlayerConnection
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+PollPlayerConnection,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProfilerStartFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ProfilerStartFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PollHtcsPlayerConnection
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+PollHtcsPlayerConnection,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: GpuTimestamp
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+GpuTimestamp,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: AnalyticsCoreStatsUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+AnalyticsCoreStatsUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UnityWebRequestUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UnityWebRequestUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateStreamingManager
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateStreamingManager,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ExecuteMainThreadJobs
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ExecuteMainThreadJobs,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProcessMouseInWindow
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ProcessMouseInWindow,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ClearIntermediateRenderers
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ClearIntermediateRenderers,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ClearLines
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ClearLines, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PresentBeforeUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+PresentBeforeUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ResetFrameStatsAfterPresent
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ResetFrameStatsAfterPresent,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateAsyncReadbackManager
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateAsyncReadbackManager,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateTextureStreamingManager
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateTextureStreamingManager,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdatePreloading
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdatePreloading,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: RendererNotifyInvisible
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+RendererNotifyInvisible,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PlayerCleanupCachedData
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+PlayerCleanupCachedData,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateMainGameViewRect
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateMainGameViewRect,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateCanvasRectTransform
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateCanvasRectTransform,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateInputManager
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateInputManager,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProcessRemoteInput
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ProcessRemoteInput,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: XRUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+XRUpdate, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunDelayedStartupFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ScriptRunDelayedStartupFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateKinect
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+UpdateKinect,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: DeliverIosPlatformEvents
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+DeliverIosPlatformEvents,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: DispatchEventQueueEvents
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+DispatchEventQueueEvents,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: PhysicsResetInterpolatedTransformPosition
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+PhysicsResetInterpolatedTransformPosition,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: SpriteAtlasManagerUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+SpriteAtlasManagerUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: TangoUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+TangoUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: ARCoreUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+ARCoreUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PerformanceAnalyticsUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.EarlyUpdate+PerformanceAnalyticsUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _preUpdatePhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 0
+      typeName: PhysicsUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+PhysicsUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: Physics2DUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+Physics2DUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: CheckTexFieldInput
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+CheckTexFieldInput,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: IMGUISendQueuedEvents
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+IMGUISendQueuedEvents,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: SendMouseEvents
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+SendMouseEvents,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: AIUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+AIUpdate, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: WindUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+WindUpdate, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateVideo
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+UpdateVideo, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: NewInputUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreUpdate+NewInputUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _updatePhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Update, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 1
+      typeName: ScriptRunBehaviourUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Update+ScriptRunBehaviourUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Update+DirectorUpdate, UnityEngine.CoreModule,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunDelayedDynamicFrameRate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Update+ScriptRunDelayedDynamicFrameRate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunDelayedTasks
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.Update+ScriptRunDelayedTasks,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _preLateUpdatePhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 0
+      typeName: Physics2DLateUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+Physics2DLateUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: AIUpdatePostScript
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+AIUpdatePostScript,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorUpdateAnimationBegin
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+DirectorUpdateAnimationBegin,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: LegacyAnimationUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+LegacyAnimationUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorUpdateAnimationEnd
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+DirectorUpdateAnimationEnd,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorDeferredEvaluate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+DirectorDeferredEvaluate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UIElementsUpdatePanels
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+UIElementsUpdatePanels,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateNetworkManager
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+UpdateNetworkManager,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateMasterServerInterface
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+UpdateMasterServerInterface,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UNetUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+UNetUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: EndGraphicsJobsAfterScriptUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+EndGraphicsJobsAfterScriptUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ParticleSystemBeginUpdateAll
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+ParticleSystemBeginUpdateAll,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunBehaviourLateUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+ScriptRunBehaviourLateUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ConstraintManagerUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PreLateUpdate+ConstraintManagerUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  _postLateUpdatePhase:
+    enabled: 1
+    typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate, UnityEngine.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    systems:
+    - enabled: 1
+      typeName: PlayerSendFrameStarted
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PlayerSendFrameStarted,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateRectTransform
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateRectTransform,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateCanvasRectTransform
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateCanvasRectTransform,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PlayerUpdateCanvases
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PlayerUpdateCanvases,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateAudio
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateAudio,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateVideo
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateVideo,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorLateUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+DirectorLateUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ScriptRunDelayedDynamicFrameRate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ScriptRunDelayedDynamicFrameRate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: VFXUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+VFXUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ParticleSystemEndUpdateAll
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ParticleSystemEndUpdateAll,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: EndGraphicsJobsAfterScriptLateUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+EndGraphicsJobsAfterScriptLateUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateSubstance
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateSubstance,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateCustomRenderTextures
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateCustomRenderTextures,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: XRPostLateUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+XRPostLateUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateAllRenderers
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateAllRenderers,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateLightProbeProxyVolumes
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateLightProbeProxyVolumes,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: EnlightenRuntimeUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+EnlightenRuntimeUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateAllSkinnedMeshes
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateAllSkinnedMeshes,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProcessWebSendMessages
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ProcessWebSendMessages,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: SortingGroupsUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+SortingGroupsUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: UpdateVideoTextures
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateVideoTextures,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: DirectorRenderImage
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+DirectorRenderImage,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PlayerEmitCanvasGeometry
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PlayerEmitCanvasGeometry,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: FinishFrameRendering
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+FinishFrameRendering,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: BatchModeUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+BatchModeUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PlayerSendFrameComplete
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PlayerSendFrameComplete,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateCaptureScreenshot
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateCaptureScreenshot,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PresentAfterDraw
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PresentAfterDraw,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ClearImmediateRenderers
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ClearImmediateRenderers,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: XRPostPresent
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+XRPostPresent,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: UpdateResolution
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+UpdateResolution,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: InputEndFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+InputEndFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: GUIClearEvents
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+GUIClearEvents,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ShaderHandleErrors
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ShaderHandleErrors,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ResetInputAxis
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ResetInputAxis,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ThreadedLoadingDebug
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ThreadedLoadingDebug,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProfilerSynchronizeStats
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ProfilerSynchronizeStats,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: MemoryFrameMaintenance
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+MemoryFrameMaintenance,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ExecuteGameCenterCallbacks
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ExecuteGameCenterCallbacks,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: XRPreEndFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+XRPreEndFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: ProfilerEndFrame
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+ProfilerEndFrame,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: GraphicsWarmupPreloadedShaders
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+GraphicsWarmupPreloadedShaders,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: PlayerSendFramePostPresent
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PlayerSendFramePostPresent,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: PhysicsSkinnedClothBeginUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PhysicsSkinnedClothBeginUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 0
+      typeName: PhysicsSkinnedClothFinishUpdate
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+PhysicsSkinnedClothFinishUpdate,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    - enabled: 1
+      typeName: TriggerEndOfFrameCallbacks
+      typeAssemblyQualifiedName: UnityEngine.PlayerLoop.PostLateUpdate+TriggerEndOfFrameCallbacks,
+        UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
