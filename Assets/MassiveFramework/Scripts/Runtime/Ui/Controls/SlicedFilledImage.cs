@@ -5,13 +5,14 @@ using UnityEngine.UI;
 #if UNITY_2017_4 || UNITY_2018_2_OR_NEWER
 using UnityEngine.U2D;
 #endif
-using Sprites = UnityEngine.Sprites;
-
 #if UNITY_EDITOR
 using UnityEditor;
+#endif
+using Sprites = UnityEngine.Sprites;
 
 namespace MassiveCore.Framework.Runtime
 {
+#if UNITY_EDITOR
 	// Custom Editor to order the variables in the Inspector similar to Image component
 	[CustomEditor(typeof(SlicedFilledImage)), CanEditMultipleObjects]
 	public class SlicedFilledImageEditor : Editor
@@ -37,10 +38,9 @@ namespace MassiveCore.Framework.Runtime
 			serializedObject.ApplyModifiedProperties();
 		}
 	}
+#endif // UNITY_EDITOR
 
-#endif
-
-// Credit: https://bitbucket.org/Unity-Technologies/ui/src/2018.4/UnityEngine.UI/UI/Core/Image.cs
+	// Credit: https://bitbucket.org/Unity-Technologies/ui/src/2018.4/UnityEngine.UI/UI/Core/Image.cs
 	[RequireComponent(typeof(CanvasRenderer))]
 	[AddComponentMenu("UI/Sliced Filled Image", 11)]
 	public class SlicedFilledImage : MaskableGraphic, ISerializationCallbackReceiver, ILayoutElement,
