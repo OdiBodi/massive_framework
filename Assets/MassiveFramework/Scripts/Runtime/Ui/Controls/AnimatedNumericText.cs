@@ -25,11 +25,11 @@ namespace MassiveCore.Framework.Runtime
 
         private void Awake()
         {
-            InitAnimation();
+            InitializeAnimation();
             SubscribeOnAnimation();
         }
 
-        private void InitAnimation()
+        private void InitializeAnimation()
         {
             _animation = new AnimatedNumber(_animationSpeed);
             _animation.AddTo(this);
