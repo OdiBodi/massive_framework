@@ -2,7 +2,7 @@ using UniRx;
 
 namespace MassiveCore.Framework.Runtime
 {
-    public class LevelIndex
+    public class LevelIndex : ILevelIndex
     {
         private readonly IProfile _profile;
         private readonly LevelsConfig _levelsConfig;

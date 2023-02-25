@@ -10,38 +10,31 @@ namespace MassiveCore.Framework.Runtime
     public class Levels : ILevels
     {
         [Inject]
-        private readonly IProfile _profile;
-
-        [Inject]
-        private readonly IConfigs _configs;
-
-        [Inject]
         private readonly LevelFactory _levelsFactory;
 
+        private readonly ILevelIndex _levelIndex;
         private readonly Transform _root;
 
         public event Action<ILevel> LevelLoaded;
 
-        public Levels(Transform root)
+        public Levels(ILevelIndex levelIndex, Transform root)
         {
+            _levelIndex = levelIndex;
             _root = root;
         }
 
-        private LevelsConfig LevelsConfig => _configs.Config<LevelsConfig>();
         public ILevel CurrentLevel { get; private set; }
 
         public UniTask LoadCurrentLevel()
         {
-            var levelIndex = new LevelIndex(_profile, LevelsConfig);
-            var index = levelIndex.Current();
+            var index = _levelIndex.Current();
             return LoadLevel(index);
         }
 
         public UniTask LoadNextLevel()
-        {
-            var levelIndex = new LevelIndex(_profile, LevelsConfig);
-            levelIndex.UpdateToNext();
-            var index = levelIndex.Current();
+        { 
+            _levelIndex.UpdateToNext();
+            var index = _levelIndex.Current();
             return LoadLevel(index);
         }
 

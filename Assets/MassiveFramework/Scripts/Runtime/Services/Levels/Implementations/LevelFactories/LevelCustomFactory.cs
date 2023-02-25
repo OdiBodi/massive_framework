@@ -17,8 +17,7 @@ namespace MassiveCore.Framework.Runtime
         public Level Create(int index, Transform root)
         {
             var configs = _configs.Config<LevelsConfig>().Configs;
-            var index_ = index % configs.Length;
-            var prefab = configs[index_].Prefab;
+            var prefab = configs[index].Prefab;
             var level = _diContainer.InstantiatePrefabForComponent<Level>(prefab, root);
             level.name = prefab.name;
             return level;
