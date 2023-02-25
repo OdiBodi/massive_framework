@@ -96,7 +96,7 @@ namespace MassiveCore.Framework.Runtime
 
         public void ReturnAll()
         {
-            _objects.ForEach(obj => obj.Return());
+            _objects.ForEach(obj => obj?.Return());
         }
 
         public void RemoveAll<T>()
