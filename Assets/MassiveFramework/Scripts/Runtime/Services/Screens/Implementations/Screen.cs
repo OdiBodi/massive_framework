@@ -1,5 +1,8 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using UniRx;
+using Unity.Linq;
 using UnityEngine;
 
 namespace MassiveCore.Framework.Runtime
@@ -38,6 +41,42 @@ namespace MassiveCore.Framework.Runtime
         {
             TriggerCloseResult(result);
             Destroy(CacheGameObject);
+        }
+
+        public IEnumerable<T> Controls<T>()
+            where T : Component
+        {
+            var components = CacheGameObject.Descendants().OfComponent<T>();
+            return components;
+        }
+
+        public IEnumerable<T> Controls<T>(string[] names)
+            where T : Component
+        {
+            var components = Controls<T>().Where(x => names.Contains(x.name));
+            return components;
+        }
+
+        public IEnumerable<T> Controls<T>(string name)
+            where T : Component
+        {
+            var names = new[] { name };
+            var components = Controls<T>().Where(x => names.Contains(x.name));
+            return components;
+        }
+
+        public T Control<T>()
+            where T : Component
+        {
+            var component = Controls<T>().First();
+            return component;
+        }
+        
+        public T Control<T>(string name)
+            where T : Component
+        {
+            var component = Controls<T>(name).First();
+            return component;
         }
     }
 }
