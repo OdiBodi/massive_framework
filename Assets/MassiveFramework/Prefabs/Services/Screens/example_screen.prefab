@@ -1668,7 +1668,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1273930128883204181, guid: 79b6a171598a64e28b3611b8d7c79059, type: 3}
       propertyPath: m_Name
-      value: animated_numeric_text
+      value: auto_increased_numeric_text
       objectReference: {fileID: 0}
     - target: {fileID: 5320389341251948277, guid: 79b6a171598a64e28b3611b8d7c79059, type: 3}
       propertyPath: format
