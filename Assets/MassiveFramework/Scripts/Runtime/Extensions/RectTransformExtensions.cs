@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace MassiveCore.Framework.Runtime
@@ -20,6 +21,19 @@ namespace MassiveCore.Framework.Runtime
                 screenPoint.x / canvasScaleFactor,
                 screenPoint.y / canvasScaleFactor
             );
+        }
+
+        public static bool Contains(this RectTransform rectTransform, RectTransform otherRectTransform)
+        {
+            var otherCorners = new Vector3[4];
+            otherRectTransform.GetWorldCorners(otherCorners);
+            return otherCorners.Any(corner => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, corner));
+        }
+
+        public static bool Contains(this RectTransform rectTransform, Vector2 position)
+        {
+            var result = RectTransformUtility.RectangleContainsScreenPoint(rectTransform, position);
+            return result;
         }
     }
 }
