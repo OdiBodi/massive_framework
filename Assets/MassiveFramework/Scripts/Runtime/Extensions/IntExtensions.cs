@@ -18,5 +18,10 @@ namespace MassiveCore.Framework.Runtime
             while (number == except);
             return number;
         }
+
+        public static int Mod(this int number, int m)
+        {
+            return (number % m + m) % m;
+        }
     }
 }
