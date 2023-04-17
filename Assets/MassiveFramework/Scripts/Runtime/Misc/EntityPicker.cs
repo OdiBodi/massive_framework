@@ -26,7 +26,7 @@ namespace MassiveCore.Framework.Runtime
 
         private bool _active;
 
-        public event Action<T> Picked;
+        public event Action<T, RaycastHit> Picked;
         public event Action Missed;
 
         public EntityPicker(Camera camera, PickType pickType, float maxDistance, int layerMask)
@@ -110,7 +110,7 @@ namespace MassiveCore.Framework.Runtime
             var entity = hitInfo.transform.GetComponent<T>();
             if (entity && !_disabledEntities.Contains(entity))
             {
-                Picked?.Invoke(entity);
+                Picked?.Invoke(entity, hitInfo);
             }
         }
 
