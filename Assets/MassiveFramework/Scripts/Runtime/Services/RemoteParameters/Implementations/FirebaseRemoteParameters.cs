@@ -1,3 +1,5 @@
+#if UNITY_IOS || UNITY_ANDROID
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -124,3 +126,5 @@ namespace MassiveCore.Framework.Runtime
         }
     }
 }
+
+#endif // UNITY_IOS || UNITY_ANDROID

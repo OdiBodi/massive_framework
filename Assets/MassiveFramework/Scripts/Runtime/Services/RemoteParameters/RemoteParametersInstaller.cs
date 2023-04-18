@@ -7,7 +7,11 @@ namespace MassiveCore.Framework.Runtime
         [Inject]
         private readonly IConfigs _configs;
 
+#if UNITY_IOS || UNITY_ANDROID
         private IRemoteParameters RemoteParameters => _configs.Config<FirebaseRemoteParameters>();
+#else
+        private IRemoteParameters RemoteParameters => _configs.Config<StaticRemoteParameters>();
+#endif
 
         public override void InstallBindings()
         {
