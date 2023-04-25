@@ -1,4 +1,4 @@
-namespace MassiveCore.Framework.Runtime
+namespace MassiveCore.Framework.Runtime.Patterns
 {
     public interface ICommandReceiver<out T>
     {

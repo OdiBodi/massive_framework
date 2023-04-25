@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
-namespace MassiveCore.Framework.Runtime
+namespace MassiveCore.Framework.Runtime.Patterns
 {
     public class AsyncCommandsInvoker : ICommandInvoker<UniTask>, IEnumerable<ICommand<UniTask>>
     {

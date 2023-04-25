@@ -1,6 +1,6 @@
 ﻿namespace MassiveCore.Framework.Runtime.Patterns
 {
-    public interface IStateArguments
+    public interface IPoolObjectArguments
     {
     }
 }
