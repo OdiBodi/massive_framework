@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using MassiveCore.Framework.Runtime.Patterns;
 using Zenject;
 
 namespace MassiveCore.Framework.Runtime

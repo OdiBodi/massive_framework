@@ -1,4 +1,5 @@
 ﻿using System;
+using MassiveCore.Framework.Runtime.Patterns;
 using Zenject;
 
 namespace MassiveCore.Framework.Runtime

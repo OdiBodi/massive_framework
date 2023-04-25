@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MassiveCore.Framework.Runtime.Patterns;
 using Zenject;
 
 namespace MassiveCore.Framework.Runtime
