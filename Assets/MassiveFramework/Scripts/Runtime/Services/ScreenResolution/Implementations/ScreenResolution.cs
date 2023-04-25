@@ -30,8 +30,9 @@ namespace MassiveCore.Framework.Runtime
                 var newResolution = new Resolution(UnityScreen.width, UnityScreen.height);
                 var result = oldResolution != newResolution;
                 return result;
-            }).Subscribe(_ =>
+            }).Subscribe(async _ =>
             {
+                await Observable.NextFrame();
                 _resolution.Value = new Resolution(UnityScreen.width, UnityScreen.height);
             });
         }

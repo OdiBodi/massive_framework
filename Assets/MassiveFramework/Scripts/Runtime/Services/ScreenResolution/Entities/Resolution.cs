@@ -15,11 +15,7 @@ namespace MassiveCore.Framework.Runtime
             this.height = height;
         }
 
-        public Vector2 Vector2()
-        {
-            var vector = new Vector2(width, height);
-            return vector;
-        }
+        public Vector2 Vector2 => new Vector2(width, height);
 
         public bool Equals(Resolution other)
         {
