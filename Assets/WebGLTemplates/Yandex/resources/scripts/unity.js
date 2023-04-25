@@ -38,9 +38,6 @@ script.onload = () => {
     loadingCover.style.display = "none";
     window.unityInstance = instance;
     window.unityInstance.SendMessage('engine', 'OnInitialized');
-    window.onbeforeunload = () => {
-      return "Are you sure to leave this page?";
-    };
   })
   .catch(message => {
     alert(message);
