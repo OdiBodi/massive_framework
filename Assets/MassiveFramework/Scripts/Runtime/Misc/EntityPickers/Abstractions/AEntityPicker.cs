@@ -4,32 +4,25 @@ using Lean.Touch;
 using UniRx;
 using UnityEngine;
 
-namespace MassiveCore.Framework.Runtime
+namespace MassiveCore.Framework.Runtime.Misc.EntityPicker
 {
-    public class EntityPicker<T> : IDisposable
+    public abstract class AEntityPicker<T> : IDisposable
         where T : BaseMonoBehaviour
     {
-        public enum PickType
-        {
-            FingerDown,
-            FingerMove,
-            FingerUp,
-            FingerTap
-        }
-
-        private readonly Camera _camera;
-        private readonly PickType _pickType;
-        private readonly float _maxDistance;
-        private readonly int _layerMask;
-
-        private readonly HashSet<T> _disabledEntities = new();
-
         private bool _active;
 
-        public event Action<T, RaycastHit> Picked;
+        private readonly PickType _pickType;
+
+        protected readonly Camera _camera;
+        protected readonly float _maxDistance;
+        protected readonly int _layerMask;
+
+        protected readonly HashSet<T> _disabledEntities = new();
+
+        public event Action<T> Picked;
         public event Action Missed;
 
-        public EntityPicker(Camera camera, PickType pickType, float maxDistance, int layerMask)
+        protected AEntityPicker(Camera camera, PickType pickType, float maxDistance, int layerMask)
         {
             _camera = camera;
             _pickType = pickType;
@@ -93,25 +86,16 @@ namespace MassiveCore.Framework.Runtime
             _disabledEntities.Add(entity);
         }
 
-        private void Handle(LeanFinger finger)
+        protected abstract void Handle(LeanFinger finger);
+
+        protected void InvokePicked(T entity)
         {
-            if (finger.IsOverGui)
-            {
-                return;
-            }
+            Picked?.Invoke(entity);
+        }
 
-            var ray = finger.GetRay(_camera);
-            if (!Physics.Raycast(ray, out var hitInfo, _maxDistance, _layerMask))
-            {
-                Missed?.Invoke();
-                return;
-            }
-
-            var entity = hitInfo.transform.GetComponent<T>();
-            if (entity && !_disabledEntities.Contains(entity))
-            {
-                Picked?.Invoke(entity, hitInfo);
-            }
+        protected void InvokeMissed()
+        {
+            Missed?.Invoke();
         }
 
         private void OnActiveChanged(bool value)
