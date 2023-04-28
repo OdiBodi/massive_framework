@@ -39,6 +39,12 @@ namespace MassiveCore.Framework.Runtime
             return list.ElementAt(index);
         }
 
+        public static T RandomElement<T>(this IEnumerable<T> list, int count)
+        {
+            var index = Random.Range(0, count);
+            return list.ElementAt(index);
+        }
+
         public static int IndexOf<T>(this IEnumerable<T> list, T value)
             where T : IEquatable<T>
         {
