@@ -34,10 +34,10 @@ script.onload = () => {
     progressBarFull.style.width = `${100 * progress}%`;
   })
   .then(instance => {
-    console.log('Unity initialized!');
+    console.log("Unity initialized!");
     loadingCover.style.display = "none";
     window.unityInstance = instance;
-    window.unityInstance.SendMessage('engine', 'OnInitialized');
+    window.unityInstance.SendMessage("engine", "OnInitialized");
   })
   .catch(message => {
     alert(message);
