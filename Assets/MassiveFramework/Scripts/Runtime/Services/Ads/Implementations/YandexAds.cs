@@ -136,7 +136,6 @@ namespace MassiveCore.Framework.Runtime
         private void OnYandexInterstitialAdsError(string error)
         {
             _logger.PrintError($"Yandex Ads: Interstitial error: {error}!");
-            ResetInterstitial();
         }
 
         private void OnYandexRewardedAdsOpened()
