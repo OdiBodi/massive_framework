@@ -1,0 +1,71 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+html, body {
+    height: 100%;
+}
+canvas {
+    display: block;
+}
+body {
+    margin: 0;
+}
+#unity-container {
+    width: 100%;
+    height: 100%;
+}
+#unity-canvas {
+    width: 100%;
+    height: 100%;
+    background: {{{ BACKGROUND_COLOR }}};
+}
+#loading-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#unity-loading-bar {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#unity-logo {
+    text-align: center;
+    margin-bottom: 50px;
+}
+#unity-logo img {
+    width: 256px;
+    height: 256px;
+    border-radius: 50px;
+}
+#unity-progress-bar-empty {
+    width: 50%;
+    height: 25px;
+    background: rgb(50, 50, 50);
+    border-radius: 25px;
+}
+#unity-progress-bar-full {
+    width: 0%;
+    height: 100%;
+    background: white;
+    border-radius: 25px;
+}
+#ads-bottom-banner-728x90 {
+    width: 728px;
+    height: 90px;
+    background-color: #00000000;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
