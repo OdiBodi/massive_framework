@@ -12,12 +12,12 @@ namespace MassiveCore.Framework.Runtime
         [Inject]
         private readonly IYandex _yandex;
 
-        private bool _videoAdShowing;
+        private AdsVideo _currentVideoShowing;
 
         private string _rewardedTag;
 
-        public bool InterstitialAvailable => !_videoAdShowing;
-        public bool RewardedAvailable => !_videoAdShowing;
+        public bool InterstitialAvailable => _currentVideoShowing == AdsVideo.None;
+        public bool RewardedAvailable => _currentVideoShowing == AdsVideo.None;
         public bool BannerReady => true;
         public bool InterstitialReady => true;
         public bool RewardedReady => true;
@@ -46,6 +46,7 @@ namespace MassiveCore.Framework.Runtime
 
         public bool ShowBanner()
         {
+            _logger.Print("Yandex Ads: Banner show!");
             _yandex.ShowBannerAds();
             BannerShown?.Invoke(true);
             return true;
@@ -53,19 +54,22 @@ namespace MassiveCore.Framework.Runtime
 
         public void HideBanner()
         {
+            _logger.Print("Yandex Ads: Banner hide!");
             BannerHid?.Invoke();
         }
 
         public bool ShowInterstitial()
         {
-            _videoAdShowing = true;
+            _logger.Print("Yandex Ads: Interstitial show!");
+            _currentVideoShowing = AdsVideo.Interstitial;
             _yandex.ShowInterstitialAds();
             return true;
         }
 
         public bool ShowRewarded(string tag)
         {
-            _videoAdShowing = true;
+            _logger.Print("Yandex Ads: Rewarded show!");
+            _currentVideoShowing = AdsVideo.Rewarded;
             _rewardedTag = tag;
             _yandex.ShowRewardedAds();
             return true;
@@ -73,14 +77,14 @@ namespace MassiveCore.Framework.Runtime
 
         private void SubscribeOnInterstitial()
         {
-            InterstitialOpened += result => _videoAdShowing = result;
-            InterstitialClosed += () => _videoAdShowing = false;
+            InterstitialOpened += result => _currentVideoShowing = result ? AdsVideo.Interstitial : AdsVideo.None;
+            InterstitialClosed += ResetInterstitial;
         }
 
         private void SubscribeOnRewarded()
         {
-            RewardedOpened += (result, _) => _videoAdShowing = result;
-            RewardedClosed += (_, _) => _videoAdShowing = false;
+            RewardedOpened += (result, _) => _currentVideoShowing = result ? AdsVideo.Rewarded : AdsVideo.None;
+            RewardedClosed += (_, _) => ResetRewarded();
         }
 
         private void SubscribeOnYandexInterstitial()
@@ -96,6 +100,17 @@ namespace MassiveCore.Framework.Runtime
             _yandex.RewardedAdsRewarded += OnYandexRewardedAdsRewarded;
             _yandex.RewardedAdsClosed += OnYandexRewardedAdsClosed;
             _yandex.RewardedAdsError += OnYandexRewardedAdsError;
+        }
+
+        private void ResetInterstitial()
+        {
+            _currentVideoShowing = AdsVideo.None;
+        }
+
+        private void ResetRewarded()
+        {
+            _currentVideoShowing = AdsVideo.None;
+            _rewardedTag = string.Empty;
         }
 
         private void OnYandexInterstitialAdsOpened()
@@ -121,8 +136,9 @@ namespace MassiveCore.Framework.Runtime
         private void OnYandexInterstitialAdsError(string error)
         {
             _logger.PrintError($"Yandex Ads: Interstitial error: {error}!");
+            ResetInterstitial();
         }
-        
+
         private void OnYandexRewardedAdsOpened()
         {
             _logger.Print("Yandex Ads: Rewarded opened!");
@@ -139,7 +155,6 @@ namespace MassiveCore.Framework.Runtime
         {
             _logger.Print("Yandex Ads: Rewarded rewarded!");
             RewardedClosed?.Invoke(false, _rewardedTag);
-            _rewardedTag = string.Empty;
         }
 
         private void OnYandexRewardedAdsError(string error)

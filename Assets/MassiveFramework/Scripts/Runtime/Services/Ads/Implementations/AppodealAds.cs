@@ -6,11 +6,10 @@ using System.Collections.Generic;
 using AppodealStack.Monetization.Api;
 using AppodealStack.Monetization.Common;
 using Cysharp.Threading.Tasks;
-using MassiveCore.Framework;
 using UniRx;
 using Zenject;
 
-namespace Client
+namespace MassiveCore.Framework.Runtime
 {
     public class AppodealAds : IAds, IAppodealInitializationListener, IBannerAdListener, IInterstitialAdListener,
         IRewardedVideoAdListener
@@ -26,12 +25,12 @@ namespace Client
 
         private readonly AsyncSubject<bool> _initializerSubject = new(); 
 
-        private bool _videoAdShowing;
+        private AdsVideo _currentVideoShowing;
 
         private string _rewardedTag;
 
-        public bool InterstitialAvailable => !_videoAdShowing;
-        public bool RewardedAvailable => !_videoAdShowing;
+        public bool InterstitialAvailable => _currentVideoShowing == AdsVideo.None;
+        public bool RewardedAvailable => _currentVideoShowing == AdsVideo.None;
         public bool BannerReady => Appodeal.IsLoaded(AppodealAdType.Banner);
         public bool InterstitialReady => Appodeal.IsLoaded(AppodealAdType.Interstitial);
         public bool RewardedReady => Appodeal.IsLoaded(AppodealAdType.RewardedVideo);
@@ -71,14 +70,14 @@ namespace Client
 
         private void SubscribeOnInterstitial()
         {
-            InterstitialOpened += result => _videoAdShowing = result;
-            InterstitialClosed += () => _videoAdShowing = false;
+            InterstitialOpened += result => _currentVideoShowing = result ? AdsVideo.Interstitial : AdsVideo.None;
+            InterstitialClosed += ResetInterstitial;
         }
 
         private void SubscribeOnRewarded()
         {
-            RewardedOpened += (result, __) => _videoAdShowing = result;
-            RewardedClosed += (_, __) => _videoAdShowing = false;
+            RewardedOpened += (result, __) => _currentVideoShowing = result ? AdsVideo.Rewarded : AdsVideo.None;
+            RewardedClosed += (_, __) => ResetRewarded();
         }
 
         private void InitializeBanner()
@@ -98,28 +97,43 @@ namespace Client
 
         public bool ShowBanner()
         {
+            _logger.Print("Appodeal Ads: Banner show!");
             var result = Appodeal.Show(AppodealShowStyle.BannerBottom);
             return result;
         }
 
         public void HideBanner()
         {
+            _logger.Print("Appodeal Ads: Banner hide!");
             BannerHid?.Invoke();
         }
 
         public bool ShowInterstitial()
         {
-            _videoAdShowing = true;
+            _logger.Print("Appodeal Ads: Interstitial show!");
+            _currentVideoShowing = AdsVideo.Interstitial;
             var result = Appodeal.Show(AppodealShowStyle.Interstitial);
             return result;
         }
 
         public bool ShowRewarded(string tag)
         {
-            _videoAdShowing = true;
+            _logger.Print("Appodeal Ads: Rewarded show!");
+            _currentVideoShowing = AdsVideo.Rewarded;
             var result = Appodeal.Show(AppodealShowStyle.RewardedVideo); 
             _rewardedTag = result ? tag : string.Empty;
             return result;
+        }
+
+        private void ResetInterstitial()
+        {
+            _currentVideoShowing = AdsVideo.None;
+        }
+
+        private void ResetRewarded()
+        {
+            _currentVideoShowing = AdsVideo.None;
+            _rewardedTag = string.Empty;
         }
 
         public void OnInitializationFinished(List<string> errors)
