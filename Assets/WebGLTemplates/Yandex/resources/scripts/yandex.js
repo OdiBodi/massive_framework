@@ -1,5 +1,5 @@
 YaGames.init().then(ysdk => {
-  console.log('Yandex SDK initialized!');
+  console.log("Yandex SDK initialized!");
   window.ysdk = ysdk;
 });
 
@@ -15,13 +15,13 @@ function showFullscreenAdv() {
   window.ysdk.adv.showFullscreenAdv({
     callbacks: {
       onOpen: function() {
-        window.unityInstance.SendMessage('yandex', 'OnInterstitialAdsOpened');
+        window.unityInstance.SendMessage("yandex", "OnInterstitialAdsOpened");
       },
       onClose: function(wasShown) {
-        window.unityInstance.SendMessage('yandex', 'OnInterstitialAdsClosed', wasShown ? 1 : 0);
+        window.unityInstance.SendMessage("yandex", "OnInterstitialAdsClosed", wasShown ? 1 : 0);
       },
       onError: function(error) {
-        window.unityInstance.SendMessage('yandex', 'OnInterstitialAdsError', error.message);
+        window.unityInstance.SendMessage("yandex", "OnInterstitialAdsError", error.message);
       }
     }
   })
@@ -31,16 +31,16 @@ function showRewardedVideo() {
   window.ysdk.adv.showRewardedVideo({
     callbacks: {
       onOpen: function() {
-        window.unityInstance.SendMessage('yandex', 'OnRewardedAdsOpened');
+        window.unityInstance.SendMessage("yandex", "OnRewardedAdsOpened");
       },
       onRewarded: function() {
-        window.unityInstance.SendMessage('yandex', 'OnRewardedAdsRewarded');
+        window.unityInstance.SendMessage("yandex", "OnRewardedAdsRewarded");
       },
       onClose: function() {
-        window.unityInstance.SendMessage('yandex', 'OnRewardedAdsClosed');
+        window.unityInstance.SendMessage("yandex", "OnRewardedAdsClosed");
       },
       onError: function(error) {
-        window.unityInstance.SendMessage('yandex', 'OnRewardedAdsError', error.message);
+        window.unityInstance.SendMessage("yandex", "OnRewardedAdsError", error.message);
       }
     }
   })
