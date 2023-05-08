@@ -38,6 +38,7 @@ namespace Client
 
         public event Action<bool> BannerLoaded;
         public event Action<bool> BannerShown;
+        public event Action BannerHid;
         public event Action<bool> InterstitialLoaded;
         public event Action<bool> InterstitialOpened;
         public event Action InterstitialClosed;
@@ -99,6 +100,11 @@ namespace Client
         {
             var result = Appodeal.Show(AppodealShowStyle.BannerBottom);
             return result;
+        }
+
+        public void HideBanner()
+        {
+            BannerHid?.Invoke();
         }
 
         public bool ShowInterstitial()

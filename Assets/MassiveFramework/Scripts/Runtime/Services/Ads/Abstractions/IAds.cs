@@ -7,6 +7,7 @@ namespace MassiveCore.Framework.Runtime
     {
         event Action<bool> BannerLoaded;
         event Action<bool> BannerShown;
+        event Action BannerHid;
         event Action<bool> InterstitialLoaded;
         event Action<bool> InterstitialOpened;
         event Action InterstitialClosed;
@@ -22,6 +23,7 @@ namespace MassiveCore.Framework.Runtime
 
         UniTask<bool> Initialize();
         bool ShowBanner();
+        void HideBanner();
         bool ShowInterstitial();
         bool ShowRewarded(string tag);
     }

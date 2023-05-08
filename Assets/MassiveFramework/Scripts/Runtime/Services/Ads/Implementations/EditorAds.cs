@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using UniRx;
 using Zenject;
 
 namespace MassiveCore.Framework.Runtime
@@ -17,6 +18,7 @@ namespace MassiveCore.Framework.Runtime
 
         public event Action<bool> BannerLoaded;
         public event Action<bool> BannerShown;
+        public event Action BannerHid;
         public event Action<bool> InterstitialLoaded;
         public event Action<bool> InterstitialOpened;
         public event Action InterstitialClosed;
@@ -38,21 +40,33 @@ namespace MassiveCore.Framework.Runtime
             return true;
         }
 
+        public void HideBanner()
+        {
+            _logger.Print("Editor Ads: Banner hide!");
+            BannerHid?.Invoke();
+        }
+
         public bool ShowInterstitial()
         {
             _logger.Print("Editor Ads: Interstitial shown!");
-            InterstitialLoaded?.Invoke(true);
-            InterstitialOpened?.Invoke(true);
-            InterstitialClosed?.Invoke();
+            Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
+            {
+                InterstitialLoaded?.Invoke(true);
+                InterstitialOpened?.Invoke(true);
+                InterstitialClosed?.Invoke();
+            });
             return true;
         }
 
         public bool ShowRewarded(string tag)
         {
             _logger.Print($"Editor Ads: Rewarded \"{tag}\" shown!");
-            RewardedLoaded?.Invoke(true, tag);
-            RewardedOpened?.Invoke(true, tag);
-            RewardedClosed?.Invoke(true, tag);
+            Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
+            {
+                RewardedLoaded?.Invoke(true, tag);
+                RewardedOpened?.Invoke(true, tag);
+                RewardedClosed?.Invoke(true, tag);
+            });
             return true;
         }
     }

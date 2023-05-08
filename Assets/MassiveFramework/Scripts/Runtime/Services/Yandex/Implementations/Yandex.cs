@@ -8,7 +8,7 @@ namespace MassiveCore.Framework.Runtime
 {
     public class Yandex : BaseMonoBehaviour, IYandex
     {
-#if UNITY_WEBGL
+#if UNITY_WEBGL && !UNITY_EDITOR
         [DllImport("__Internal")]
         private static extern void ShowBannerAdv();
 
@@ -31,7 +31,7 @@ namespace MassiveCore.Framework.Runtime
         public event Action RewardedAdsClosed;
         public event Action<string> RewardedAdsError;
 
-#if UNITY_WEBGL
+#if UNITY_WEBGL && !UNITY_EDITOR
         public void ShowBannerAds()
         {
             ShowBannerAdv();

@@ -24,6 +24,7 @@ namespace MassiveCore.Framework.Runtime
 
         public event Action<bool> BannerLoaded;
         public event Action<bool> BannerShown;
+        public event Action BannerHid;
         public event Action<bool> InterstitialLoaded;
         public event Action<bool> InterstitialOpened;
         public event Action InterstitialClosed;
@@ -48,6 +49,11 @@ namespace MassiveCore.Framework.Runtime
             _yandex.ShowBannerAds();
             BannerShown?.Invoke(true);
             return true;
+        }
+
+        public void HideBanner()
+        {
+            BannerHid?.Invoke();
         }
 
         public bool ShowInterstitial()
