@@ -54,14 +54,14 @@ namespace MassiveCore.Framework.Runtime
         public T ScreenInstance<T>()
             where T : Screen
         {
-            var screen = ScreenInstances.First(x => x.GetType() == typeof(T)) as T;
+            var screen = ScreenInstances.FirstOrDefault(x => x.GetType() == typeof(T)) as T;
             return screen;
         }
 
         public T TopScreenInstance<T>()
             where T : Screen
         {
-            var screen = TopScreenInstances.First(x => x.GetType() == typeof(T)) as T;
+            var screen = TopScreenInstances.FirstOrDefault(x => x.GetType() == typeof(T)) as T;
             return screen;
         }
 
