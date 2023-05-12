@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using UnityEngine;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using System.Runtime.InteropServices;
@@ -182,8 +183,11 @@ namespace MassiveCore.Framework.Runtime
         }
 
         [Preserve]
-        public void OnAdsBannerError(string containerId, string error)
+        public void OnAdsBannerError(string json)
         {
+            var arguments = JsonConvert.DeserializeObject<object[]>(json);
+            var containerId = arguments[0] as string;
+            var error = arguments[1] as string;
             _logger.Print($"Game Distribution: Ads banner \"{containerId}\" error \"{error})\"!");
             AdsBannerError?.Invoke(containerId, error);
         }

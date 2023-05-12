@@ -78,7 +78,8 @@ mergeInto(LibraryManager.library, {
         window.unityInstance.SendMessage("game_distribution", "OnAdsBannerShown", elementId);
       })
       .catch(function(error) {
-        window.unityInstance.SendMessage("game_distribution", "OnAdsBannerError", elementId, error.message);
+        var json = JSON.stringify([elementId, error.message]);
+        window.unityInstance.SendMessage("game_distribution", "OnAdsBannerError", json);
       });
   },
 
