@@ -10,8 +10,8 @@ namespace MassiveCore.Framework.Runtime
         [Inject]
         private readonly ILogger _logger;
 
-        public bool InterstitialAvailable => true;
-        public bool RewardedAvailable => true;
+        public bool InterstitialAvailable { get; private set; } = true;
+        public bool RewardedAvailable { get; private set; } = true;
         public bool BannerReady => true;
         public bool InterstitialReady => true;
         public bool RewardedReady => true;
@@ -49,11 +49,13 @@ namespace MassiveCore.Framework.Runtime
         public bool ShowInterstitial()
         {
             _logger.Print("Editor Ads: Interstitial shown!");
+            InterstitialAvailable = false;
             Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
             {
                 InterstitialLoaded?.Invoke(true);
                 InterstitialOpened?.Invoke(true);
                 InterstitialClosed?.Invoke();
+                InterstitialAvailable = true;
             });
             return true;
         }
@@ -61,11 +63,13 @@ namespace MassiveCore.Framework.Runtime
         public bool ShowRewarded(string tag)
         {
             _logger.Print($"Editor Ads: Rewarded \"{tag}\" shown!");
+            RewardedAvailable = false;
             Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
             {
                 RewardedLoaded?.Invoke(true, tag);
                 RewardedOpened?.Invoke(true, tag);
                 RewardedClosed?.Invoke(true, tag);
+                RewardedAvailable = true;
             });
             return true;
         }

@@ -55,6 +55,7 @@ namespace MassiveCore.Framework.Runtime
         public void HideBanner()
         {
             _logger.Print("Yandex Ads: Banner hide!");
+            _yandex.HideBannerAds();
             BannerHid?.Invoke();
         }
 

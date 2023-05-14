@@ -105,6 +105,7 @@ namespace MassiveCore.Framework.Runtime
         public void HideBanner()
         {
             _logger.Print("Appodeal Ads: Banner hide!");
+            Appodeal.Hide(AppodealAdType.Banner);
             BannerHid?.Invoke();
         }
 
