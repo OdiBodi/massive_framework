@@ -17,7 +17,7 @@ namespace MassiveCore.Framework.Runtime
         private Vector2 _originAnchorMin;
         private Vector2 _originAnchorMax;
 
-        private void Awake()
+        private void Start()
         {
             CacheCanvas();
             CacheOriginAnchors();
