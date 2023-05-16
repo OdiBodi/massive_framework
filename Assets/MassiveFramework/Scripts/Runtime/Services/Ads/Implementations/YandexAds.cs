@@ -85,7 +85,14 @@ namespace MassiveCore.Framework.Runtime
         private void SubscribeOnRewarded()
         {
             RewardedOpened += (result, _) => _currentVideoShowing = result ? AdsVideo.Rewarded : AdsVideo.None;
-            RewardedClosed += (_, _) => ResetRewarded();
+            RewardedClosed += (result, _) =>
+            {
+                if (result)
+                {
+                    return;
+                }
+                ResetRewarded();
+            };
         }
 
         private void SubscribeOnYandexInterstitial()
