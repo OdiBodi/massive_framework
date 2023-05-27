@@ -9,6 +9,13 @@ namespace MassiveCore.Framework.Runtime
             return new Vector2EqualityComparer(error).Equals(a, b);
         }
 
+        public static Vector2 Rotate(this Vector2 vector, float angleInDegrees)
+        {
+            var rotation = Quaternion.Euler(0, 0, angleInDegrees);
+            var rotated = rotation * vector;
+            return rotated;
+        }
+
         public static float RandomRange(this Vector2 vector)
         {
             return Random.Range(vector.x, vector.y);
