@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace MassiveCore.Framework.Runtime
@@ -23,17 +22,36 @@ namespace MassiveCore.Framework.Runtime
             );
         }
 
+        public static Bounds WorldBounds(this RectTransform rectTransform)
+        {
+            var corners = new Vector3[4];
+            rectTransform.GetWorldCorners(corners);
+            var bounds = new Bounds(corners[0], Vector3.zero);
+            for (var i = 1; i < 4; i++)
+            {
+                bounds.Encapsulate(corners[i]);
+            }
+            return bounds;
+        }
+        
         public static bool Contains(this RectTransform rectTransform, RectTransform otherRectTransform)
         {
-            var otherCorners = new Vector3[4];
-            otherRectTransform.GetWorldCorners(otherCorners);
-            return otherCorners.Any(corner => RectTransformUtility.RectangleContainsScreenPoint(rectTransform, corner));
+            var bounds0 = rectTransform.WorldBounds();
+            var bounds1 = otherRectTransform.WorldBounds();
+            return bounds0.Intersects(bounds1);
         }
 
         public static bool Contains(this RectTransform rectTransform, Vector2 position)
         {
-            var result = RectTransformUtility.RectangleContainsScreenPoint(rectTransform, position);
-            return result;
+            return RectTransformUtility.RectangleContainsScreenPoint(rectTransform, position);
+        }
+
+        public static Vector2 ToLocalPosition(this RectTransform rectTransform, RectTransform local)
+        {
+            var worldPosition = rectTransform.position;
+            var screenPosition = RectTransformUtility.WorldToScreenPoint(null, worldPosition);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(local, screenPosition, null, out var localPosition);
+            return localPosition;
         }
     }
 }
