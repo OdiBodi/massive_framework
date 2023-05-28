@@ -34,7 +34,7 @@ namespace MassiveCore.Framework.Runtime
                 _logger.Print($"Vibration \"{id}\" is not available by enable!");
                 return;
             }
-            if (config.CooldownTime > 0f && !_waitingList.Add(id, config.CooldownTime))
+            if (config.CooldownTime > 0f && !_waitingList.AddItem(id, config.CooldownTime))
             {
                 _logger.Print($"Vibration \"{id}\" is not available by cooldown time!");
                 return;
