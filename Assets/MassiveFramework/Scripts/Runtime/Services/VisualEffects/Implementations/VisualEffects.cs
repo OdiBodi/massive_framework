@@ -53,7 +53,7 @@ namespace MassiveCore.Framework.Runtime
         {
             var configs = _configs.Config<VisualEffectsConfig>().Configs;
             var config = configs.First(x => x.Id == id);
-            var result = config.CooldownTime <= 0f || _waitingList.Add(id, config.CooldownTime);
+            var result = config.CooldownTime <= 0f || _waitingList.AddItem(id, config.CooldownTime);
             return result;
         }
     }
