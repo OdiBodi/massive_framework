@@ -13,16 +13,16 @@ namespace MassiveCore.Framework.Runtime
             _map = new Dictionary<T, IDisposable>(capacity);
         }
 
-        public bool Add(T type, float duration)
+        public bool AddItem(T item, float duration)
         {
-            if (_map.ContainsKey(type))
+            if (_map.ContainsKey(item))
             {
                 return false;
             }
-            _map[type] = Observable.Timer(TimeSpan.FromSeconds(duration)).Subscribe
+            _map[item] = Observable.Timer(TimeSpan.FromSeconds(duration)).Subscribe
             (
                 _ => { },
-                () => _map.Remove(type)
+                () => _map.Remove(item)
             );
             return true;
         }
