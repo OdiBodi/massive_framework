@@ -8,55 +8,55 @@
       "hash": "ac405b32a618bf9d9880e4fc1b63c5e45036c72c"
     },
     "com.google.android.appbundle": {
-      "version": "file:Google/com.google.android.appbundle-1.8.0.tgz",
+      "version": "file:Google/com.google.android.appbundle-1.9.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
     },
     "com.google.external-dependency-manager": {
-      "version": "file:Google/com.google.external-dependency-manager-1.2.175.tgz",
+      "version": "file:Google/com.google.external-dependency-manager-1.2.176.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {}
     },
     "com.google.firebase.analytics": {
-      "version": "file:Google/com.google.firebase.analytics-10.3.0.tgz",
+      "version": "file:Google/com.google.firebase.analytics-11.0.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.firebase.app": "10.3.0"
+        "com.google.firebase.app": "11.0.0"
       }
     },
     "com.google.firebase.app": {
-      "version": "file:Google/com.google.firebase.app-10.3.0.tgz",
+      "version": "file:Google/com.google.firebase.app-11.0.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.external-dependency-manager": "1.2.175"
+        "com.google.external-dependency-manager": "1.2.176"
       }
     },
     "com.google.firebase.remote-config": {
-      "version": "file:Google/com.google.firebase.remote-config-10.3.0.tgz",
+      "version": "file:Google/com.google.firebase.remote-config-11.0.0.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.firebase.app": "10.3.0"
+        "com.google.firebase.app": "11.0.0"
       }
     },
     "com.google.play.common": {
-      "version": "file:Google/com.google.play.common-1.8.1.tgz",
+      "version": "file:Google/com.google.play.common-1.8.2.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.android.appbundle": "1.8.0"
+        "com.google.android.appbundle": "1.9.0"
       }
     },
     "com.google.play.core": {
-      "version": "file:Google/com.google.play.core-1.8.1.tgz",
+      "version": "file:Google/com.google.play.core-1.8.2.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {
-        "com.google.android.appbundle": "1.8.0",
+        "com.google.android.appbundle": "1.9.0",
         "com.google.external-dependency-manager": "1.2.172"
       }
     },
@@ -83,7 +83,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.0.3",
+      "version": "2.0.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -97,7 +97,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.18",
+      "version": "3.0.21",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -122,7 +122,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "3.0.2",
+      "version": "3.2.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -138,7 +138,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
-      "version": "1.8.1",
+      "version": "1.8.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -169,7 +169,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.6.4",
+      "version": "1.6.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {

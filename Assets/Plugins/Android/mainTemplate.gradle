@@ -30,15 +30,15 @@ dependencies {
     implementation 'com.facebook.android:facebook-gamingservices:[16.0,17)' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:9
     implementation 'com.facebook.android:facebook-login:[16.0,17)' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:7
     implementation 'com.facebook.android:facebook-share:[16.0,17)' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:8
-    implementation 'com.google.android.gms:play-services-base:18.1.0' // Packages/com.google.firebase.app/Firebase/Editor/AppDependencies.xml:17
+    implementation 'com.google.android.gms:play-services-base:18.2.0' // Packages/com.google.firebase.app/Firebase/Editor/AppDependencies.xml:17
     implementation 'com.google.android.play:core-common:2.0.0' // Packages/com.google.play.core/Editor/Dependencies.xml:3
     implementation 'com.google.android.play:review:2.0.0' // Packages/com.google.play.review/Editor/Dependencies.xml:3
-    implementation 'com.google.firebase:firebase-analytics:21.2.0' // Packages/com.google.firebase.analytics/Firebase/Editor/AnalyticsDependencies.xml:13
-    implementation 'com.google.firebase:firebase-analytics-unity:10.3.0' // Packages/com.google.firebase.analytics/Firebase/Editor/AnalyticsDependencies.xml:18
-    implementation 'com.google.firebase:firebase-app-unity:10.3.0' // Packages/com.google.firebase.app/Firebase/Editor/AppDependencies.xml:22
-    implementation 'com.google.firebase:firebase-common:20.2.0' // Packages/com.google.firebase.app/Firebase/Editor/AppDependencies.xml:13
-    implementation 'com.google.firebase:firebase-config:21.2.0' // Packages/com.google.firebase.remote-config/Firebase/Editor/RemoteConfigDependencies.xml:13
-    implementation 'com.google.firebase:firebase-config-unity:10.3.0' // Packages/com.google.firebase.remote-config/Firebase/Editor/RemoteConfigDependencies.xml:20
+    implementation 'com.google.firebase:firebase-analytics:21.2.2' // Packages/com.google.firebase.analytics/Firebase/Editor/AnalyticsDependencies.xml:13
+    implementation 'com.google.firebase:firebase-analytics-unity:11.0.0' // Packages/com.google.firebase.analytics/Firebase/Editor/AnalyticsDependencies.xml:18
+    implementation 'com.google.firebase:firebase-app-unity:11.0.0' // Packages/com.google.firebase.app/Firebase/Editor/AppDependencies.xml:22
+    implementation 'com.google.firebase:firebase-common:20.3.2' // Packages/com.google.firebase.app/Firebase/Editor/AppDependencies.xml:13
+    implementation 'com.google.firebase:firebase-config:21.4.0' // Packages/com.google.firebase.remote-config/Firebase/Editor/RemoteConfigDependencies.xml:13
+    implementation 'com.google.firebase:firebase-config-unity:11.0.0' // Packages/com.google.firebase.remote-config/Firebase/Editor/RemoteConfigDependencies.xml:20
     implementation 'com.parse.bolts:bolts-android:1.4.0' // Assets/MassiveFramework/Plugins/FacebookSDK/Plugins/Editor/Dependencies.xml:4
     implementation 'com.yandex.android:mobmetricalib:5.2.0' // Assets/MassiveFramework/Plugins/AppMetrica/Editor/AppMetricaDependencies.xml:4
 // Android Resolver Dependencies End
