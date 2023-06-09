@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace MassiveCore.Framework.Runtime
 {
-    public class ImageButton : BaseButton
+    public class ImageButton : Button
     {
         [SerializeField]
         private Image _image;

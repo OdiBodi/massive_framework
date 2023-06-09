@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MassiveCore.Framework.Runtime
 {
-    public class StatesButton : StatesControl<BaseButton>
+    public class StatesButton : StatesControl<Button>
     {
         public event Action<State> Clicked;
 
@@ -19,13 +19,13 @@ namespace MassiveCore.Framework.Runtime
         }
 
         public T Button<T>(string id)
-            where T : BaseButton 
+            where T : Button 
         {
             return (T)this.First(state => state.id == id).control;
         }
 
         public T CurrentButton<T>()
-            where T : BaseButton
+            where T : Button
         {
             return (T)CurrentState.control;
         }

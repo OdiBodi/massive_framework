@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace MassiveCore.Framework.Runtime
 {
-    public class TextButton : BaseButton
+    public class TextButton : Button
     {
         [SerializeField]
         private Text _text;
