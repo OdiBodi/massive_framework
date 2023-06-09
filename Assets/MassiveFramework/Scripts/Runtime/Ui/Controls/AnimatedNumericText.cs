@@ -29,6 +29,11 @@ namespace MassiveCore.Framework.Runtime
             SubscribeOnAnimation();
         }
 
+        public void Reset(int number)
+        {
+            _animation.Reset(number);
+        }
+
         private void InitializeAnimation()
         {
             _animation = new AnimatedNumber(_animationSpeed);
