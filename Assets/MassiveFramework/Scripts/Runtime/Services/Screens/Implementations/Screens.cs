@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -29,16 +28,16 @@ namespace MassiveCore.Framework.Runtime
         private int LastScreenOrder => ScreenAllInstances.Count(Screen);
         private int LastTopScreenOrder => _originTopOrder + ScreenAllInstances.Count(TopScreen);
 
-        public UniTask<ScreenClosingResult> ShowScreen<T>(Action<T> onCreated = null)
+        public T OpenScreen<T>()
             where T : Screen
         {
-            return ShowScreen(LastScreenOrder, onCreated);
+            return OpenScreen<T>(LastScreenOrder);
         }
 
-        public UniTask<ScreenClosingResult> ShowTopScreen<T>(Action<T> onCreated = null)
+        public T OpenTopScreen<T>()
             where T : Screen
         {
-            return ShowScreen(LastTopScreenOrder, onCreated);
+            return OpenScreen<T>(LastTopScreenOrder);
         }
 
         public void CloseScreens()
@@ -65,15 +64,13 @@ namespace MassiveCore.Framework.Runtime
             return screen;
         }
 
-        private async UniTask<ScreenClosingResult> ShowScreen<T>(int order, Action<T> onCreated = null)
+        private T OpenScreen<T>(int order)
             where T : Screen
         {
             var screen = _screenFactory.Create(typeof(T), _root) as T;
             screen.Order = order;
-            onCreated?.Invoke(screen);
-            var result = await screen.WaitForClose();
             UpdateScreenOrdersOnNextFrame();
-            return result;
+            return screen;
         }
 
         private async UniTask UpdateScreenOrdersOnNextFrame()

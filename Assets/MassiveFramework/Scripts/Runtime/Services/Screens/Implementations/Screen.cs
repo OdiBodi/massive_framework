@@ -7,18 +7,21 @@ using UnityEngine;
 
 namespace MassiveCore.Framework.Runtime
 {
+    [RequireComponent(typeof(Canvas))]
     public class Screen : BaseMonoBehaviour
     {
-        [SerializeField]
-        private Canvas _canvas;
+        private readonly AsyncSubject<bool> _openingSubject = new();
+        private readonly AsyncSubject<ScreenClosingResult> _closingSubject = new();
 
-        protected readonly AsyncSubject<ScreenClosingResult> _closingSubject = new();
-
-        public Canvas Canvas => _canvas;
         public int Order
         {
-            get => _canvas.sortingOrder;
-            set => _canvas.sortingOrder = value;
+            get => CacheCanvas.sortingOrder;
+            set => CacheCanvas.sortingOrder = value;
+        }
+
+        protected virtual void Start()
+        {
+            TriggerOpen();
         }
 
         protected virtual void OnDestroy()
@@ -26,18 +29,29 @@ namespace MassiveCore.Framework.Runtime
             TriggerCloseResult(ScreenClosingResult.Close);
         }
 
-        public async UniTask<ScreenClosingResult> WaitForClose()
+        public async UniTask<bool> WaitForOpening()
+        {
+            return await _openingSubject.ToTask();
+        }
+
+        public async UniTask<ScreenClosingResult> WaitForClosing()
         {
             return await _closingSubject.ToTask();
         }
 
-        private void TriggerCloseResult(ScreenClosingResult result)
+        protected void TriggerOpen()
+        {
+            _openingSubject.OnNext(true);
+            _openingSubject.OnCompleted();
+        }
+
+        protected void TriggerCloseResult(ScreenClosingResult result)
         {
             _closingSubject.OnNext(result);
             _closingSubject.OnCompleted();
         }
 
-        public void Close(ScreenClosingResult result)
+        public virtual void Close(ScreenClosingResult result)
         {
             TriggerCloseResult(result);
             Destroy(CacheGameObject);
@@ -46,15 +60,13 @@ namespace MassiveCore.Framework.Runtime
         public IEnumerable<T> Controls<T>()
             where T : Component
         {
-            var components = CacheGameObject.Descendants().OfComponent<T>();
-            return components;
+            return CacheGameObject.Descendants().OfComponent<T>();
         }
 
         public IEnumerable<T> Controls<T>(string[] names)
             where T : Component
         {
-            var components = Controls<T>().Where(x => names.Contains(x.name));
-            return components;
+            return Controls<T>().Where(x => names.Contains(x.name));
         }
 
         public IEnumerable<T> Controls<T>(string name)
@@ -68,15 +80,13 @@ namespace MassiveCore.Framework.Runtime
         public T Control<T>()
             where T : Component
         {
-            var component = Controls<T>().First();
-            return component;
+            return Controls<T>().First();
         }
         
         public T Control<T>(string name)
             where T : Component
         {
-            var component = Controls<T>(name).First();
-            return component;
+            return Controls<T>(name).First();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MassiveCore.Framework.Runtime
 {
@@ -9,8 +7,8 @@ namespace MassiveCore.Framework.Runtime
         IEnumerable<Screen> ScreenInstances { get; }
         IEnumerable<Screen> TopScreenInstances { get; }
 
-        UniTask<ScreenClosingResult> ShowScreen<T>(Action<T> onCreated = null) where T : Screen;
-        UniTask<ScreenClosingResult> ShowTopScreen<T>(Action<T> onCreated = null) where T : Screen;
+        T OpenScreen<T>() where T : Screen;
+        T OpenTopScreen<T>() where T : Screen;
 
         void CloseScreens();
         void CloseTopScreens();
