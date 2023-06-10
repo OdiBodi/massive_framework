@@ -12,6 +12,7 @@ namespace MassiveCore.Framework.Runtime
         private GameObject _cacheGameObject;
         private Transform _cacheTransform;
         private RectTransform _cacheRectTransform;
+        private Canvas _cacheCanvas;
         private Image _cacheImage;
         private Rigidbody _cacheRigidbody;
 
@@ -48,6 +49,18 @@ namespace MassiveCore.Framework.Runtime
                     _cacheRectTransform = GetComponent<RectTransform>();
                 }
                 return _cacheRectTransform;
+            }
+        }
+
+        public Canvas CacheCanvas
+        {
+            get
+            {
+                if (_cacheCanvas == null)
+                {
+                    _cacheCanvas = GetComponent<Canvas>();
+                }
+                return _cacheCanvas;
             }
         }
 
