@@ -5,7 +5,7 @@ namespace MassiveCore.Framework.Runtime
     public class CheckBox : StatesRectTransform
     {
         [SerializeField]
-        private BaseButton _button;
+        private Button _button;
 
         protected override void Awake()
         {
