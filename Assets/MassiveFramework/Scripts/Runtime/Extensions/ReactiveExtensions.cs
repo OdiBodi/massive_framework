@@ -18,13 +18,17 @@ namespace MassiveCore.Framework.Runtime
 
         public static string SerializeToJson<T>(this ReactiveProperty<T> property)
         {
-            var json = JsonConvert.SerializeObject(property);
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(new ColorJsonConverter());
+            var json = JsonConvert.SerializeObject(property, settings);
             return json;
         }
 
         public static void DeserializeFromJson<T>(this ReactiveProperty<T> property, string json)
         {
-            var newProperty = JsonConvert.DeserializeObject<ReactiveProperty<T>>(json);
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(new ColorJsonConverter());
+            var newProperty = JsonConvert.DeserializeObject<ReactiveProperty<T>>(json, settings);
             if (newProperty == null)
             {
                 return;
