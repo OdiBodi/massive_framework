@@ -20,7 +20,7 @@ namespace MassiveCore.Framework.Runtime
 
         private void OnClicked()
         {
-            var state = CurrentState.id == "active" ? "inactive" : "active"; 
+            var state = CurrentState.Id == "active" ? "inactive" : "active"; 
             ChangeState(state);
         }
     }

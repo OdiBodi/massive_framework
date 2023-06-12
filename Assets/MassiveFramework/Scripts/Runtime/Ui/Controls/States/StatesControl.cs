@@ -12,8 +12,8 @@ namespace MassiveCore.Framework.Runtime
         [Serializable]
         public struct State
         {
-            public string id;
-            public T control;
+            public string Id;
+            public T Control;
         }
 
         [SerializeField]
@@ -27,17 +27,17 @@ namespace MassiveCore.Framework.Runtime
 
         protected virtual void Awake()
         {
-            ChangeState(_states[0].id);
+            ChangeState(_states[0].Id);
         }
 
         public void ChangeState(string id)
         {
-            if (_state.id == id)
+            if (_state.Id == id)
             {
                 return;
             }
-            _state = _states.First(x => x.id == id);
-            _states.ForEach(x => x.control.gameObject.SetActive(_state.id == x.id));
+            _state = _states.First(x => x.Id == id);
+            _states.ForEach(x => x.Control.gameObject.SetActive(_state.Id == x.Id));
             StateChanged?.Invoke(_state);
         }
 

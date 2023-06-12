@@ -15,19 +15,19 @@ namespace MassiveCore.Framework.Runtime
 
         private void Subscribe()
         {
-            this.ForEach(state => state.control.Clicked += () => Clicked?.Invoke(state));
+            this.ForEach(state => state.Control.Clicked += () => Clicked?.Invoke(state));
         }
 
         public T Button<T>(string id)
             where T : Button 
         {
-            return (T)this.First(state => state.id == id).control;
+            return (T)this.First(state => state.Id == id).Control;
         }
 
         public T CurrentButton<T>()
             where T : Button
         {
-            return (T)CurrentState.control;
+            return (T)CurrentState.Control;
         }
     }
 }
