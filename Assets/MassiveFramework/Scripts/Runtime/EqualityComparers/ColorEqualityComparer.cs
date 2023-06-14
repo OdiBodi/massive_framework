@@ -5,9 +5,9 @@ namespace MassiveCore.Framework.Runtime
 {
     public class ColorEqualityComparer : IEqualityComparer<Color>
     {
-        private readonly float _error;
-
         public static readonly ColorEqualityComparer Default = new(0.01f);
+
+        private readonly float _error;
 
         public ColorEqualityComparer(float error)
         {
