@@ -5,9 +5,9 @@ namespace MassiveCore.Framework.Runtime
 {
     public class Vector2EqualityComparer : IEqualityComparer<Vector2>
     {
-        private readonly float _error;
-
         public static readonly Vector2EqualityComparer Default = new(0.01f);
+        
+        private readonly float _error;
 
         public Vector2EqualityComparer(float error)
         {
