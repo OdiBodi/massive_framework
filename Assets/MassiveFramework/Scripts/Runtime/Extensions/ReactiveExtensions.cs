@@ -53,10 +53,18 @@ namespace MassiveCore.Framework.Runtime
             collection.ForEach(property.Add);
         }
 
-        public static void ChangeAsStruct<T>(this ReactiveProperty<T> property, Func<T, T> change)
+        public static void ChangeAsStruct<T>(this ReactiveProperty<T> property, Func<T, T> change, bool forceNotify = false)
             where T : struct
         {
-            property.Value = change(property.Value);
+            if (forceNotify)
+            {
+                var value = change(property.Value);
+                property.SetValueAndForceNotify(value);
+            }
+            else
+            {
+                property.Value = change(property.Value);
+            }
         }
     }
 }
