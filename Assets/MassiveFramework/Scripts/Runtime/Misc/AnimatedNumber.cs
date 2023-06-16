@@ -7,6 +7,7 @@ namespace MassiveCore.Framework.Runtime
     public class AnimatedNumber : IDisposable
     {
         private readonly float _speed;
+        private readonly ReactiveProperty<float> _number = new();
 
         private IDisposable _updateStream; 
 
@@ -16,11 +17,11 @@ namespace MassiveCore.Framework.Runtime
         }
 
         public float TargetNumber { get; set; }
-        public FloatReactiveProperty Number { get; private set; }
+        public ReadOnlyReactiveProperty<float> Number { get; private set; }
 
         public void Initialize()
         {
-            Number = new FloatReactiveProperty();
+            Number = _number.ToReadOnlyReactiveProperty();
             StartUpdateStream();
         }
 
@@ -33,15 +34,15 @@ namespace MassiveCore.Framework.Runtime
         public void Reset(float number)
         {
             TargetNumber = number;
-            Number.Value = number;
+            _number.Value = number;
         }
 
         private void StartUpdateStream()
         {
             _updateStream = Observable.EveryUpdate().Subscribe(_ =>
             {
-                Number.Value = Number.Value.EqualsTo(TargetNumber) ? TargetNumber :
-                    Mathf.Lerp(Number.Value, TargetNumber, Time.deltaTime * _speed);
+                _number.Value = _number.Value.EqualsTo(TargetNumber) ? TargetNumber :
+                    Mathf.Lerp(_number.Value, TargetNumber, Time.deltaTime * _speed);
             });
         }
     }

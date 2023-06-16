@@ -16,16 +16,18 @@ namespace MassiveCore.Framework.Runtime
         private float _animationSpeed = 5f;
 
         private AnimatedNumber _animation;
+        private ReactiveProperty<int> _number;
 
         public int Number
         {
             get => (int)_animation.TargetNumber;
             set => _animation.TargetNumber = value;
         }
+        public ReadOnlyReactiveProperty<int> AnimatedNumber;
 
         private void Awake()
         {
-            InitializeAnimation();
+            Initialize();
             SubscribeOnAnimation();
         }
 
@@ -34,6 +36,12 @@ namespace MassiveCore.Framework.Runtime
             _animation.Reset(number);
         }
 
+        private void Initialize()
+        {
+            InitializeAnimation();
+            InitializeNumberProperties();
+        }
+        
         private void InitializeAnimation()
         {
             _animation = new AnimatedNumber(_animationSpeed);
@@ -41,9 +49,19 @@ namespace MassiveCore.Framework.Runtime
             _animation.Initialize();
         }
 
+        private void InitializeNumberProperties()
+        {
+            _number = new ReactiveProperty<int>();
+            AnimatedNumber = _number.ToReadOnlyReactiveProperty();
+        }
+
         private void SubscribeOnAnimation()
         {
-            _animation.Number.Subscribe(value => UpdateText((int)Mathf.Round(value)));
+            _animation.Number.Subscribe(value =>
+            {
+                _number.Value = (int)value;
+                UpdateText((int)Mathf.Round(value));
+            });
         }
 
         private void UpdateText(int value)
