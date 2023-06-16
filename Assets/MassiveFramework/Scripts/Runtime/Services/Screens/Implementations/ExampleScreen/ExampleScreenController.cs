@@ -30,26 +30,26 @@ namespace MassiveCore.Framework.Runtime
 
         private void SubscribeOnView()
         {
-            _view.CloseButton.onClick.AddListener(() =>
+            _view.CloseButton.Clicked += () =>
             {
                 _view.Close(ScreenClosingResult.Close);
-            });
-            _view.ShowAppReviewButton.onClick.AddListener(() =>
+            };
+            _view.ShowAppReviewButton.Clicked += () =>
             {
                 _applicationReview.Request();
-            });
-            _view.PlayVfxButton.onClick.AddListener(() =>
+            };
+            _view.PlayVfxButton.Clicked += () =>
             {
                 _visualEffects.PlayVisualEffect("example", Vector3.zero, Quaternion.identity, Vector3.one);
-            });
-            _view.IncreaseCurrencyButton.onClick.AddListener(() =>
+            };
+            _view.IncreaseCurrencyButton.Clicked += () =>
             {
                 CurrencyResource.Increase(100);
-            });
-            _view.SpendCurrencyButton.onClick.AddListener(() =>
+            };
+            _view.SpendCurrencyButton.Clicked += () =>
             {
                 CurrencyResource.Spend(100);
-            });
+            };
         }
 
         private void SubscribeOnResources()
