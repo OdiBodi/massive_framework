@@ -15,7 +15,7 @@ namespace MassiveCore.Framework.Runtime
 
         private void SubscribeOnThemes()
         {
-            _themes.Theme.Subscribe(OnThemeChanged).AddTo(this);
+            _themes.Theme.Where(config => config).Subscribe(OnThemeChanged).AddTo(this);
         }
 
         protected abstract void OnThemeChanged(ThemeConfig config);
