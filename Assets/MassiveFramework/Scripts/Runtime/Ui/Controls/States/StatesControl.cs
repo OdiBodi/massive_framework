@@ -14,10 +14,14 @@ namespace MassiveCore.Framework.Runtime
         {
             public string Id;
             public T Control;
+            public bool Valid => !string.IsNullOrEmpty(Id) && Control;
         }
 
         [SerializeField]
         private State[] _states;
+
+        [SerializeField]
+        private string _originState;
 
         private State _state;
  
@@ -27,7 +31,12 @@ namespace MassiveCore.Framework.Runtime
 
         protected virtual void Awake()
         {
-            ChangeState(_states[0].Id);
+            ChangeState(_originState);
+        }
+
+        public State StateBy(string id)
+        {
+            return _states.FirstOrDefault(x => x.Id == id);
         }
 
         public void ChangeState(string id)
@@ -36,7 +45,12 @@ namespace MassiveCore.Framework.Runtime
             {
                 return;
             }
-            _state = _states.First(x => x.Id == id);
+            var state = StateBy(id);
+            if (!state.Valid)
+            {
+                return;
+            }
+            _state = state;
             _states.ForEach(x => x.Control.gameObject.SetActive(_state.Id == x.Id));
             StateChanged?.Invoke(_state);
         }
