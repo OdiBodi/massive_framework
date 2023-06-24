@@ -24,13 +24,17 @@ namespace MassiveCore.Framework.Runtime
             JsonSerializer serializer)
         {
             reader.Read();
-            var r = serializer.Deserialize<float>(reader);
             reader.Read();
-            var g = serializer.Deserialize<float>(reader);
+            var r = (float)serializer.Deserialize<double>(reader);
             reader.Read();
-            var b = serializer.Deserialize<float>(reader);
             reader.Read();
-            var a = serializer.Deserialize<float>(reader);
+            var g = (float)serializer.Deserialize<double>(reader);
+            reader.Read();
+            reader.Read();
+            var b = (float)serializer.Deserialize<double>(reader);
+            reader.Read();
+            reader.Read();
+            var a = (float)serializer.Deserialize<double>(reader);
             reader.Read();
             return new Color(r, g, b, a);
         }
