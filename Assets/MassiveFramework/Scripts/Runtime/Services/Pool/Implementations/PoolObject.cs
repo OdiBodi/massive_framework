@@ -1,30 +1,24 @@
-﻿using UnityEngine;
+﻿using MassiveCore.Framework.Runtime.Patterns;
 
 namespace MassiveCore.Framework.Runtime
 {
-    public class PoolObject : BaseMonoBehaviour, IPoolObject
+    public class PoolObject : BaseMonoBehaviour, IPoolObject, IAbstractProduct
     {
-        private Transform _root;
+        protected PoolObjectArguments _poolObjectArguments;
 
         public virtual string Id => name;
-        public virtual bool Active => this.Activity();
 
-        public virtual void Request(Transform root)
+        public virtual void Request(IPoolObjectArguments poolObjectArguments)
         {
-            _root = root;
-            CacheTransform.SetParent(root);
+            _poolObjectArguments = poolObjectArguments as PoolObjectArguments;
+            CacheTransform.SetParent(_poolObjectArguments.Root);
             this.ChangeActivity(true);
         }
 
         public virtual void Return()
         {
-            CacheTransform.SetParent(_root);
+            CacheTransform.SetParent(_poolObjectArguments.Root);
             this.ChangeActivity(false);
-        }
-
-        public virtual void Remove()
-        {
-            Destroy(CacheGameObject);
         }
     }
 }
