@@ -30,7 +30,7 @@ namespace MassiveCore.Framework.Runtime
         {
             _environment.ApplyConfig("example");
             _levels.LoadCurrentLevel();
-            _screens.ShowScreen<ExampleScreen>();
+            _screens.OpenScreen<ExampleScreen>();
         }
 
         public async UniTask Exit()
@@ -50,7 +50,7 @@ namespace MassiveCore.Framework.Runtime
 
         private void TestScreens()
         {
-            _screens.ShowScreen<ExampleScreen>();   
+            _screens.OpenScreen<ExampleScreen>();   
         }
 
         private void TestTimers()
