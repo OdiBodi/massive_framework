@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace MassiveCore.Framework.Runtime
@@ -9,7 +10,10 @@ namespace MassiveCore.Framework.Runtime
         private readonly IPool _pool;
 
         [Inject]
-        private readonly VisualEffectFactory _visualEffectFactory;
+        private readonly VisualEffectPlaceholderFactory _visualEffectPlaceholderFactory;
+
+        [SerializeField]
+        private Transform _root;
 
         public override UniTask<bool> Initialize()
         {
@@ -20,8 +24,8 @@ namespace MassiveCore.Framework.Runtime
 
         protected virtual void BindPoolFactories()
         {
-            var factory = new VisualEffectPoolFactory(_visualEffectFactory);
-            (_pool as Pool).BindFactory<VisualEffect>(factory);
+            var factory = new VisualEffectAbstractFactory(_visualEffectPlaceholderFactory);
+            (_pool as Pool).BindObjectPool<VisualEffect>(factory, null, _root, 100);
         }
     }
 }

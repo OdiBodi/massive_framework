@@ -5,7 +5,7 @@ namespace MassiveCore.Framework.Runtime
         public override void InstallBindings()
         {
             Container.Bind<IVisualEffects>().To<VisualEffects>().AsSingle();
-            Container.BindFactory<string, VisualEffect, VisualEffectFactory>().FromFactory<VisualEffectCustomFactory>();
+            Container.BindFactory<string, VisualEffect, VisualEffectPlaceholderFactory>().FromFactory<VisualEffectCustomFactory>();
         }
     }
 }

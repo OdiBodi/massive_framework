@@ -17,39 +17,53 @@ namespace MassiveCore.Framework.Runtime
         [Inject]
         private readonly IPool _pool;
 
+        private readonly List<IVisualEffect> _visualEffects = new(8);
+
         private readonly WaitingList<string> _waitingList = new(8);
 
-        public IEnumerable<IVisualEffect> VisualEffectsBy(string id)
+        public IEnumerable<IVisualEffect> VisualEffectsBy(string id = "")
         {
-            var visualEffects = _pool.Objects<VisualEffect>(id);
-            return visualEffects;
+            if (string.IsNullOrEmpty(id))
+            {
+                return _visualEffects;
+            }
+            return _visualEffects.Where(sound => sound.Id == id);
         }
 
         public UniTask PlayVisualEffect(string id, Action<IVisualEffect> prepare)
         {
-            if (!EffectAvailabilityByCooldownTime(id))
+            if (!VisualEffectAvailabilityByCooldownTime(id))
             {
                 _logger.Print($"Visual effect \"{id}\" is not available by cooldown time!");
                 return UniTask.CompletedTask;
             }
-            var effect = EffectBy(id);
-            prepare?.Invoke(effect);
-            var result = effect.Play();
-            return result;
+
+            var visualEffect = _pool.Request<VisualEffect>(id);
+
+            if (!_visualEffects.Contains(visualEffect))
+            {
+                _visualEffects.Add(visualEffect);
+            }
+
+            prepare?.Invoke(visualEffect);
+
+            var task = visualEffect.Play();
+
+            task.ContinueWith(() =>
+            {
+                _visualEffects.Remove(visualEffect);
+                _pool.Return(visualEffect);
+            });
+
+            return task;
         }
 
         public void StopVisualEffects()
         {
-            _pool.ReturnAll<VisualEffect>();
+            VisualEffectsBy().ForEach(sound => sound.Stop());
         }
 
-        private IVisualEffect EffectBy(string id)
-        {
-            var effect = _pool.Request<VisualEffect>(id);
-            return effect;
-        }
-
-        private bool EffectAvailabilityByCooldownTime(string id)
+        private bool VisualEffectAvailabilityByCooldownTime(string id)
         {
             var configs = _configs.Config<VisualEffectsConfig>().Configs;
             var config = configs.First(x => x.Id == id);

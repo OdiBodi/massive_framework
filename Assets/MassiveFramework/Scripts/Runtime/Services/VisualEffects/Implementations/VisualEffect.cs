@@ -1,10 +1,11 @@
 using Cysharp.Threading.Tasks;
+using MassiveCore.Framework.Runtime.Patterns;
 using UniRx;
 using UnityEngine;
 
 namespace MassiveCore.Framework.Runtime
 {
-    public class VisualEffect : PoolObject, IVisualEffect
+    public class VisualEffect : PoolObject, IVisualEffect, IPoolObject
     {
         [SerializeField]
         private ParticleSystem _particleSystem;
@@ -14,16 +15,19 @@ namespace MassiveCore.Framework.Runtime
             Stop();
         }
 
-        public async UniTask Play()
+        public UniTask Play()
         {
             if (_particleSystem.isPlaying)
             {
-                return;
+                return UniTask.CompletedTask;
             }
+
             _particleSystem.Play();
+
             _logger.Print($"Visual effect \"{Id}\" play!");
-            await Observable.EveryUpdate().TakeWhile(_ => _particleSystem.isPlaying && this.Activity());
-            Return();
+
+            var task = Observable.EveryUpdate().TakeWhile(_ => _particleSystem.isPlaying).ToUniTask();
+            return task;
         }
 
         public void Stop()
@@ -35,12 +39,6 @@ namespace MassiveCore.Framework.Runtime
         {
             Reset();
             base.Return();
-        }
-
-        public override void Remove()
-        {
-            Reset();
-            base.Remove();
         }
 
         private void Reset()
