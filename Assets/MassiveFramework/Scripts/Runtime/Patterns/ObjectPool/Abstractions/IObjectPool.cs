@@ -1,7 +1,7 @@
 ﻿namespace MassiveCore.Framework.Runtime.Patterns
 {
     public interface IObjectPool<T>
-        where T : IPoolObject
+        where T : class, IPoolObject
     {
         int Capacity { get; }
         int Count { get; }

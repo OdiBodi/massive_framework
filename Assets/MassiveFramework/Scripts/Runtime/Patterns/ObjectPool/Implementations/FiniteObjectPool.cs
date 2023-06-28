@@ -4,7 +4,7 @@ using System.Linq;
 namespace MassiveCore.Framework.Runtime.Patterns
 {
     public class FiniteObjectPool<T> : IObjectPool<T>
-        where T : IPoolObject
+        where T : class, IPoolObject
     {
         private readonly IAbstractFactory<T> _objectFactory;
         private readonly IAbstractFactoryArguments _objectFactoryArguments;
@@ -23,8 +23,9 @@ namespace MassiveCore.Framework.Runtime.Patterns
 
         public T Request(string id = "", IPoolObjectArguments arguments = null)
         {
-            var obj = string.IsNullOrEmpty(id) ? Request(x => true) : Request(x => x.Id == id);
-            obj ??= _objectFactory.Product(_objectFactoryArguments);
+            var obj = string.IsNullOrEmpty(id) ? Request(_ => true) : Request(x => x.Id == id);
+            var objectFactoryArguments = new PoolAbstractFactoryArguments(id, _objectFactoryArguments);
+            obj ??= _objectFactory.Product(objectFactoryArguments);
             obj.Request(arguments);
             return obj;
         }
@@ -33,7 +34,7 @@ namespace MassiveCore.Framework.Runtime.Patterns
         {
             if (_objects.Contains(obj))
             {
-                throw new ArgumentException();
+                return;
             }
             for (var i = 0; i < _objects.Length; ++i)
             {
@@ -57,10 +58,10 @@ namespace MassiveCore.Framework.Runtime.Patterns
                 {
                     continue;
                 }
-                _objects[i] = default;
+                _objects[i] = null;
                 return obj;
             }
-            return default;
+            return null;
         }
     }
 }
