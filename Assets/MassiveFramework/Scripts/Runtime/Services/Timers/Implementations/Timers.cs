@@ -29,7 +29,7 @@ namespace MassiveCore.Framework.Runtime
             timer.Completed += () =>
             {
                 _timers.Remove(id);
-                _logger.Print($"Timer[\"{id}\"] stopped!");
+                _logger.Print($"Timer[\"{id}\"] completed!");
             };
 
             _timers.Add(id, timer);
@@ -45,7 +45,6 @@ namespace MassiveCore.Framework.Runtime
             }
 
             timer.Dispose();
-            _timers.Remove(id);
 
             _logger.Print($"Timer[\"{id}\"] stopped!");
         }
