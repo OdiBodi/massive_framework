@@ -1,5 +1,3 @@
-using UnityEngine.UI;
-
 namespace MassiveCore.Framework.Runtime
 {
     public class ExampleScreen : Screen
