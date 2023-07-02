@@ -9,9 +9,19 @@ namespace MassiveCore.Framework.Runtime
             return new ColorEqualityComparer(error).Equals(a, b);
         }
 
+        public static Color Color(this Color color, Color other)
+        {
+            return new Color(other.r, other.g, other.b, color.a);
+        }
+
         public static Color Alpha(this Color color, float alpha)
         {
             return new Color(color.r, color.g, color.b, alpha);
+        }
+
+        public static string Hex(this Color color)
+        {
+            return ColorUtility.ToHtmlStringRGBA(color);
         }
     }
 }
