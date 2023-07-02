@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace MassiveCore.Framework.Runtime
@@ -8,35 +9,16 @@ namespace MassiveCore.Framework.Runtime
     {
         public override void WriteJson(JsonWriter writer, Color value, JsonSerializer serializer)
         {
-            writer.WriteStartObject();
-            writer.WritePropertyName("r");
-            serializer.Serialize(writer, value.r);
-            writer.WritePropertyName("g");
-            serializer.Serialize(writer, value.g);
-            writer.WritePropertyName("b");
-            serializer.Serialize(writer, value.b);
-            writer.WritePropertyName("a");
-            serializer.Serialize(writer, value.a);
-            writer.WriteEndObject();
+            var hex = value.Hex();
+            writer.WriteValue(hex);
         }
 
         public override Color ReadJson(JsonReader reader, Type objectType, Color existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
-            reader.Read();
-            reader.Read();
-            var r = (float)serializer.Deserialize<double>(reader);
-            reader.Read();
-            reader.Read();
-            var g = (float)serializer.Deserialize<double>(reader);
-            reader.Read();
-            reader.Read();
-            var b = (float)serializer.Deserialize<double>(reader);
-            reader.Read();
-            reader.Read();
-            var a = (float)serializer.Deserialize<double>(reader);
-            reader.Read();
-            return new Color(r, g, b, a);
+            var token = JToken.Load(reader);
+            var hex = token.Value<string>();
+            return hex.Color();
         }
     }
 }
