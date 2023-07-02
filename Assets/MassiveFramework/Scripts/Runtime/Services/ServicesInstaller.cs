@@ -12,7 +12,7 @@ namespace MassiveCore.Framework.Runtime
 
         private void Awake()
         {
-            _sceneContext.Installers = CacheGameObject.Descendants().OfInterfaceComponent<IServiceInstaller>()
+            _sceneContext.Installers = CacheGameObject.Children().OfInterfaceComponent<IServiceInstaller>()
                 .Select(installer => installer.Installer()).Where(installer => installer.Activity());
         }
     }

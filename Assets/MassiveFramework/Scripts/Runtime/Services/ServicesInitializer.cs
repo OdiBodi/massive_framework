@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 using Unity.Linq;
@@ -10,9 +9,6 @@ namespace MassiveCore.Framework.Runtime
         private ReactiveProperty<bool> _initialized;
 
         public ReadOnlyReactiveProperty<bool> Initialized { get; private set; }
-
-        private IEnumerable<IServiceInitializer> Initializers => CacheGameObject.Descendants()
-            .OfInterfaceComponent<IServiceInitializer>().Where(service => (service as BaseMonoBehaviour).Activity());
 
         private void Awake()
         {
@@ -28,7 +24,10 @@ namespace MassiveCore.Framework.Runtime
 
         private async void InitializeServices()
         {
-            foreach (var initializer in Initializers)
+            var initializers = CacheGameObject.Children().OfInterfaceComponent<IServiceInitializer>()
+                .Where(service => (service as BaseMonoBehaviour).Activity()).ToArray();
+
+            foreach (var initializer in initializers)
             {
                 var result = await initializer.Initialize();
                 var serviceName = (initializer as BaseMonoBehaviour).name;
@@ -42,6 +41,7 @@ namespace MassiveCore.Framework.Runtime
                     return;
                 }
             }
+
             _initialized.Value = true;
         }
     }
