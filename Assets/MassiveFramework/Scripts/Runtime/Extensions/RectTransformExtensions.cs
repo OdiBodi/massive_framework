@@ -33,7 +33,7 @@ namespace MassiveCore.Framework.Runtime
             }
             return bounds;
         }
-        
+
         public static bool Contains(this RectTransform rectTransform, RectTransform otherRectTransform)
         {
             var bounds0 = rectTransform.WorldBounds();
