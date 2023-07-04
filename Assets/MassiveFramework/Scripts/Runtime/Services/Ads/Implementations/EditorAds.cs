@@ -50,10 +50,10 @@ namespace MassiveCore.Framework.Runtime
         {
             _logger.Print("Editor Ads: Interstitial shown!");
             InterstitialAvailable = false;
+            InterstitialLoaded?.Invoke(true);
+            InterstitialOpened?.Invoke(true);
             Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
             {
-                InterstitialLoaded?.Invoke(true);
-                InterstitialOpened?.Invoke(true);
                 InterstitialClosed?.Invoke();
                 InterstitialAvailable = true;
             });
@@ -64,10 +64,10 @@ namespace MassiveCore.Framework.Runtime
         {
             _logger.Print($"Editor Ads: Rewarded \"{tag}\" shown!");
             RewardedAvailable = false;
+            RewardedLoaded?.Invoke(true, tag);
+            RewardedOpened?.Invoke(true, tag);
             Observable.Timer(TimeSpan.FromSeconds(1f)).Subscribe(_ =>
             {
-                RewardedLoaded?.Invoke(true, tag);
-                RewardedOpened?.Invoke(true, tag);
                 RewardedClosed?.Invoke(true, tag);
                 RewardedAvailable = true;
             });
