@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ namespace MassiveCore.Framework.Runtime
 {
     public static class DictionaryExtensions
     {
-        public static string ToFormattedString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, string format = "{0}:{1}\n")
+        public static string ToFormattedString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, string format = "\"{0}\":\"{1}\"\n")
         {
             var sb = new StringBuilder();
             foreach (var pair in dictionary)
