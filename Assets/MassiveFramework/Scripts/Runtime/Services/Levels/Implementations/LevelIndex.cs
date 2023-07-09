@@ -13,17 +13,17 @@ namespace MassiveCore.Framework.Runtime
             _levelsConfig = levelsConfig;
         }
 
-        private ReactiveProperty<int> CurrentLevelIndexProperty => _profile.Property<int>(ProfileIds.LevelIndex);
+        private ReactiveProperty<int> CurrentLevelIndex => _profile.Property<int>(ProfileIds.LevelIndex);
 
         public int Current()
         {
-            return CurrentLevelIndexProperty.Value;
+            return CurrentLevelIndex.Value;
         }
 
         public void UpdateToNext()
         {
-            CurrentLevelIndexProperty.Value++;
-            CurrentLevelIndexProperty.Value %= _levelsConfig.Configs.Length;
+            CurrentLevelIndex.Value++;
+            CurrentLevelIndex.Value %= _levelsConfig.Configs.Length;
         }
     }
 }

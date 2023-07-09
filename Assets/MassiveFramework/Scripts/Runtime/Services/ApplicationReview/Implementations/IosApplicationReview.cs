@@ -11,16 +11,16 @@ namespace MassiveCore.Framework
         [Inject]
         private readonly IProfile _profile;
 
-        private ReactiveProperty<bool> ApplicationReviewActiveProperty => _profile.Property<bool>(ProfileIds.ApplicationReviewActive);
+        private ReactiveProperty<bool> ApplicationReviewActive => _profile.Property<bool>(ProfileIds.ApplicationReviewActive);
 
         public async UniTask<bool> Request()
         {
-            if (!ApplicationReviewActiveProperty.Value)
+            if (!ApplicationReviewActive.Value)
             {
                 return true;
             }
             Device.RequestStoreReview();
-            ApplicationReviewActiveProperty.Value = false;
+            ApplicationReviewActive.Value = false;
             return true; 
         }
     }

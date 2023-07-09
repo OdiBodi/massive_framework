@@ -14,8 +14,8 @@ namespace MassiveCore.Framework.Runtime
             _initializer = initializer;
         }
 
-        private ReactiveProperty<int> SessionNumberProperty => _profile.Property<int>(ProfileIds.SessionNumber);
-        private ReactiveProperty<DateTime> LastSessionDateProperty => _profile.Property<DateTime>(ProfileIds.LastSessionDate);
+        private ReactiveProperty<int> SessionNumber => _profile.Property<int>(ProfileIds.SessionNumber);
+        private ReactiveProperty<DateTime> LastSessionDate => _profile.Property<DateTime>(ProfileIds.LastSessionDate);
 
         public void Initialize()
         {
@@ -37,23 +37,23 @@ namespace MassiveCore.Framework.Runtime
 
         private void IncreaseSession()
         {
-            SessionNumberProperty.Value++;
+            SessionNumber.Value++;
             UpdateLastSessionDate();
         }
 
         private void UpdateSession()
         {
-            var time = (DateTime.Now - LastSessionDateProperty.Value).TotalMinutes;
+            var time = (DateTime.Now - LastSessionDate.Value).TotalMinutes;
             if (time > 30)
             {
-                SessionNumberProperty.Value++;
+                SessionNumber.Value++;
             }
             UpdateLastSessionDate();
         }
 
         private void UpdateLastSessionDate()
         {
-            LastSessionDateProperty.Value = DateTime.Now;
+            LastSessionDate.Value = DateTime.Now;
         }
 
         private void OnApplicationInactive()
