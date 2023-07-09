@@ -6,6 +6,9 @@ namespace MassiveCore.Framework.Runtime
     public class EnableSoundControl : BaseMonoBehaviour
     {
         [Inject]
+        private readonly IProfile _profile;
+
+        [Inject]
         private readonly ISounds _sounds;
 
         [SerializeField]
@@ -13,7 +16,7 @@ namespace MassiveCore.Framework.Runtime
 
         private void OnEnable()
         {
-            _sounds.PlaySound(_soundId);
+            _sounds.PlaySoundByEnable(_soundId, _profile);
         }
     }
 }
