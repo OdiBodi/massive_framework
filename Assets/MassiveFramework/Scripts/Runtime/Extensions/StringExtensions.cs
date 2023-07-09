@@ -14,7 +14,7 @@ namespace MassiveCore.Framework.Runtime
 
         public static Color Color(this string value)
         {
-            ColorUtility.TryParseHtmlString(value, out var color);
+            ColorUtility.TryParseHtmlString("#" + value, out var color);
             return color;
         }
     }
