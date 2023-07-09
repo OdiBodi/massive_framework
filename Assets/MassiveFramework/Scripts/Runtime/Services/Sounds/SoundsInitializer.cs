@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace MassiveCore.Framework.Runtime
@@ -9,7 +10,10 @@ namespace MassiveCore.Framework.Runtime
         private readonly IPool _pool;
 
         [Inject]
-        private readonly SoundFactory _soundFactory;
+        private readonly SoundPlaceholderFactory _soundPlaceholderFactory;
+
+        [SerializeField]
+        private Transform _root;
 
         [Inject]
         private void Inject(IProfile profile)
@@ -26,8 +30,8 @@ namespace MassiveCore.Framework.Runtime
 
         protected virtual void BindPoolFactories()
         {
-            var factory = new SoundPoolFactory(_soundFactory);
-            (_pool as Pool).BindFactory<Sound>(factory);
+            var factory = new SoundAbstractFactory(_soundPlaceholderFactory);
+            (_pool as Pool).BindObjectPool<Sound>(factory, null, _root, 100);
         }
 
         private void InitializeProfileValues(IProfile profile)

@@ -17,12 +17,17 @@ namespace MassiveCore.Framework.Runtime
         [Inject]
         private readonly IPool _pool;
 
+        private readonly List<ISound> _sounds = new(8);
+
         private readonly WaitingList<string> _waitingList = new(8);
 
-        public IEnumerable<ISound> SoundsBy(string id)
+        public IEnumerable<ISound> SoundsBy(string id = "")
         {
-            var sounds = _pool.Objects<Sound>(id);
-            return sounds;
+            if (string.IsNullOrEmpty(id))
+            {
+                return _sounds;
+            }
+            return _sounds.Where(sound => sound.Id == id);
         }
 
         public UniTask PlaySound(string id, Action<ISound> prepare)
@@ -32,16 +37,30 @@ namespace MassiveCore.Framework.Runtime
                 _logger.Print($"Sound \"{id}\" is not available by cooldown time!");
                 return UniTask.CompletedTask;
             }
-            var sound = SoundBy(id);
+
+            var sound = _pool.Request<Sound>(id);
+
+            if (!_sounds.Contains(sound))
+            {
+                _sounds.Add(sound);
+            }
+
             prepare?.Invoke(sound);
-            var result = sound.Play();
-            return result;
+
+            var task = sound.Play();
+
+            task.ContinueWith(() =>
+            {
+                _sounds.Remove(sound);
+                _pool.Return(sound);
+            });
+
+            return task;
         }
 
-        private ISound SoundBy(string id)
+        public void StopSounds()
         {
-            var sound = _pool.Request<Sound>(id);
-            return sound;
+            SoundsBy().ForEach(sound => sound.Stop());
         }
 
         private bool SoundAvailabilityByCooldownTime(string id)

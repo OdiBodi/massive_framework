@@ -5,7 +5,7 @@ namespace MassiveCore.Framework.Runtime
         public override void InstallBindings()
         {
             Container.Bind<ISounds>().To<Sounds>().AsSingle();
-            Container.BindFactory<string, Sound, SoundFactory>().FromFactory<SoundCustomFactory>();
+            Container.BindFactory<string, Sound, SoundPlaceholderFactory>().FromFactory<SoundCustomFactory>();
         }
     }
 }

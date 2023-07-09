@@ -24,35 +24,32 @@ namespace MassiveCore.Framework.Runtime
             Stop();
         }
 
-        public async UniTask Play(float volumeScale = 1f, float pitchScale = 1f)
+        public UniTask Play(float volumeScale = 1f, float pitchScale = 1f)
         {
             if (_audioSource.isPlaying)
             {
-                return;
+                return UniTask.CompletedTask;
             }
+
             _audioSource.volume = _initialVolume * volumeScale;
             _audioSource.pitch = _initialPitch * pitchScale;
             _audioSource.Play();
+
             _logger.Print($"Sound \"{Id}\" play!");
-            await Observable.EveryUpdate().TakeWhile(_ => _audioSource.isPlaying && this.Activity());
-            Return();
+
+            var task = Observable.EveryUpdate().TakeWhile(_ => _audioSource.isPlaying).ToUniTask();
+            return task;
         }
 
         public void Stop()
         {
-            Return();
+            Reset();
         }
 
         public override void Return()
         {
             Reset();
             base.Return();
-        }
-
-        public override void Remove()
-        {
-            Reset();
-            base.Remove();
         }
 
         private void InitializeInitialAudioSourceValues()

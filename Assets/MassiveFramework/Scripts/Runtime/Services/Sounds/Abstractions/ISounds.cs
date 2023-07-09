@@ -8,5 +8,6 @@ namespace MassiveCore.Framework.Runtime
     {
         IEnumerable<ISound> SoundsBy(string id = "");
         UniTask PlaySound(string id, Action<ISound> prepare = null);
+        void StopSounds();
     }
 }
