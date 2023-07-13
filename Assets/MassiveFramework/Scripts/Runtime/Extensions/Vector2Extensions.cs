@@ -20,7 +20,12 @@ namespace MassiveCore.Framework.Runtime
         {
             return Random.Range(vector.x, vector.y);
         }
-        
+
+        public static float SqrDistance(this Vector2 vector, Vector2 other)
+        {
+            return Vector2.SqrMagnitude(vector - other);
+        }
+
         public static Vector2 SetX(this Vector2 vector, float value)
         {
             return new Vector2(value, vector.y);
