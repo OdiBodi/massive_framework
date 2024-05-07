@@ -825,22 +825,24 @@ PlayerSettings:
     1: ODIN_INSPECTOR;ODIN_INSPECTOR_3
     4: ODIN_INSPECTOR;ODIN_INSPECTOR_3
     7: ODIN_INSPECTOR;ODIN_INSPECTOR_3
-    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;TextMeshPro
-    EmbeddedLinux: TextMeshPro
-    GameCoreXboxOne: TextMeshPro
+    Android: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;TextMeshPro;DOTWEEN
+    EmbeddedLinux: TextMeshPro;DOTWEEN
+    GameCoreScarlett: DOTWEEN
+    GameCoreXboxOne: TextMeshPro;DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN
     Lumin: TextMeshPro
-    Nintendo Switch: TextMeshPro
-    PS4: TextMeshPro
-    PS5: TextMeshPro
-    QNX: TextMeshPro
-    Stadia: TextMeshPro
-    Standalone: TextMeshPro
-    VisionOS: TextMeshPro
-    WebGL: TextMeshPro
-    Windows Store Apps: TextMeshPro
-    XboxOne: TextMeshPro
-    iPhone: TextMeshPro
-    tvOS: TextMeshPro
+    Nintendo Switch: TextMeshPro;DOTWEEN
+    PS4: TextMeshPro;DOTWEEN
+    PS5: TextMeshPro;DOTWEEN
+    QNX: TextMeshPro;DOTWEEN
+    Stadia: TextMeshPro;DOTWEEN
+    Standalone: TextMeshPro;DOTWEEN
+    VisionOS: TextMeshPro;DOTWEEN
+    WebGL: TextMeshPro;DOTWEEN
+    Windows Store Apps: TextMeshPro;DOTWEEN
+    XboxOne: TextMeshPro;DOTWEEN
+    iPhone: TextMeshPro;DOTWEEN
+    tvOS: TextMeshPro;DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
