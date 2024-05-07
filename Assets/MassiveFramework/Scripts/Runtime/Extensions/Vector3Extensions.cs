@@ -9,6 +9,11 @@ namespace MassiveCore.Framework.Runtime
             return new Vector3EqualityComparer(error).Equals(a, b);
         }
 
+        public static Vector3 Abs(this Vector3 vector)
+        {
+            return new Vector3(Mathf.Abs(vector.x), Mathf.Abs(vector.y), Mathf.Abs(vector.z));
+        }
+        
         public static float SqrDistance(this Vector3 vector, Vector3 other)
         {
             return Vector3.SqrMagnitude(vector - other);

@@ -21,6 +21,11 @@ namespace MassiveCore.Framework.Runtime
             return Random.Range(vector.x, vector.y);
         }
 
+        public static Vector2 Abs(this Vector2 vector)
+        {
+            return new Vector2(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
+        }
+
         public static float SqrDistance(this Vector2 vector, Vector2 other)
         {
             return Vector2.SqrMagnitude(vector - other);
