@@ -577,7 +577,14 @@ namespace I2.Loc
 
 				if (string.IsNullOrEmpty(Error))
 				{
-					Result = Encoding.UTF8.GetString(mConnection_WWW.downloadHandler.data); //mConnection_WWW.text;
+					// Try first converting with the right encoding
+					var bytes = mConnection_WWW.downloadHandler.data;
+					if (bytes!=null)
+						Result = Encoding.UTF8.GetString(bytes); //mConnection_WWW.text;
+					
+					// Fallback to use the default encoding
+					else
+						Result = mConnection_WWW.downloadHandler.text;
 				}
 
 				StopConnectionWWW();

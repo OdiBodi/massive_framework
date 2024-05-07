@@ -749,5 +749,15 @@ namespace I2.Loc
 
 
         #endregion
-    }
+        
+		#if UNITY_2022_3_OR_NEWER
+			public const string Style_ToolbarSearchTextField = "ToolbarSearchTextField";
+			public const string Style_ToolbarSearchCancelButtonEmpty = "ToolbarSearchCancelButtonEmpty";
+			public const string Style_ToolbarSearchCancelButton = "ToolbarSearchCancelButton";
+		#else
+			public const string Style_ToolbarSearchTextField = "ToolbarSeachTextField";
+			public const string Style_ToolbarSearchCancelButtonEmpty = "ToolbarSeachCancelButtonEmpty";
+			public const string Style_ToolbarSearchCancelButton = "ToolbarSeachCancelButton";
+		#endif        
+	}
 }

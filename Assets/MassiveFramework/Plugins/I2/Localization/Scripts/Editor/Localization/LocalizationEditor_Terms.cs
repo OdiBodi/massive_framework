@@ -579,17 +579,17 @@ namespace I2.Loc
 
 			// Terms Filter
 			{
-				//KeyList_Filter = EditorGUILayout.TextField(KeyList_Filter, GUI.skin.GetStyle("ToolbarSeachTextField"), GUILayout.ExpandWidth(true));
+				//KeyList_Filter = EditorGUILayout.TextField(KeyList_Filter, GUI.skin.GetStyle(GUITools.Style_ToolbarSearchTextField), GUILayout.ExpandWidth(true));
 				GUILayout.Label( "", GUILayout.ExpandWidth( true ) );
 				mKeyListFilterRect = GUILayoutUtility.GetLastRect();
                 mKeyListFilterRect.xMax += 4;
 
-                KeyList_Filter = GUITools.TextField( mKeyListFilterRect, KeyList_Filter, 255, GUI.skin.GetStyle( "ToolbarSeachTextField" ), KeyListFilterID );
+                KeyList_Filter = GUITools.TextField( mKeyListFilterRect, KeyList_Filter, 255, GUI.skin.GetStyle( GUITools.Style_ToolbarSearchTextField ), KeyListFilterID );
 			}
 
 
 
-			if (GUILayout.Button( string.Empty, string.IsNullOrEmpty( KeyList_Filter ) ? "ToolbarSeachCancelButtonEmpty" : "ToolbarSeachCancelButton", GUILayout.ExpandWidth( false ) ))
+			if (GUILayout.Button( string.Empty, string.IsNullOrEmpty( KeyList_Filter ) ? GUITools.Style_ToolbarSearchCancelButtonEmpty : GUITools.Style_ToolbarSearchCancelButton, GUILayout.ExpandWidth( false ) ))
 			{
 				KeyList_Filter = string.Empty;
 				EditorApplication.update += RepaintScene;
