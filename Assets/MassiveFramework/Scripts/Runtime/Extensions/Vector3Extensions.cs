@@ -13,7 +13,12 @@ namespace MassiveCore.Framework.Runtime
         {
             return new Vector3(Mathf.Abs(vector.x), Mathf.Abs(vector.y), Mathf.Abs(vector.z));
         }
-        
+
+        public static float Max(this Vector3 vector)
+        {
+            return Mathf.Max(Mathf.Max(vector.x, vector.y), vector.z);
+        }
+
         public static float SqrDistance(this Vector3 vector, Vector3 other)
         {
             return Vector3.SqrMagnitude(vector - other);
